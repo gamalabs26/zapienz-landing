@@ -1,6 +1,6 @@
 <!-- MOTION-CONTRACT
-protagonista: gallery-scroll-scale
-soporte: blur-in-word, liquid-glass, grain, scramble
+protagonista: pinned-saga
+soporte: gallery-scroll-scale, blur-in-word, liquid-glass, grain, scramble
 assets: assets/zapienz_mark.svg
 -->
 
@@ -50,12 +50,25 @@ intercambiable con ninguna landing de IA.
 ## 4. Motion
 
 - **Tipo de hero**: tipográfico con portadas reales flotando en profundidad.
-- **Nivel de inmersión**: 2 (ambiente vivo). Más sería fricción: el objetivo es descargar.
-- **Protagonista**: `gallery-scroll-scale` — panel fijo donde las portadas escalan
-  0→1→0 según su posición vertical real, calculado por `requestAnimationFrame`
-  (adaptado de `prmpt-scroll-gallery-panel.md`).
+- **Nivel de inmersión**: **3 — espacio navegable**. El scroll no decora: transforma
+  el producto ante los ojos del visitante. Es la carta de presentación de GamaLabs
+  como constructora de sitios, así que la vara es la página de producto de Apple.
+- **Protagonista**: `pinned-saga` — una sola escena sticky de 720vh donde el objeto
+  muta por capítulos ligados al progreso del scroll:
+  1. un libro real del catálogo entra girando en perspectiva;
+  2. **se abre** — la tapa rota 168° en Y y las hojas se despliegan;
+  3. **se compacta** — el volumen colapsa en la tarjeta del Zap;
+  4. **se vuelve voz** — la tarjeta se disuelve en 44 barras de onda que laten;
+  5. **el teléfono sube desde abajo girando** (rotateY 200°→0) con el logo y la
+     UI real de la app, y las ondas entran en su pantalla.
+  Clave registrada en `verifica-motion.py` el 27-ago-2026: no existía ninguna para
+  "objeto que muta por capítulos dentro de un pin".
+- **Hilo de audio continuo**: canvas fijo tras toda la página con tres capas de onda
+  que recorren el ancho; su amplitud sube al entrar en la saga y alcanza el pico en
+  el capítulo de la voz. Es el hilo que cose el sitio entero.
 - **Soporte**:
-  - `blur-in-word` — titulares que enfocan palabra por palabra (secciones 1, 3, 5)
+  - `gallery-scroll-scale` — las 305 portadas emergen en el panel de biblioteca
+  - `blur-in-word` — titulares que enfocan palabra por palabra
   - `liquid-glass` — nav pill y tarjetas de precio
   - `grain` — textura de papel en todos los fondos
   - `scramble` — el contador de Zaps se decodifica al entrar en viewport

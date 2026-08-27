@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zapienz — 305 libros que no vas a leer. Nosotros ya los leímos.</title>
+<meta name="description" content="Resúmenes de libros de no ficción en texto y audio. 305 títulos en español, 20 minutos cada uno. Lee o escucha en App Store y Google Play.">
+<link rel="canonical" href="https://zapienz.gamalabs.mx/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zapienz — la biblioteca que sí terminas">
+<meta property="og:description" content="305 libros de no ficción, resumidos en texto y audio. 20 minutos cada uno.">
+<meta property="og:url" content="https://zapienz.gamalabs.mx/">
+<meta property="og:image" content="https://zapienz.gamalabs.mx/assets/zapienz_logo_full.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/zapienz_icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/zapienz_logo_full.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Zapienz",
+"applicationCategory":"EducationApplication","operatingSystem":"iOS, Android",
+"inLanguage":"es","description":"Resúmenes de libros de no ficción en texto y audio.",
+"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"18"},
+"offers":{"@type":"Offer","category":"subscription"}}
+</script>
+<style>
+:root{
+  --noche:#0B1F3A; --noche-2:#132A4D; --azul:#313A59;
+  --lavanda:#C9B6FF; --violeta:#7C6BFF;
+  --dorado:#FFD700; --ambar:#FFC86B;
+  --hueso:#F6F7FB; --tenue:#AAB2C5;
+  --ease:cubic-bezier(.16,.8,.3,1);
+  --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:32px; --s6:48px; --s7:64px; --s8:96px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--noche); color:var(--hueso);
+  font-family:'Inter',sans-serif; line-height:1.7;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.08;font-weight:600}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ---- grano de papel: la firma visual ---- */
+/* El grano necesita algo que filtrar: un rect pintado por el propio SVG.
+   Con el ::after vacio, filter:url() no tenia superficie y no se veia nada. */
+.grain::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23p)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity:.17;mix-blend-mode:overlay;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--s4)}
+section{position:relative;padding:var(--s8) 0}
+
+/* ---- skip link ---- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--dorado);color:var(--noche);
+  padding:var(--s3);z-index:999;font-weight:600;border-radius:0 0 8px 0}
+.skip:focus{left:0}
+
+/* ---- nav vidrio líquido ---- */
+.nav{position:fixed;top:var(--s3);left:50%;transform:translateX(-50%);z-index:100;
+  display:flex;align-items:center;gap:var(--s4);padding:10px 10px 10px var(--s4);
+  border-radius:999px;background:rgba(255,255,255,.01);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);box-shadow:inset 0 1px 1px rgba(255,255,255,.1);
+  overflow:hidden;transition:transform .4s var(--ease)}
+.nav::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.15) 20%,
+    rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.15) 80%,rgba(255,255,255,.45));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.nav__logo{display:flex;align-items:center;gap:var(--s2);font-weight:700;letter-spacing:-.02em}
+.nav__logo img{width:26px;height:26px;border-radius:7px}
+.nav__links{display:flex;gap:var(--s4);font-size:.9rem;color:var(--tenue)}
+.nav__links a{text-decoration:none;transition:color .25s var(--ease)}
+.nav__links a:hover{color:var(--hueso)}
+.nav__cta{background:var(--dorado);color:var(--noche);text-decoration:none;font-weight:600;
+  font-size:.9rem;padding:10px 18px;border-radius:999px;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.nav__cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,215,0,.3)}
+@media(max-width:820px){.nav__links{display:none}}
+
+/* ---- hero ---- */
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:var(--s8);
+  background:radial-gradient(120% 90% at 50% 0%,var(--noche-2) 0%,var(--noche) 62%)}
+.hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--s7);align-items:center}
+@media(max-width:960px){.hero__grid{grid-template-columns:1fr;gap:var(--s6)}}
+.eyebrow{display:inline-flex;align-items:center;gap:var(--s2);color:var(--ambar);
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;margin-bottom:var(--s4)}
+.eyebrow svg{width:15px;height:15px}
+h1{font-size:clamp(2.9rem,6.4vw,5.4rem);letter-spacing:-.015em;margin-bottom:var(--s4)}
+h1 em{font-style:normal;color:var(--lavanda)}
+.hero__sub{font-size:clamp(1.02rem,1.7vw,1.22rem);color:var(--tenue);max-width:33rem;margin-bottom:var(--s6)}
+.stores{display:flex;gap:var(--s3);flex-wrap:wrap;margin-bottom:var(--s5)}
+.store{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;
+  padding:14px 24px;border-radius:14px;min-height:44px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.store--ios{background:var(--hueso);color:var(--noche)}
+.store--and{background:rgba(255,255,255,.04);color:var(--hueso);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.store:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.store svg{width:20px;height:20px;flex:none}
+.hero__proof{display:flex;align-items:center;gap:var(--s3);color:var(--tenue);font-size:.9rem}
+.stars{color:var(--dorado);letter-spacing:2px}
+
+/* pila de portadas del hero */
+.stack{position:relative;height:440px}
+.stack img{position:absolute;width:158px;border-radius:10px;
+  box-shadow:0 24px 60px rgba(0,0,0,.55);opacity:0;
+  animation:flotar 9s ease-in-out infinite;
+  transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.stack img.on{opacity:1}
+.stack img:nth-child(1){left:6%;top:2%;transform:rotate(-8deg);animation-delay:0s;z-index:3}
+.stack img:nth-child(2){left:34%;top:20%;transform:rotate(3deg);animation-delay:-3s;z-index:5}
+.stack img:nth-child(3){left:62%;top:5%;transform:rotate(9deg);animation-delay:-6s;z-index:2}
+.stack img:nth-child(4){left:16%;top:52%;transform:rotate(6deg);animation-delay:-1.5s;z-index:4}
+.stack img:nth-child(5){left:50%;top:58%;transform:rotate(-5deg);animation-delay:-4.5s;z-index:1}
+@keyframes flotar{0%,100%{translate:0 0}50%{translate:0 -16px}}
+@media(max-width:960px){.stack{height:300px}.stack img{width:112px}}
+
+/* ---- blur-in por palabra ---- */
+.bw span{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(26px);
+  transition:opacity .7s var(--ease),filter .7s var(--ease),transform .7s var(--ease)}
+.bw.on span{opacity:1;filter:blur(0);transform:none}
+
+/* ---- reveals ---- */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+
+/* ---- problema ---- */
+.problema{background:var(--noche-2)}
+.problema h2{font-size:clamp(2rem,4.2vw,3.3rem);max-width:22ch;margin-bottom:var(--s4)}
+.problema p{color:var(--tenue);max-width:46ch;font-size:1.06rem}
+.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:var(--s4);margin-top:var(--s7)}
+.cifra{padding:var(--s5) var(--s4);border-radius:16px;background:rgba(255,255,255,.03);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.cifra b{display:block;font-family:'Cormorant Garamond',serif;font-size:3.1rem;
+  color:var(--dorado);line-height:1;margin-bottom:var(--s2)}
+.cifra span{color:var(--tenue);font-size:.92rem}
+
+/* ---- como funciona ---- */
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:var(--s4);margin-top:var(--s6)}
+.paso{padding:var(--s5);border-radius:18px;background:rgba(255,255,255,.03);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.paso:hover{transform:translateY(-6px);box-shadow:inset 0 0 0 1px rgba(201,182,255,.32),0 20px 44px rgba(0,0,0,.34)}
+.paso__n{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--lavanda);
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(124,107,255,.14);margin-bottom:var(--s3)}
+.paso h3{font-size:1.35rem;margin-bottom:var(--s2)}
+.paso p{color:var(--tenue);font-size:.97rem}
+
+/* ---- SHOWSTOPPER: la biblioteca ---- */
+.biblio{height:380vh;padding:0}
+.biblio__pin{position:sticky;top:0;height:100svh;overflow:hidden;
+  display:grid;place-items:center;background:var(--noche)}
+/* Scrim generoso: las portadas pasan POR DETRAS del texto y sin esto el
+   subtitulo se pierde sobre las que van iluminadas. */
+.biblio__txt{position:relative;z-index:6;text-align:center;pointer-events:none;
+  max-width:min(94vw,46rem);padding:var(--s7) var(--s5);
+  background:radial-gradient(68% 62% at 50% 50%,
+    rgba(11,31,58,.97) 0%,rgba(11,31,58,.93) 42%,rgba(11,31,58,.72) 66%,rgba(11,31,58,0) 100%)}
+.biblio__txt h2{font-size:clamp(2.1rem,5vw,4rem);margin-bottom:var(--s3);
+  text-shadow:0 2px 30px rgba(11,31,58,.95)}
+.biblio__txt p{color:var(--hueso);text-shadow:0 1px 16px rgba(11,31,58,1),0 0 34px rgba(11,31,58,.9)}
+.campo{position:absolute;inset:0;z-index:2}
+.campo img{position:absolute;top:50%;width:clamp(76px,9vw,124px);border-radius:8px;
+  box-shadow:0 18px 44px rgba(0,0,0,.55);will-change:transform,opacity;opacity:0}
+@media(prefers-reduced-motion:reduce){
+  .biblio{height:auto}
+  .biblio__pin{position:static;height:auto;padding:var(--s8) 0}
+  .campo{position:static;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));
+    gap:var(--s3);margin-top:var(--s6);padding:0 var(--s4)}
+  .campo img{position:static;opacity:1;width:100%;transform:none!important}
+  .stack img{opacity:1;animation:none}
+}
+
+/* ---- precios ---- */
+.precios{background:var(--noche-2)}
+.planes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--s4);margin-top:var(--s6)}
+.plan{position:relative;padding:var(--s6) var(--s5);border-radius:20px;overflow:hidden;
+  background:rgba(255,255,255,.01);backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);
+  box-shadow:4px 4px 4px rgba(0,0,0,.05),inset 0 1px 1px rgba(255,255,255,.15)}
+.plan::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,.2) 20%,
+    rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.2) 80%,rgba(255,255,255,.5));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.plan--destacado{box-shadow:4px 4px 4px rgba(0,0,0,.05),inset 0 1px 1px rgba(255,255,255,.15),
+  0 0 0 1px rgba(255,215,0,.32)}
+.plan__tag{display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--noche);background:var(--dorado);
+  padding:4px 12px;border-radius:999px;margin-bottom:var(--s3)}
+.plan h3{font-size:1.7rem;margin-bottom:var(--s2)}
+.plan__desc{color:var(--tenue);font-size:.95rem;margin-bottom:var(--s4)}
+.plan ul{list-style:none;display:grid;gap:10px}
+.plan li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;color:var(--hueso)}
+.plan li svg{width:17px;height:17px;flex:none;margin-top:5px;color:var(--lavanda)}
+
+/* ---- prueba social ---- */
+.social{text-align:center}
+.social__rating{font-family:'Cormorant Garamond',serif;font-size:clamp(3.6rem,9vw,6.4rem);
+  color:var(--dorado);line-height:1}
+.social__stars{color:var(--dorado);font-size:1.5rem;letter-spacing:5px;margin:var(--s2) 0}
+.social__meta{color:var(--tenue)}
+
+/* ---- cierre ---- */
+.cierre{text-align:center;background:radial-gradient(90% 120% at 50% 100%,var(--noche-2),var(--noche))}
+.cierre h2{font-size:clamp(2.2rem,5.4vw,4.2rem);max-width:18ch;margin:0 auto var(--s4)}
+.cierre p{color:var(--tenue);margin-bottom:var(--s6)}
+.cierre .stores{justify-content:center}
+
+/* ---- footer ---- */
+footer{padding:var(--s7) 0 var(--s6);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.foot{display:flex;justify-content:space-between;gap:var(--s5);flex-wrap:wrap;align-items:flex-start}
+.foot__marca{display:flex;align-items:center;gap:10px;font-weight:700}
+.foot__marca img{width:30px;height:30px;border-radius:8px}
+.foot nav{display:flex;gap:var(--s3);flex-wrap:wrap;font-size:.92rem}
+/* min-height 44px: objetivos tactiles accesibles en movil */
+.foot nav a{color:var(--tenue);text-decoration:none;transition:color .25s var(--ease);
+  display:inline-flex;align-items:center;min-height:44px;padding:0 var(--s2)}
+.foot nav a:hover{color:var(--hueso)}
+.foot__legal{color:var(--tenue);font-size:.84rem;margin-top:var(--s5);max-width:62ch}
+:focus-visible{outline:2px solid var(--dorado);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="papel">
+    <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.42"/></feComponentTransfer>
+  </filter>
+</svg>
+
+<header class="nav" id="nav">
+  <span class="nav__logo"><img src="assets/zapienz_icon.svg" alt=""> Zapienz</span>
+  <nav class="nav__links" aria-label="Secciones">
+    <a href="#como">Cómo funciona</a>
+    <a href="#biblioteca">Biblioteca</a>
+    <a href="#precios">Precios</a>
+  </nav>
+  <a class="nav__cta" href="#descargar">Descargar</a>
+</header>
+
+<main id="main">
+
+<section class="hero grain">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        305 Zaps · 10 categorías · en español
+      </span>
+      <h1 class="bw" data-bw>305 libros que no vas a leer. <em>Nosotros ya los leímos.</em></h1>
+      <p class="hero__sub">Las ideas de cada libro, en veinte minutos. Léelas o escúchalas mientras manejas, entrenas o lavas los trastes.</p>
+      <div class="stores" id="descargar">
+        <a class="store store--ios" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5zM14.9 5.6c.6-.75 1-1.75.9-2.8-.85.05-1.95.6-2.6 1.35-.55.65-1.05 1.7-.9 2.7.95.05 1.95-.5 2.6-1.25z"/></svg>
+          App Store
+        </a>
+        <a class="store store--and" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14l-.06.06zm12.9 6.44L13.6 5.74l.13-.08 3.83-2.18c.72-.41 1.42-.2 1.62.42l-2.68 4.74zm1.1 1.1 2.7 1.54c.83.47.83 1.24 0 1.71l-2.72 1.55-2.9-2.4 2.92-2.4zM13.73 18.34l-.13-.08 2.9-2.9 2.68 4.74c-.2.62-.9.83-1.62.42l-3.83-2.18z"/></svg>
+          Google Play
+        </a>
+      </div>
+      <p class="hero__proof"><span class="stars" aria-hidden="true">★★★★★</span> 5.0 · 18 valoraciones en la app</p>
+    </div>
+    <div class="stack" id="stack" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="problema grain">
+  <div class="wrap">
+    <h2 class="bw" data-bw>La pila de pendientes no baja sola.</h2>
+    <p>Compras el libro con la mejor intención. Lees treinta páginas. Se queda en el buró seis meses. No es falta de disciplina: es que no hay tiempo. Zapienz te da las ideas que ibas a buscar, sin la culpa del libro a medias.</p>
+    <div class="cifras">
+      <div class="cifra rv"><b data-scramble="305">305</b><span>Zaps publicados, en español</span></div>
+      <div class="cifra rv"><b>20</b><span>minutos por libro, en promedio</span></div>
+      <div class="cifra rv"><b>10</b><span>categorías, de filosofía a negocios</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="como" class="grain">
+  <div class="wrap">
+    <h2 class="bw" data-bw>Léelo o escúchalo. Tú decides.</h2>
+    <div class="pasos">
+      <article class="paso rv">
+        <div class="paso__n">1</div>
+        <h3>Elige un Zap</h3>
+        <p>305 títulos de no ficción organizados en diez categorías: psicología, negocios, filosofía, productividad, relaciones y más.</p>
+      </article>
+      <article class="paso rv">
+        <div class="paso__n">2</div>
+        <h3>Veinte minutos</h3>
+        <p>Las ideas centrales del libro, con sus aprendizajes clave. Ni la contraportada ni el libro entero: lo que de verdad te llevarías.</p>
+      </article>
+      <article class="paso rv">
+        <div class="paso__n">3</div>
+        <h3>En texto o en audio</h3>
+        <p>Lee con calma o pon el audio mientras manejas. La app recuerda dónde te quedaste, en cualquiera de los dos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="biblioteca" class="biblio">
+  <div class="biblio__pin grain">
+    <div class="campo" id="campo" aria-hidden="true"></div>
+    <div class="biblio__txt">
+      <h2>Toda la biblioteca<br>cabe en tu bolsillo.</h2>
+      <p>305 libros, listos para escuchar. Sigue bajando.</p>
+    </div>
+  </div>
+</section>
+
+<section id="precios" class="precios grain">
+  <div class="wrap">
+    <h2 class="bw" data-bw>Empieza gratis. Sigue si te sirve.</h2>
+    <div class="planes">
+      <article class="plan rv">
+        <h3>Con créditos</h3>
+        <p class="plan__desc">Para quien lee de vez en cuando.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Desbloqueas el libro que quieras</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Tuyo para siempre, sin caducidad</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Texto y audio incluidos</li>
+        </ul>
+      </article>
+      <article class="plan plan--destacado rv">
+        <span class="plan__tag">Premium</span>
+        <h3>Todo, sin límite</h3>
+        <p class="plan__desc">Para quien quiere leer de verdad este año.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Los 305 Zaps, completos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Audio de todos los títulos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Títulos nuevos cada semana</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Mensual o anual, cancelas cuando quieras</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="social grain">
+  <div class="wrap">
+    <p class="social__rating">5.0</p>
+    <p class="social__stars" aria-hidden="true">★★★★★</p>
+    <p class="social__meta">18 valoraciones de lectores dentro de la app</p>
+  </div>
+</section>
+
+<section class="cierre grain">
+  <div class="wrap">
+    <h2 class="bw" data-bw>Tu próximo libro empieza en veinte minutos.</h2>
+    <p>Descárgala gratis y escucha el primero hoy.</p>
+    <div class="stores">
+      <a class="store store--ios" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5zM14.9 5.6c.6-.75 1-1.75.9-2.8-.85.05-1.95.6-2.6 1.35-.55.65-1.05 1.7-.9 2.7.95.05 1.95-.5 2.6-1.25z"/></svg>
+        Descargar para iPhone
+      </a>
+      <a class="store store--and" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14l-.06.06z"/></svg>
+        Descargar para Android
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="grain">
+  <div class="wrap">
+    <div class="foot">
+      <span class="foot__marca"><img src="assets/zapienz_icon.svg" alt=""> Zapienz</span>
+      <nav aria-label="Legal">
+        <a href="privacidad.html">Aviso de privacidad</a>
+        <a href="terminos.html">Términos y condiciones</a>
+        <a href="eliminar-cuenta.html">Eliminar mi cuenta</a>
+        <a href="mailto:contactozapienz@gmail.com">Contacto</a>
+      </nav>
+    </div>
+    <p class="foot__legal">
+      Los Zaps son interpretaciones educativas generadas con apoyo de inteligencia
+      artificial a partir de obras publicadas. No sustituyen la obra original: si un
+      libro te mueve, cómpralo. Los derechos pertenecen a sus autores y editoriales.
+      © <span id="anio">2026</span> Zapienz.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('anio').textContent = new Date().getFullYear();
+
+  /* ---- portadas reales del catálogo ---- */
+  var B = 'https://xxzjuzuouobfzbezuwxs.supabase.co/storage/v1/object/public/covers/';
+  var PORTADAS = [
+    ['23300c33-8b4e-48db-bd44-3bef205856e8','El Arte de Pensar Claramente'],
+    ['5d791589-84d9-4aca-83a3-f8635e5a6237','Háblame Bonito'],
+    ['cfdeefd6-8ca9-45ff-b5fe-52091d7aa301','Quiet: El Poder de los Introvertidos'],
+    ['fe0d183a-f124-4fd9-8bf1-1bd379940687','La Sociedad del Cansancio'],
+    ['829a0a2e-7e7e-4a29-85b0-9459a1f5fe54','Factfulness'],
+    ['d15dc7a5-c1df-4337-a4ed-8f92cfd039bf','Cómo Mandar a la Mierda de Forma Educada'],
+    ['b0469f2f-d7b6-4b06-814c-404f1ab44a68','Bullshit Jobs'],
+    ['261a074f-d973-40fd-8c3a-2d677bffbb22','Atrévete a No Gustar'],
+    ['690f98a5-ed2b-465b-9d6e-32ab34782b11','El Poder de los 5 Segundos'],
+    ['50f9e235-66aa-46fe-957d-612d4b14810f','La Buena Suerte'],
+    ['6ca00260-73b0-427a-814b-fcc2cc54c20c','Tu Cerebro Manda'],
+    ['3f13a11b-683c-47b8-a145-7788e9e783e7','Mujeres y Poder'],
+    ['cb9132cd-f5b6-4732-bd79-5f7dd25192ce','Redefine Imposible'],
+    ['aec8f1b0-5aae-4ae3-be7c-a5b8b3d2f2b4','Aprende más Rápido'],
+    ['aa21467a-6110-4ab0-b14c-57c08b8719ae','La Tercera Ola'],
+    ['b9c6ecc1-fb68-4313-80c7-7dab8ad9e44c','Minimalismo'],
+    ['84ca7ced-22cd-4601-b9e6-52047c905b66','Tiende tu Cama'],
+    ['7e634917-7934-4a36-b13f-931964c54f68','Pensamiento Lateral'],
+    ['a2b3e139-8f87-4c15-b3f6-bd89bb251186','12 Reglas para Vivir'],
+    ['25b60c5b-41e1-4cd4-b017-ca6ebfd09146','El Camino del Artista'],
+    ['a8f1eea9-d384-490b-bd3a-35a9d78163df','Innovación Abierta'],
+    ['f3d30675-9287-4ff6-b86c-e388bc4c96fb','La Singularidad está Cerca'],
+    ['cddc0f22-8e7f-4dda-ad82-ce5835dcb71c','Sprint'],
+    ['bacd543b-57a9-46c3-89db-40fbea6e1e99','El Futuro es más Rápido de lo que Piensas'],
+    ['bf26f09c-ea68-482f-a636-fcf062e5f697','Abundancia'],
+    ['0bede6af-d969-4e19-a237-e7b1616bc478','Lo Inevitable'],
+    ['8a104e96-911c-420d-a048-56467064dfba','Inner Excellence'],
+    ['b6820d58-0655-407c-8e58-154deea38d2c','El Curso Fénix']
+  ];
+  function url(id){ return B + id + '/cover.png'; }
+
+  /* pila del hero */
+  var stack = document.getElementById('stack');
+  if (stack){
+    PORTADAS.slice(0,5).forEach(function(p,i){
+      var im = new Image();
+      im.src = url(p[0]); im.alt = ''; im.loading = i < 3 ? 'eager' : 'lazy';
+      im.decoding = 'async';
+      im.onload = function(){ im.classList.add('on'); };
+      stack.appendChild(im);
+    });
+  }
+
+  /* ---- SHOWSTOPPER: campo de portadas que escalan por posición ---- */
+  var campo = document.getElementById('campo');
+  var seccion = document.getElementById('biblioteca');
+  var fichas = [];
+  if (campo && seccion && !quieto){
+    PORTADAS.forEach(function(p,i){
+      var im = new Image();
+      im.src = url(p[0]); im.alt = ''; im.loading = 'lazy'; im.decoding = 'async';
+      // rejilla dispersa: 4 columnas irregulares, profundidad por fila
+      var col = i % 4, fila = Math.floor(i / 4);
+      var x = 8 + col * 24 + ((fila % 2) ? 9 : 0) + (i % 3) * 2;
+      im.dataset.x = x;
+      im.dataset.orden = fila / Math.ceil(PORTADAS.length / 4);
+      im.dataset.giro = ((i * 37) % 15) - 7;
+      im.style.left = x + '%';
+      campo.appendChild(im);
+      fichas.push(im);
+    });
+
+    var ticking = false;
+    // Cada ficha tiene su ventana dentro del scroll: escala 0 -> 1 -> 0 segun
+    // su distancia al foco, que avanza con el progreso de la seccion pineada.
+    function pintar(){
+      ticking = false;
+      var vh=innerHeight, r=seccion.getBoundingClientRect(),
+          p=Math.max(0,Math.min(1,-r.top/((r.height-vh)||1)));
+      for (var i=0;i<fichas.length;i++){
+        var im=fichas[i], d=p*1.06-parseFloat(im.dataset.orden),
+            v=Math.max(0,1-Math.abs(d)*3.1), y=(0.5-d*0.86)*vh-vh*0.5;
+        im.style.transform='translate3d(-50%,'+y.toFixed(1)+'px,0) scale('+
+          (0.42+v*0.72).toFixed(3)+') rotate('+im.dataset.giro+'deg)';
+        im.style.opacity = v * 0.96;
+      }
+    }
+    function alScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(pintar); } }
+    addEventListener('scroll', alScroll, {passive:true});
+    addEventListener('resize', alScroll);
+    pintar();
+  } else if (campo){
+    // reduced-motion: rejilla estática con el catálogo
+    PORTADAS.forEach(function(p){
+      var im = new Image(); im.src = url(p[0]); im.alt=''; im.loading='lazy';
+      campo.appendChild(im);
+    });
+  }
+
+  /* ---- blur-in por palabra ---- */
+  document.querySelectorAll('[data-bw]').forEach(function(el){
+    var partes = el.innerHTML.split(/(<em>.*?<\/em>|\s+)/).filter(function(s){return s.trim();});
+    el.innerHTML = partes.map(function(w){ return '<span>' + w + '</span> '; }).join('');
+    el.querySelectorAll('span').forEach(function(s,i){ s.style.transitionDelay = (i*0.085)+'s'; });
+  });
+
+  /* ---- reveals ---- */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'-8% 0px'});
+  document.querySelectorAll('.rv,[data-bw]').forEach(function(el){ io.observe(el); });
+  // barrido inicial: cubre primer paint y renderers throttled
+  requestAnimationFrame(function(){
+    document.querySelectorAll('.rv,[data-bw]').forEach(function(el){
+      if (el.getBoundingClientRect().top < innerHeight * 0.92) el.classList.add('on');
+    });
+  });
+
+  /* ---- scramble del contador ---- */
+  var glifos = '0123456789';
+  document.querySelectorAll('[data-scramble]').forEach(function(el){
+    var fin = el.dataset.scramble, hecho = false;
+    new IntersectionObserver(function(es,ob){
+      es.forEach(function(e){
+        if(!e.isIntersecting || hecho) return;
+        hecho = true; ob.disconnect();
+        if (quieto){ el.textContent = fin; return; }
+        var t = 0, total = 26;
+        var iv = setInterval(function(){
+          t++;
+          el.textContent = fin.split('').map(function(c,i){
+            return (t/total) * fin.length > i ? c : glifos[Math.floor(Math.random()*10)];
+          }).join('');
+          if (t >= total){ clearInterval(iv); el.textContent = fin; }
+        }, 42);
+      });
+    }, {threshold:.6}).observe(el);
+  });
+
+  /* ---- nav que se esconde al bajar ---- */
+  var ultimo = 0, nav = document.getElementById('nav');
+  addEventListener('scroll', function(){
+    var y = scrollY;
+    nav.style.transform = 'translateX(-50%)' + (y > ultimo && y > 420 ? ' translateY(-140%)' : '');
+    ultimo = y;
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>

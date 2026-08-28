@@ -29,23 +29,35 @@ posición. El activo del negocio ES el espectáculo — y nadie más lo tiene.
 
 ## 3. Identidad visual
 
-| Rol | Hex | Origen |
+Tomada de `lib/theme/colors.dart`, el sistema de diseño real de la app.
+
+| Rol | Hex | Nombre en la app |
 |---|---|---|
-| Fondo profundo | `#0B1F3A` | del logo |
-| Fondo secundario | `#313A59` | de la app |
-| Primario claro | `#C9B6FF` | lavanda de la app |
-| Acento | `#7C6BFF` | violeta de la app |
-| Cálido / CTA | `#FFC86B` → `#FFD700` | dorado de la app + naranja del logo |
-| Texto sobre oscuro | `#F6F7FB` | de la app |
+| Fondo profundo | `#081225` | `darkBackground` |
+| Fondo secundario | `#0F1B38` | `darkSurface` |
+| Tarjeta | `#13244A` | `darkCard` |
+| **Marca / CTA** | `#1DB954` | `primary` |
+| Verde claro | `#4ADE80` | `primaryLight` |
+| Verde del símbolo | `#38EB6B` | del PNG del icono |
+| Acento frío | `#19D3C5` | `accentTeal` |
+| Texto | `#F8FAFC` / `#B7C2D9` | `darkText*` |
 
-**Tipografía**: Cormorant Garamond (display, literaria) + Inter (cuerpo).
-Validadas contra la base de datos de pairings — nunca fuentes de sistema.
+> **Corrección del 27-ago-2026.** La primera versión usó lavanda `#C9B6FF`,
+> violeta `#7C6BFF` y dorado `#FFD700`: ninguno pertenece a la marca. Salieron de
+> contar literales de color en el código —gradientes decorativos sueltos— en vez
+> de leer el sistema de diseño. El resultado se veía correcto y era de otra marca.
+> Lección: la identidad se lee del theme y de los assets, nunca de un `grep`.
 
-**Firma visual**: *el rayo sobre papel*. El grano de papel impreso (filtro SVG
-`feTurbulence`) cubre los fondos, y el rayo del logo aparece como motivo — la
-tensión exacta de la marca: la lentitud del libro contra la velocidad del Zap.
-El dorado es canto de libro, no acento tecnológico: por eso esto no es
-intercambiable con ninguna landing de IA.
+**Tipografía**: **Fraunces** (display) + Inter (cuerpo). Se descartó Cormorant
+Garamond: es una serif de lujo clásico y chocaba con una marca de verde vibrante
+y símbolo minimalista. Fraunces mantiene el aire editorial —son libros— pero es
+contemporánea.
+
+**Firma visual**: *el libro que suena*. El logo de Zapienz ya es exactamente eso
+—un libro abierto con ondas de audio verdes— y la saga lo pone en movimiento: el
+libro se abre y se convierte en esas mismas ondas. El grano de papel cubre los
+fondos. Ninguna otra marca puede usar este hero: son sus portadas, su símbolo y
+su historia.
 
 ## 4. Motion
 

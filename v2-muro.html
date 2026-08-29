@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zapienz — El muro</title>
+<meta name="description" content="305 libros de no ficción, resumidos en texto y audio.">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#050B16; --verde:#1DB954; --verde-vivo:#38EB6B; --teal:#19D3C5;
+  --hueso:#FFFFFF; --tenue:#93A3BC;
+  --ease:cubic-bezier(.16,.8,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--noche);color:var(--hueso);font-family:'Inter',sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:.94;font-weight:900;letter-spacing:-.03em}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+:focus-visible{outline:2px solid var(--verde-vivo);outline-offset:3px}
+
+/* ================= EL MURO ================= */
+.muro{position:fixed;inset:0;z-index:0;display:flex;gap:12px;padding:0 6px;
+  transform:scale(1.08)}
+.col{flex:1;display:flex;flex-direction:column;gap:12px;will-change:transform}
+.col img{width:100%;border-radius:5px;opacity:1}
+/* velo que apaga el muro; el cursor abre un hueco y lo enciende */
+.velo{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(78% 62% at 50% 42%,rgba(5,11,22,.62) 0%,rgba(5,11,22,.86) 52%,rgba(5,11,22,.97) 100%)}
+/* Capa que oscurece; la mascara le abre un hueco donde esta el cursor, asi que
+   la luz "enciende" las portadas que hay debajo. */
+.foco{position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:rgba(5,11,22,.55);
+  -webkit-mask-image:radial-gradient(circle 250px at var(--mx,-500px) var(--my,-500px),transparent 0%,rgba(0,0,0,.5) 55%,#000 100%);
+  mask-image:radial-gradient(circle 250px at var(--mx,-500px) var(--my,-500px),transparent 0%,rgba(0,0,0,.5) 55%,#000 100%)}
+
+/* ================= contenido ================= */
+main{position:relative;z-index:5}
+.cab{position:fixed;top:0;left:0;right:0;z-index:60;padding:20px 32px;
+  display:flex;align-items:center;justify-content:space-between}
+.cab__marca{display:flex;align-items:center;gap:9px;font-weight:700}
+.cab__marca img{width:28px;height:28px}
+.cab__cta{background:var(--verde);color:#04140A;text-decoration:none;font-weight:700;
+  font-size:.88rem;padding:12px 22px;border-radius:999px;min-height:44px;
+  display:inline-flex;align-items:center;transition:transform .25s var(--ease)}
+.cab__cta:hover{transform:translateY(-2px)}
+
+.hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 60px}
+.marca-viva{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--verde-vivo);margin-bottom:28px}
+.marca-viva::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--verde-vivo);
+  box-shadow:0 0 0 0 rgba(56,235,107,.6);animation:latir 2.4s infinite}
+@keyframes latir{70%{box-shadow:0 0 0 14px rgba(56,235,107,0)}100%{box-shadow:0 0 0 0 rgba(56,235,107,0)}}
+.hero h1{font-size:clamp(3.2rem,9.6vw,9rem);max-width:15ch;margin-bottom:30px;
+  text-shadow:0 8px 60px rgba(5,11,22,.9)}
+.hero h1 em{font-style:normal;color:var(--verde-vivo)}
+.hero__lead{font-size:clamp(1.04rem,1.6vw,1.3rem);max-width:40ch;color:var(--tenue);
+  margin-bottom:38px;text-shadow:0 2px 24px rgba(5,11,22,1)}
+.hero__pista{margin-top:44px;font-size:.82rem;color:var(--tenue);display:flex;align-items:center;gap:10px}
+.hero__pista svg{width:17px;height:17px;color:var(--verde-vivo)}
+
+.tiendas{display:flex;gap:13px;flex-wrap:wrap}
+.tienda{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;
+  padding:15px 26px;border-radius:12px;min-height:44px;backdrop-filter:blur(12px);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.tienda--p{background:var(--hueso);color:#050B16}
+.tienda--s{background:rgba(255,255,255,.07);color:var(--hueso);box-shadow:inset 0 0 0 1px rgba(255,255,255,.24)}
+.tienda:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.55)}
+.tienda svg{width:19px;height:19px}
+
+/* bloques que se apoyan sobre el muro */
+.bloque{background:rgba(5,11,22,.82);backdrop-filter:blur(22px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09);padding:88px 0;position:relative}
+.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+@media(max-width:820px){.cifras{grid-template-columns:1fr}}
+.cifra b{display:block;font-family:'Fraunces',serif;font-size:clamp(3rem,6.4vw,5rem);
+  font-weight:900;line-height:.9;color:var(--verde-vivo);margin-bottom:8px}
+.cifra span{color:var(--tenue);font-size:.95rem}
+.bloque h2{font-size:clamp(2.2rem,5vw,3.9rem);max-width:18ch;margin-bottom:44px}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(max-width:820px){.pasos{grid-template-columns:1fr}}
+.paso{padding:28px;border-radius:16px;background:rgba(255,255,255,.04);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);transition:transform .35s var(--ease)}
+.paso:hover{transform:translateY(-6px)}
+.paso i{font-style:normal;color:var(--verde-vivo);font-weight:700;font-size:.86rem;
+  letter-spacing:.1em;display:block;margin-bottom:12px}
+.paso h3{font-size:1.34rem;margin-bottom:8px}
+.paso p{color:var(--tenue);font-size:.96rem}
+
+.cierre{padding:120px 0;text-align:center;position:relative}
+.cierre h2{font-size:clamp(2.4rem,6.4vw,5.4rem);max-width:16ch;margin:0 auto 20px;
+  text-shadow:0 8px 60px rgba(5,11,22,.95)}
+.cierre p{color:var(--tenue);margin-bottom:36px;text-shadow:0 2px 20px rgba(5,11,22,1)}
+.cierre .tiendas{justify-content:center}
+footer{background:#020509;padding:44px 0;font-size:.86rem;color:var(--tenue);position:relative;z-index:5}
+.pie{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;align-items:center}
+.pie nav{display:flex;gap:6px;flex-wrap:wrap}
+.pie nav a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:0 9px}
+.pie nav a:hover{color:var(--verde-vivo)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .col{transform:none!important}.foco{display:none}.rv{opacity:1;transform:none}
+  .marca-viva::before{animation:none}
+}
+@media(pointer:coarse){.foco{display:none}}
+</style>
+</head>
+<body>
+
+<div class="muro" id="muro" aria-hidden="true"></div>
+<div class="velo" aria-hidden="true"></div>
+<div class="foco" id="foco" aria-hidden="true"></div>
+
+<header class="cab">
+  <span class="cab__marca"><img src="assets/icon.png" alt=""> Zapienz</span>
+  <a class="cab__cta" href="#cierre">Descargar gratis</a>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <span class="marca-viva">305 Zaps · en español</span>
+    <h1>Toda esta biblioteca, <em>escuchada</em>.</h1>
+    <p class="hero__lead">Cada portada que ves detrás es un libro que ya leímos por ti. Sus ideas, en veinte minutos, para leer o escuchar.</p>
+    <div class="tiendas">
+      <a class="tienda tienda--p" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5z"/></svg>
+        App Store</a>
+      <a class="tienda tienda--s" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14z"/></svg>
+        Google Play</a>
+    </div>
+    <p class="hero__pista">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+      Mueve el cursor: la luz enciende el catálogo.
+    </p>
+  </div>
+</section>
+
+<section class="bloque">
+  <div class="wrap">
+    <div class="cifras">
+      <div class="cifra rv"><b>305</b><span>Zaps publicados, todos en español</span></div>
+      <div class="cifra rv"><b>20</b><span>minutos por libro, en promedio</span></div>
+      <div class="cifra rv"><b>5.0</b><span>de calificación · 18 valoraciones</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="bloque" style="padding-top:0">
+  <div class="wrap">
+    <h2>Léelo o escúchalo. Tú decides.</h2>
+    <div class="pasos">
+      <article class="paso rv"><i>01</i><h3>Elige un Zap</h3><p>305 títulos de no ficción en diez categorías: psicología, negocios, filosofía y más.</p></article>
+      <article class="paso rv"><i>02</i><h3>Veinte minutos</h3><p>Las ideas centrales con sus aprendizajes clave. Lo que de verdad te llevarías del libro.</p></article>
+      <article class="paso rv"><i>03</i><h3>Texto o audio</h3><p>Lee con calma o escucha mientras manejas. La app recuerda dónde te quedaste.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cierre" id="cierre">
+  <div class="wrap">
+    <h2>Empieza por el que llevas años posponiendo.</h2>
+    <p>Descárgala gratis y escucha el primero hoy.</p>
+    <div class="tiendas">
+      <a class="tienda tienda--p" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">Descargar para iPhone</a>
+      <a class="tienda tienda--s" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">Descargar para Android</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap pie">
+    <span>© <span id="anio">2026</span> Zapienz</span>
+    <nav>
+      <a href="privacidad.html">Privacidad</a><a href="terminos.html">Términos</a>
+      <a href="eliminar-cuenta.html">Eliminar cuenta</a><a href="mailto:contactozapienz@gmail.com">Contacto</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  document.getElementById('anio').textContent=new Date().getFullYear();
+  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var B='https://xxzjuzuouobfzbezuwxs.supabase.co/storage/v1/object/public/covers/';
+  var IDS=['23300c33-8b4e-48db-bd44-3bef205856e8','5d791589-84d9-4aca-83a3-f8635e5a6237',
+    'cfdeefd6-8ca9-45ff-b5fe-52091d7aa301','fe0d183a-f124-4fd9-8bf1-1bd379940687',
+    '829a0a2e-7e7e-4a29-85b0-9459a1f5fe54','d15dc7a5-c1df-4337-a4ed-8f92cfd039bf',
+    'b0469f2f-d7b6-4b06-814c-404f1ab44a68','261a074f-d973-40fd-8c3a-2d677bffbb22',
+    '690f98a5-ed2b-465b-9d6e-32ab34782b11','50f9e235-66aa-46fe-957d-612d4b14810f',
+    '6ca00260-73b0-427a-814b-fcc2cc54c20c','3f13a11b-683c-47b8-a145-7788e9e783e7',
+    'cb9132cd-f5b6-4732-bd79-5f7dd25192ce','aec8f1b0-5aae-4ae3-be7c-a5b8b3d2f2b4',
+    'aa21467a-6110-4ab0-b14c-57c08b8719ae','b9c6ecc1-fb68-4313-80c7-7dab8ad9e44c',
+    '84ca7ced-22cd-4601-b9e6-52047c905b66','7e634917-7934-4a36-b13f-931964c54f68',
+    'a2b3e139-8f87-4c15-b3f6-bd89bb251186','25b60c5b-41e1-4cd4-b017-ca6ebfd09146',
+    'a8f1eea9-d384-490b-bd3a-35a9d78163df','f3d30675-9287-4ff6-b86c-e388bc4c96fb',
+    'cddc0f22-8e7f-4dda-ad82-ce5835dcb71c','bacd543b-57a9-46c3-89db-40fbea6e1e99',
+    'bf26f09c-ea68-482f-a636-fcf062e5f697','0bede6af-d969-4e19-a237-e7b1616bc478',
+    '8a104e96-911c-420d-a048-56467064dfba','b6820d58-0655-407c-8e58-154deea38d2c'];
+
+  /* ---- construir el muro: N columnas, cada una con su ritmo ---- */
+  var muro=document.getElementById('muro');
+  var COLS = innerWidth<700 ? 4 : innerWidth<1100 ? 6 : 8;
+  var POR_COL = 7, k=0, columnas=[];
+  for (var c=0;c<COLS;c++){
+    var col=document.createElement('div'); col.className='col';
+    for (var j=0;j<POR_COL*2;j++){          // x2 para que el bucle sea continuo
+      var im=new Image();
+      im.src=B+IDS[k++%IDS.length]+'/cover.png'; im.alt=''; im.decoding='async';
+      im.loading = j<POR_COL ? 'eager' : 'lazy';
+      col.appendChild(im);
+    }
+    muro.appendChild(col);
+    columnas.push({el:col, v:(c%2?-1:1)*(0.16+((c*7)%5)*0.045), y:-(c*90)%700});
+  }
+
+  /* ---- deriva vertical continua ---- */
+  var visible=true;
+  document.addEventListener('visibilitychange',function(){ visible=!document.hidden; });
+  function correr(){
+    requestAnimationFrame(correr);
+    if(!visible) return;
+    for (var i=0;i<columnas.length;i++){
+      var C=columnas[i];
+      C.y -= C.v;
+      var h=C.el.scrollHeight/2;
+      if (C.y <= -h) C.y += h;
+      if (C.y > 0) C.y -= h;
+      C.el.style.transform='translate3d(0,'+C.y.toFixed(1)+'px,0)';
+    }
+  }
+  if(!quieto) requestAnimationFrame(correr);
+
+  /* ---- la linterna: el cursor enciende el catalogo ---- */
+  var foco=document.getElementById('foco'), mx=innerWidth/2, my=innerHeight/2, sx=mx, sy=my;
+  addEventListener('pointermove',function(e){ mx=e.clientX; my=e.clientY; },{passive:true});
+  (function suave(){
+    requestAnimationFrame(suave);
+    sx+=(mx-sx)*0.12; sy+=(my-sy)*0.12;
+    foco.style.setProperty('--mx',sx.toFixed(1)+'px');
+    foco.style.setProperty('--my',sy.toFixed(1)+'px');
+  })();
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

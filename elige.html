@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zapienz — tres direcciones</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ease:cubic-bezier(.16,.8,.3,1)}
+body{background:#0A0E14;color:#F2F5F8;font-family:'Inter',sans-serif;line-height:1.6;
+  -webkit-font-smoothing:antialiased;padding:64px 24px 96px}
+h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:900;line-height:.95;letter-spacing:-.03em}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto}
+.intro{max-width:60ch;margin-bottom:56px}
+.intro h1{font-size:clamp(2.4rem,5.4vw,4.2rem);margin-bottom:18px}
+.intro p{color:#93A3BC}
+.intro p+p{margin-top:12px}
+.rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(max-width:1000px){.rejilla{grid-template-columns:1fr}}
+.opcion{display:flex;flex-direction:column;border-radius:20px;overflow:hidden;text-decoration:none;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.opcion:hover{transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,0,0,.65)}
+.opcion:focus-visible{outline:3px solid #38EB6B;outline-offset:4px}
+/* cada muestra usa la paleta REAL de su version */
+.muestra{height:230px;padding:26px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.muestra b{font-family:'Fraunces',serif;font-weight:900;line-height:.92;display:block}
+.m1{background:#F2EDE1;color:#14181C}
+.m1 b{font-size:2.5rem}
+.m1 .verde{color:#0F7A38}
+.m1::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,#14181C 0 33%,#0F7A38 33% 66%,#C0392B 66%)}
+.m2{background:#050B16;color:#fff;overflow:hidden}
+.m2 b{font-size:2.5rem;position:relative;z-index:2}
+.m2 .verde{color:#38EB6B}
+.m2__fondo{position:absolute;inset:0;display:flex;gap:6px;padding:6px;opacity:.5}
+.m2__fondo i{flex:1;background:linear-gradient(160deg,#1a2f4a,#0d1b2e);border-radius:4px}
+.m3{background:#07100C;color:#EAF5EE}
+.m3 b{font-size:2.4rem}
+.m3 .verde{color:#38EB6B}
+.m3__onda{display:flex;align-items:center;gap:3px;height:34px;margin-top:14px}
+.m3__onda i{flex:1;background:#1DB954;border-radius:99px}
+.cuerpo{background:#111823;padding:24px;flex:1;display:flex;flex-direction:column}
+.cuerpo h2{font-size:1.34rem;margin-bottom:8px}
+.cuerpo p{color:#93A3BC;font-size:.94rem;flex:1}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.tag{font-size:.72rem;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.06);
+  color:#B7C2D9}
+.ver{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-weight:600;
+  color:#38EB6B;font-size:.94rem}
+.nota{margin-top:56px;padding:24px;border-radius:14px;background:#111823;
+  color:#93A3BC;font-size:.92rem;max-width:74ch}
+.nota b{color:#F2F5F8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>Tres direcciones para Zapienz.</h1>
+    <p>Las tres usan la identidad real de la app —el verde <b style="color:#38EB6B">#1DB954</b>, el símbolo de ondas, las portadas de tu catálogo— y las mismas cifras verificadas: 305 Zaps, 20 minutos, 5.0 con 18 valoraciones.</p>
+    <p>Lo que cambia es la apuesta visual. Ábrelas y muévete por ellas: el diseño se juzga en movimiento, no en una captura.</p>
+  </div>
+
+  <div class="rejilla">
+
+    <a class="opcion" href="v1-papel.html">
+      <div class="muestra m1">
+        <b>Trescientos<br>libros que no<br><span class="verde">vas a leer.</span></b>
+      </div>
+      <div class="cuerpo">
+        <h2>1 · Papel y tinta</h2>
+        <p>Fondo de papel impreso en vez de oscuro. Tipografía a sangre, filete tricolor de cabecera y las portadas desfilando como en una mesa de novedades. Es la más arriesgada y la que menos se parece a una app.</p>
+        <div class="tags"><span class="tag">editorial</span><span class="tag">claro</span><span class="tag">tipografía 12vw</span></div>
+        <span class="ver">Verla →</span>
+      </div>
+    </a>
+
+    <a class="opcion" href="v2-muro.html">
+      <div class="muestra m2">
+        <span class="m2__fondo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <b>Toda esta<br>biblioteca,<br><span class="verde">escuchada.</span></b>
+      </div>
+      <div class="cuerpo">
+        <h2>2 · El muro</h2>
+        <p>Las portadas cubren la pantalla completa y derivan en columnas, cada una a su ritmo. El cursor es una linterna que enciende el catálogo a su paso. El producto no se cuenta: se ve, detrás de cada palabra.</p>
+        <div class="tags"><span class="tag">inmersivo</span><span class="tag">linterna</span><span class="tag">113 portadas</span></div>
+        <span class="ver">Verla →</span>
+      </div>
+    </a>
+
+    <a class="opcion" href="v3-reproductor.html">
+      <div class="muestra m3">
+        <b>Un libro entero,<br>en <span class="verde">veinte minutos.</span></b>
+        <span class="m3__onda" aria-hidden="true"><i style="height:30%"></i><i style="height:65%"></i><i style="height:100%"></i><i style="height:45%"></i><i style="height:80%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i><i style="height:90%"></i><i style="height:40%"></i><i style="height:60%"></i><i style="height:25%"></i></span>
+      </div>
+      <div class="cuerpo">
+        <h2>3 · Reproductor</h2>
+        <p>La página es un reproductor. Un riel de tiempo fijo a la izquierda, el scroll como línea de reproducción con su reloj, y cada sección es una pista numerada. Es la que mejor conecta con lo que de verdad vendes: escuchar.</p>
+        <div class="tags"><span class="tag">conceptual</span><span class="tag">riel de tiempo</span><span class="tag">pistas</span></div>
+        <span class="ver">Verla →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="nota">
+    <b>Mi recomendación:</b> la 1 si quieres que Zapienz no se parezca a ninguna otra app de resúmenes
+    — es la que un estudio cobraría más caro y la que se comparte. La 3 si prefieres que el sitio
+    explique el producto mientras lo usas. La 2 es la más espectacular de golpe, pero también la que
+    más depende de que las portadas se vean bien en pantallas pequeñas.
+    Dime cuál y la termino al detalle: secciones completas, saga de scroll, móvil afinado y páginas legales.
+  </p>
+</div>
+</body>
+</html>

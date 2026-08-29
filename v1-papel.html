@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zapienz — Papel y tinta</title>
+<meta name="description" content="305 libros de no ficción, resumidos en texto y audio.">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papel:#F2EDE1; --papel-2:#E8E1D1; --tinta:#14181C; --tinta-2:#4A5158;
+  --verde:#0F7A38; --verde-vivo:#1DB954; --rojo:#C0392B;
+  --ease:cubic-bezier(.16,.8,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--papel);color:var(--tinta);font-family:'Inter',sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:.92;font-weight:900;
+  letter-spacing:-.03em}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
+
+/* grano de papel real, mas presente que en un tema oscuro */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:99;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.9'/%3E%3C/svg%3E");
+  opacity:.09;mix-blend-mode:multiply}
+
+/* filete superior, como cabecera de periodico */
+.filete{position:fixed;top:0;left:0;right:0;height:5px;z-index:60;
+  background:linear-gradient(90deg,var(--tinta) 0 33%,var(--verde) 33% 66%,var(--rojo) 66%)}
+
+.cab{position:fixed;top:5px;left:0;right:0;z-index:55;padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(242,237,225,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(20,24,28,.12)}
+.cab__marca{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.01em}
+.cab__marca img{width:26px;height:26px}
+.cab__nav{display:flex;gap:26px;font-size:.86rem;font-weight:500}
+.cab__nav a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;transition:border-color .25s var(--ease)}
+.cab__nav a:hover{border-color:var(--tinta)}
+.cab__cta{background:var(--tinta);color:var(--papel);text-decoration:none;font-weight:600;
+  font-size:.86rem;padding:11px 20px;min-height:44px;display:inline-flex;align-items:center;
+  transition:background .25s var(--ease)}
+.cab__cta:hover{background:var(--verde)}
+@media(max-width:860px){.cab__nav{display:none}}
+
+/* ---------- HERO: tipografia a sangre ---------- */
+.hero{padding:150px 0 0;position:relative}
+.hero__kicker{display:flex;align-items:center;gap:14px;font-size:.76rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:26px}
+.hero__kicker::after{content:'';flex:1;height:1px;background:rgba(20,24,28,.22)}
+/* el titular manda: 12vw, a sangre, con la ultima linea en verde tinta */
+.hero h1{font-size:clamp(3.6rem,12.4vw,11.5rem);margin-left:-.055em}
+.hero h1 .l{display:block;overflow:hidden}
+.hero h1 .l span{display:block;transform:translateY(105%);
+  transition:transform 1.05s var(--ease)}
+.hero.on h1 .l span{transform:none}
+.hero h1 .l:nth-child(2) span{transition-delay:.1s}
+.hero h1 .l:nth-child(3) span{transition-delay:.2s;color:var(--verde)}
+.hero__pie{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:end;
+  margin-top:44px;padding-bottom:60px}
+@media(max-width:900px){.hero__pie{grid-template-columns:1fr;gap:32px}}
+.hero__lead{font-size:clamp(1.02rem,1.5vw,1.24rem);max-width:38ch;color:var(--tinta-2)}
+.hero__lead b{color:var(--tinta);font-weight:600}
+.tiendas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.tienda{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;
+  font-size:.92rem;padding:14px 22px;min-height:44px;border:1.5px solid var(--tinta);
+  transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)}
+.tienda--p{background:var(--tinta);color:var(--papel)}
+.tienda:hover{transform:translateY(-2px);background:var(--verde);color:#fff;border-color:var(--verde)}
+.tienda svg{width:18px;height:18px}
+.sello{text-align:right}
+.sello b{display:block;font-family:'Fraunces',serif;font-size:clamp(3.4rem,7vw,5.6rem);
+  line-height:.9;font-weight:900}
+.sello span{font-size:.82rem;color:var(--tinta-2);letter-spacing:.04em}
+
+/* ---------- MESA DE NOVEDADES: portadas como objetos ---------- */
+.mesa{background:var(--papel-2);padding:0 0 96px;position:relative;overflow:hidden}
+.mesa__tira{display:flex;gap:26px;padding:56px 32px;width:max-content;
+  animation:desfile 64s linear infinite}
+.mesa__tira:hover{animation-play-state:paused}
+@keyframes desfile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.libro-obj{width:180px;flex:none;transform:rotate(var(--r));
+  transition:transform .5s var(--ease)}
+.libro-obj img{width:100%;box-shadow:14px 18px 0 rgba(20,24,28,.14),0 2px 10px rgba(20,24,28,.2)}
+.libro-obj figcaption{margin-top:14px;font-size:.78rem;line-height:1.35}
+.libro-obj figcaption b{display:block;font-family:'Fraunces',serif;font-size:.94rem;font-weight:700}
+.libro-obj figcaption span{color:var(--tinta-2)}
+.libro-obj:hover{transform:rotate(0deg) translateY(-10px)}
+
+/* ---------- CIFRAS: bloque editorial con divisores ---------- */
+.cifras{padding:96px 0;border-top:2px solid var(--tinta)}
+.cifras__grid{display:grid;grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.cifras__grid{grid-template-columns:1fr;gap:34px}}
+.cifra{padding:0 34px;border-left:1px solid rgba(20,24,28,.2)}
+.cifra:first-child{padding-left:0;border-left:none}
+.cifra b{display:block;font-family:'Fraunces',serif;font-size:clamp(3.4rem,7vw,5.4rem);
+  font-weight:900;line-height:.88;margin-bottom:10px}
+.cifra span{font-size:.94rem;color:var(--tinta-2);max-width:22ch;display:block}
+
+/* ---------- COMO: dos columnas con regla ---------- */
+.como{padding:0 0 96px}
+.como h2{font-size:clamp(2.4rem,5.4vw,4.4rem);max-width:16ch;margin-bottom:52px}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+@media(max-width:820px){.pasos{grid-template-columns:1fr}}
+.paso{padding:30px 30px 30px 0;border-top:2px solid var(--tinta)}
+.paso+.paso{padding-left:30px;border-left:1px solid rgba(20,24,28,.2)}
+.paso i{font-style:normal;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;
+  color:var(--verde);display:block;margin-bottom:12px}
+.paso h3{font-size:1.42rem;margin-bottom:8px}
+.paso p{font-size:.96rem;color:var(--tinta-2)}
+
+/* ---------- CIERRE ---------- */
+.cierre{background:var(--tinta);color:var(--papel);padding:110px 0;text-align:center}
+.cierre h2{font-size:clamp(2.6rem,7vw,6rem);max-width:15ch;margin:0 auto 22px;color:var(--papel)}
+.cierre h2 em{font-style:normal;color:var(--verde-vivo)}
+.cierre p{color:rgba(242,237,225,.72);margin-bottom:38px}
+.cierre .tiendas{justify-content:center}
+.cierre .tienda{border-color:var(--papel);color:var(--papel)}
+.cierre .tienda--p{background:var(--papel);color:var(--tinta)}
+.cierre .tienda:hover{background:var(--verde-vivo);border-color:var(--verde-vivo);color:#fff}
+
+footer{padding:44px 0;font-size:.86rem;color:var(--tinta-2)}
+.pie{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.pie nav{display:flex;gap:8px;flex-wrap:wrap}
+.pie nav a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:0 8px}
+.pie nav a:hover{color:var(--verde)}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .mesa__tira{animation:none;flex-wrap:wrap;width:auto}
+  .hero h1 .l span{transform:none}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="filete"></div>
+<header class="cab">
+  <span class="cab__marca"><img src="assets/icon.png" alt=""> Zapienz</span>
+  <nav class="cab__nav">
+    <a href="#mesa">El catálogo</a><a href="#como">Cómo funciona</a><a href="#cierre">Descargar</a>
+  </nav>
+  <a class="cab__cta" href="#cierre">Descargar gratis</a>
+</header>
+
+<main>
+<section class="hero" id="hero">
+  <div class="wrap">
+    <p class="hero__kicker">305 Zaps · 10 categorías · en español</p>
+    <h1>
+      <span class="l"><span>Trescientos</span></span>
+      <span class="l"><span>libros que no</span></span>
+      <span class="l"><span>vas a leer.</span></span>
+    </h1>
+    <div class="hero__pie">
+      <div>
+        <p class="hero__lead"><b>Nosotros ya los leímos.</b> Las ideas de cada uno, en veinte minutos, para leer o escuchar. Sin culpa, sin el libro a medias en el buró.</p>
+        <div class="tiendas">
+          <a class="tienda tienda--p" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5z"/></svg>
+            App Store</a>
+          <a class="tienda" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14z"/></svg>
+            Google Play</a>
+        </div>
+      </div>
+      <div class="sello">
+        <b>5.0</b>
+        <span>18 valoraciones<br>de lectores</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mesa" id="mesa">
+  <div class="mesa__tira" id="tira"></div>
+</section>
+
+<section class="cifras">
+  <div class="wrap cifras__grid">
+    <div class="cifra rv"><b>305</b><span>Zaps publicados, todos en español</span></div>
+    <div class="cifra rv"><b>20</b><span>minutos por libro, en promedio</span></div>
+    <div class="cifra rv"><b>10</b><span>categorías, de filosofía a negocios</span></div>
+  </div>
+</section>
+
+<section class="como" id="como">
+  <div class="wrap">
+    <h2>Léelo o escúchalo. Tú decides.</h2>
+    <div class="pasos">
+      <article class="paso rv"><i>01</i><h3>Elige un Zap</h3><p>305 títulos de no ficción organizados en diez categorías.</p></article>
+      <article class="paso rv"><i>02</i><h3>Veinte minutos</h3><p>Las ideas centrales con sus aprendizajes clave. Lo que de verdad te llevarías.</p></article>
+      <article class="paso rv"><i>03</i><h3>Texto o audio</h3><p>Lee con calma o escucha mientras manejas. Recuerda dónde te quedaste.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cierre" id="cierre">
+  <div class="wrap">
+    <h2>Tu próximo libro empieza en <em>veinte minutos</em>.</h2>
+    <p>Descárgala gratis y escucha el primero hoy.</p>
+    <div class="tiendas">
+      <a class="tienda tienda--p" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">Descargar para iPhone</a>
+      <a class="tienda" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">Descargar para Android</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap pie">
+    <span>© <span id="anio">2026</span> Zapienz</span>
+    <nav>
+      <a href="privacidad.html">Privacidad</a><a href="terminos.html">Términos</a>
+      <a href="eliminar-cuenta.html">Eliminar cuenta</a><a href="mailto:contactozapienz@gmail.com">Contacto</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('anio').textContent=new Date().getFullYear();
+  var B='https://xxzjuzuouobfzbezuwxs.supabase.co/storage/v1/object/public/covers/';
+  var P=[['23300c33-8b4e-48db-bd44-3bef205856e8','El Arte de Pensar Claramente','Rolf Dobelli'],
+    ['cfdeefd6-8ca9-45ff-b5fe-52091d7aa301','Quiet','Susan Cain'],
+    ['fe0d183a-f124-4fd9-8bf1-1bd379940687','La Sociedad del Cansancio','Byung-Chul Han'],
+    ['829a0a2e-7e7e-4a29-85b0-9459a1f5fe54','Factfulness','Hans Rosling'],
+    ['b0469f2f-d7b6-4b06-814c-404f1ab44a68','Bullshit Jobs','David Graeber'],
+    ['261a074f-d973-40fd-8c3a-2d677bffbb22','Atrévete a No Gustar','Ichiro Kishimi'],
+    ['3f13a11b-683c-47b8-a145-7788e9e783e7','Mujeres y Poder','Mary Beard'],
+    ['a2b3e139-8f87-4c15-b3f6-bd89bb251186','12 Reglas para Vivir','Jordan B. Peterson'],
+    ['6ca00260-73b0-427a-814b-fcc2cc54c20c','Tu Cerebro Manda','John Medina'],
+    ['7e634917-7934-4a36-b13f-931964c54f68','Pensamiento Lateral','Edward de Bono'],
+    ['f3d30675-9287-4ff6-b86c-e388bc4c96fb','La Singularidad está Cerca','Ray Kurzweil'],
+    ['0bede6af-d969-4e19-a237-e7b1616bc478','Lo Inevitable','Kevin Kelly']];
+  var tira=document.getElementById('tira');
+  function tarjeta(p,i){
+    var f=document.createElement('figure'); f.className='libro-obj';
+    f.style.setProperty('--r',(((i*53)%9)-4)+'deg');
+    var im=new Image(); im.src=B+p[0]+'/cover.png'; im.alt=''; im.loading=i<6?'eager':'lazy';
+    var c=document.createElement('figcaption');
+    c.innerHTML='<b>'+p[1]+'</b><span>'+p[2]+'</span>';
+    f.appendChild(im); f.appendChild(c); return f;
+  }
+  // duplicada para que el desfile sea continuo
+  P.forEach(function(p,i){ tira.appendChild(tarjeta(p,i)); });
+  P.forEach(function(p,i){ tira.appendChild(tarjeta(p,i)); });
+
+  requestAnimationFrame(function(){ document.getElementById('hero').classList.add('on'); });
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

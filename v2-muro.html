@@ -80,7 +80,7 @@ a{color:inherit}
 .marca{display:flex;align-items:center;gap:9px;font-weight:600;font-size:1.05rem}
 .marca img{width:25px;height:25px}
 .enlaces{display:flex;gap:26px}
-.enlaces a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.86rem;font-weight:500;
+.enlaces a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.86rem;font-weight:500;min-height:44px;display:inline-flex;align-items:center;
   transition:color .25s var(--ease)}
 .enlaces a:hover{color:#fff}
 @media(max-width:900px){.enlaces{display:none}}
@@ -268,6 +268,27 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
 @media(max-width:620px){.nodo{width:62px;height:62px}.nodo svg{width:24px;height:24px}
   .nodo__et{font-size:.68rem}}
 
+/* ============ HILO DE AUDIO: cose la pagina entera ============ */
+#hilo{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4;opacity:.9}
+
+/* ============ PRECIOS ============ */
+.planes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:38px}
+@media(max-width:780px){.planes{grid-template-columns:1fr}}
+.plan{border-radius:22px;padding:32px 28px;display:flex;flex-direction:column;
+  transition:transform .35s var(--ease)}
+.plan:hover{transform:translateY(-5px)}
+.plan--top{box-shadow:4px 4px 4px rgba(0,0,0,.05),inset 0 1px 1px rgba(255,255,255,.15),
+  0 0 0 1px rgba(29,185,84,.42),0 0 60px rgba(29,185,84,.1)}
+.plan__eti{display:inline-flex;align-self:flex-start;font-size:.7rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#04140A;background:var(--verde-vivo);
+  padding:5px 12px;border-radius:999px;margin-bottom:16px}
+.plan h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.85rem;margin-bottom:6px}
+.plan__d{color:rgba(255,255,255,.6);font-size:.92rem;margin-bottom:22px}
+.plan ul{list-style:none;display:grid;gap:11px;margin-top:auto}
+.plan li{display:flex;gap:11px;align-items:flex-start;font-size:.94rem;
+  color:rgba(255,255,255,.88)}
+.plan li svg{width:16px;height:16px;flex:none;margin-top:5px;color:var(--verde-vivo)}
+
 /* ============ soportes: tilt, magnético, shiny ============ */
 .paso{transform-style:preserve-3d;will-change:transform}
 .brillo{background:linear-gradient(90deg,#fff 0%,#fff 40%,var(--verde-vivo) 50%,#fff 60%,#fff 100%);
@@ -283,7 +304,7 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
 .bw.on span{opacity:1;filter:blur(0);transform:none}
 @media(prefers-reduced-motion:reduce){
   .col{transform:none!important}.foco{display:none}
-  .rv{opacity:1;transform:none}.vivo::before{animation:none}
+  .rv{opacity:1;transform:none}.vivo::before{animation:none}#hilo{display:none}
   .bw span{opacity:1;filter:none;transform:none}
   .brillo{animation:none;background:none;-webkit-background-clip:border-box;
     background-clip:border-box;color:var(--verde-vivo)}
@@ -303,6 +324,7 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
 <div class="muro" id="muro" aria-hidden="true"></div>
 <div class="velo" aria-hidden="true"></div>
 <div class="foco" id="foco" aria-hidden="true"></div>
+<canvas id="hilo" aria-hidden="true"></canvas>
 <div class="grano" aria-hidden="true"></div>
 
 <header class="barra">
@@ -310,7 +332,7 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
     <div class="barra__izq">
       <span class="marca"><img src="assets/icon.png" alt=""> Zapienz</span>
       <nav class="enlaces" aria-label="Secciones">
-        <a href="#saga">Cómo nace un Zap</a><a href="#catalogo">Catálogo</a><a href="#como">Cómo funciona</a>
+        <a href="#saga">Cómo nace un Zap</a><a href="#como">Cómo funciona</a><a href="#precios">Precios</a>
       </nav>
     </div>
     <div class="barra__der">
@@ -438,6 +460,36 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
           <p>Las ideas centrales del libro con sus aprendizajes clave. Lo que de verdad te llevarías.</p></article>
         <article class="paso vidrio rv"><i>03</i><h3>Texto o audio</h3>
           <p>Lee con calma o escucha mientras manejas. La app recuerda dónde te quedaste.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloque" id="precios" style="padding-top:0">
+  <div class="wrap">
+    <div class="bloque__caja vidrio vidrio--fuerte">
+      <h2 class="serif bw" data-bw>Empieza <em>gratis</em>. Sigue si te sirve.</h2>
+      <div class="planes">
+        <article class="plan vidrio rv">
+          <h3>Con créditos</h3>
+          <p class="plan__d">Para quien lee de vez en cuando.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Desbloqueas el libro que quieras</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Tuyo para siempre, sin caducidad</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Texto y audio incluidos</li>
+          </ul>
+        </article>
+        <article class="plan vidrio vidrio--fuerte plan--top rv">
+          <span class="plan__eti">Premium</span>
+          <h3>Todo, sin límite</h3>
+          <p class="plan__d">Para quien quiere leer de verdad este año.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Los 305 Zaps, completos</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Audio de todos los títulos</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Títulos nuevos cada semana</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Mensual o anual, cancelas cuando quieras</li>
+          </ul>
+        </article>
       </div>
     </div>
   </div>
@@ -690,17 +742,45 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
     haz.setAttribute('cx',pt.x); haz.setAttribute('cy',pt.y);
   }
 
+  /* ============ HILO DE AUDIO: la onda cose la pagina ============ */
+  var cv=document.getElementById('hilo'), cx=cv.getContext('2d'), W=0,H=0,DPR=1;
+  function medir(){ DPR=Math.min(devicePixelRatio||1,1.6);
+    W=cv.width=innerWidth*DPR; H=cv.height=innerHeight*DPR; }
+  function hilo_pintar(t,energia){
+    cx.clearRect(0,0,W,H);
+    var base=H*0.5, amp=(11+energia*104)*DPR;
+    for(var capa=0;capa<3;capa++){
+      cx.beginPath();
+      for(var x=0;x<=W;x+=9*DPR){
+        var n=x/W;
+        var y=base+Math.sin(n*7.2+t/1150+capa*1.7)*amp*(0.5+0.5*Math.sin(n*3.1+t/2700))
+              +Math.sin(n*18+t/640-capa)*amp*0.2;
+        x===0?cx.moveTo(x,y):cx.lineTo(x,y);
+      }
+      var g=cx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'rgba(25,211,197,0)');
+      g.addColorStop(.3,'rgba(25,211,197,'+(0.1+energia*0.3)+')');
+      g.addColorStop(.62,'rgba(56,235,107,'+(0.1+energia*0.45)+')');
+      g.addColorStop(1,'rgba(29,185,84,0)');
+      cx.strokeStyle=g; cx.lineWidth=(1+capa*0.45+energia*1.5)*DPR;
+      cx.globalAlpha=1-capa*0.3; cx.stroke();
+    }
+    cx.globalAlpha=1;
+  }
+
   /* ============ bucle único ============ */
   function bucle(t){
     requestAnimationFrame(bucle);
     if(!visible) return;
     var r=saga.getBoundingClientRect();
-    if(r.top<innerHeight && r.bottom>0)
-      saga_pintar(clamp(-r.top/((r.height-innerHeight)||1),0,1),t);
+    var enSaga = r.top<innerHeight && r.bottom>0;
+    if(enSaga) saga_pintar(clamp(-r.top/((r.height-innerHeight)||1),0,1),t);
     moverHaz(t);
+    // la onda late bajo, y sube al maximo en el capitulo de la voz
+    hilo_pintar(t, 0.08 + (enSaga ? 0.2 + energiaVoz*0.72 : 0));
   }
   if(!quieto){
-    addEventListener('resize',armarHaz);
+    medir(); addEventListener("resize",function(){ medir(); armarHaz(); });
     requestAnimationFrame(function(){ armarHaz(); requestAnimationFrame(bucle); });
   }
 

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zapienz — Esta página no está en el catálogo</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--noche:#04070D;--verde:#1DB954;--verde-vivo:#38EB6B;--teal:#19D3C5;
+  --ease:cubic-bezier(.16,.8,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--noche);color:#fff;font-family:'Inter',sans-serif;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:32px 24px}
+img{max-width:100%;display:block} a{color:inherit}
+:focus-visible{outline:2px solid var(--verde-vivo);outline-offset:4px;border-radius:99px}
+.vidrio{background:rgba(255,255,255,.01);background-blend-mode:luminosity;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:none;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.1);position:relative;overflow:hidden}
+.vidrio::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.15) 20%,
+    rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.15) 80%,rgba(255,255,255,.45) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.fondo{position:fixed;inset:0;z-index:0;
+  background:radial-gradient(105% 68% at 50% 40%,#0d1a2a 0%,var(--noche) 64%)}
+.fondo::after{content:'';position:absolute;inset:0;opacity:.1;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+#onda{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.85}
+main{position:relative;z-index:5;max-width:38rem}
+.logo{width:46px;height:46px;margin:0 auto 26px}
+.cifra{font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+  font-size:clamp(4.6rem,15vw,9rem);line-height:.9;letter-spacing:-.02em;margin-bottom:8px}
+.cifra em{font-style:italic;color:var(--verde-vivo)}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+  font-size:clamp(1.5rem,3.6vw,2.3rem);line-height:1.1;margin-bottom:14px}
+p{color:rgba(255,255,255,.7);margin-bottom:32px}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.bt{border-radius:999px;padding:14px 26px;text-decoration:none;font-weight:600;font-size:.92rem;
+  min-height:44px;display:inline-flex;align-items:center;gap:9px;
+  transition:transform .25s var(--ease),background .25s var(--ease)}
+.bt--p{background:#fff;color:#04070D}
+.bt:hover{transform:translateY(-2px)}
+.bt--s:hover{background:rgba(255,255,255,.06)}
+.pie{margin-top:38px;font-size:.82rem;color:rgba(255,255,255,.42)}
+.pie a{color:rgba(255,255,255,.6);text-decoration:none;padding:0 8px;
+  min-height:44px;display:inline-flex;align-items:center}
+.pie a:hover{color:#fff}
+@media(prefers-reduced-motion:reduce){#onda{display:none}}
+</style>
+</head>
+<body>
+<div class="fondo" aria-hidden="true"></div>
+<canvas id="onda" aria-hidden="true"></canvas>
+
+<main>
+  <img class="logo" src="/assets/icon.png" alt="">
+  <p class="cifra">4<em>0</em>4</p>
+  <h1>Esta página no está en el catálogo.</h1>
+  <p>El enlace que seguiste no existe o cambió de sitio. Los 305 Zaps sí siguen donde los dejaste.</p>
+  <div class="acciones">
+    <a class="bt bt--p" href="/">Volver al inicio</a>
+    <a class="bt bt--s vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">Descargar la app</a>
+  </div>
+  <p class="pie">
+    <a href="/privacidad.html">Privacidad</a>·<a href="/terminos.html">Términos</a>·<a href="/eliminar-cuenta.html">Eliminar cuenta</a>
+  </p>
+</main>
+
+<script>
+(function(){
+  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(quieto) return;
+  var cv=document.getElementById('onda'), cx=cv.getContext('2d'), W,H,DPR;
+  function medir(){ DPR=Math.min(devicePixelRatio||1,1.6);
+    W=cv.width=innerWidth*DPR; H=cv.height=innerHeight*DPR; }
+  medir(); addEventListener('resize',medir);
+  var visible=true;
+  document.addEventListener('visibilitychange',function(){ visible=!document.hidden; });
+  // La misma onda del sitio, pero plana: aquí no hay nada sonando.
+  (function pinta(t){
+    requestAnimationFrame(pinta);
+    if(!visible) return;
+    cx.clearRect(0,0,W,H);
+    var base=H*0.5;
+    for(var capa=0;capa<2;capa++){
+      cx.beginPath();
+      for(var x=0;x<=W;x+=10*DPR){
+        var n=x/W;
+        var amp=14*DPR*(0.4+0.6*Math.sin(n*2.6+t/3000));
+        cx.lineTo(x, base+Math.sin(n*9+t/1400+capa*1.6)*amp);
+      }
+      var g=cx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'rgba(25,211,197,0)');
+      g.addColorStop(.5,'rgba(56,235,107,.22)');
+      g.addColorStop(1,'rgba(29,185,84,0)');
+      cx.strokeStyle=g; cx.lineWidth=(1+capa*.5)*DPR; cx.stroke();
+    }
+  })(0);
+})();
+</script>
+</body>
+</html>

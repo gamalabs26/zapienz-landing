@@ -3,112 +3,200 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zapienz — El muro</title>
-<meta name="description" content="305 libros de no ficción, resumidos en texto y audio.">
+<title>Zapienz — Toda esta biblioteca, escuchada</title>
+<meta name="description" content="305 libros de no ficción resumidos en texto y audio. 20 minutos cada uno, en español.">
 <link rel="icon" href="assets/icon.png">
+<meta property="og:title" content="Zapienz — Toda esta biblioteca, escuchada">
+<meta property="og:description" content="305 libros de no ficción, resumidos en texto y audio.">
+<meta property="og:image" content="assets/logo_full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --noche:#050B16; --verde:#1DB954; --verde-vivo:#38EB6B; --teal:#19D3C5;
-  --hueso:#FFFFFF; --tenue:#93A3BC;
+  --noche:#04070D; --verde:#1DB954; --verde-vivo:#38EB6B; --teal:#19D3C5;
+  --hueso:#FFFFFF; --tenue:rgba(255,255,255,.62);
   --ease:cubic-bezier(.16,.8,.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--noche);color:var(--hueso);font-family:'Inter',sans-serif;
   line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:.94;font-weight:900;letter-spacing:-.03em}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em}
 img{max-width:100%;display:block}
 a{color:inherit}
-.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
-:focus-visible{outline:2px solid var(--verde-vivo);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:2px solid var(--verde-vivo);outline-offset:4px;border-radius:99px}
 
-/* ================= EL MURO ================= */
-.muro{position:fixed;inset:0;z-index:0;display:flex;gap:12px;padding:0 6px;
-  transform:scale(1.08)}
-.col{flex:1;display:flex;flex-direction:column;gap:12px;will-change:transform}
-.col img{width:100%;border-radius:5px;opacity:1}
-/* velo que apaga el muro; el cursor abre un hueco y lo enciende */
+/* ============================================================
+   VIDRIO LÍQUIDO — el borde es un degradado de 1.4px recortado
+   por mask, no un border: por eso lee como filo de luz.
+   ============================================================ */
+.vidrio{
+  background:rgba(255,255,255,.01);
+  background-blend-mode:luminosity;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  border:none;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.1);
+  position:relative;overflow:hidden;
+}
+.vidrio::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.15) 20%,
+    rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.15) 80%,rgba(255,255,255,.45) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
+.vidrio--fuerte{backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);
+  box-shadow:4px 4px 4px rgba(0,0,0,.05),inset 0 1px 1px rgba(255,255,255,.15)}
+
+/* ============================================================
+   EL MURO — el catálogo real como fondo vivo
+   ============================================================ */
+.muro{position:fixed;inset:0;z-index:0;display:flex;gap:10px;padding:0 5px;
+  transform:scale(1.14) translateY(3%)}
+.col{flex:1;display:flex;flex-direction:column;gap:10px;will-change:transform}
+.col img{width:100%;border-radius:4px}
+/* atmósfera: viñeta + apagado general para que el texto respire */
 .velo{position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(78% 62% at 50% 42%,rgba(5,11,22,.62) 0%,rgba(5,11,22,.86) 52%,rgba(5,11,22,.97) 100%)}
-/* Capa que oscurece; la mascara le abre un hueco donde esta el cursor, asi que
-   la luz "enciende" las portadas que hay debajo. */
+  background:
+    radial-gradient(120% 78% at 50% 46%,rgba(4,7,13,.52) 0%,rgba(4,7,13,.86) 58%,rgba(4,7,13,.98) 100%),
+    linear-gradient(180deg,rgba(4,7,13,.92) 0%,rgba(4,7,13,.25) 26%,rgba(4,7,13,.4) 62%,rgba(4,7,13,.96) 100%)}
+/* la linterna: el cursor abre un hueco y enciende las portadas */
 .foco{position:fixed;inset:0;z-index:2;pointer-events:none;
-  background:rgba(5,11,22,.55);
-  -webkit-mask-image:radial-gradient(circle 250px at var(--mx,-500px) var(--my,-500px),transparent 0%,rgba(0,0,0,.5) 55%,#000 100%);
-  mask-image:radial-gradient(circle 250px at var(--mx,-500px) var(--my,-500px),transparent 0%,rgba(0,0,0,.5) 55%,#000 100%)}
+  background:rgba(4,7,13,.56);
+  -webkit-mask-image:radial-gradient(circle 270px at var(--mx,-600px) var(--my,-600px),transparent 0%,rgba(0,0,0,.55) 52%,#000 100%);
+  mask-image:radial-gradient(circle 270px at var(--mx,-600px) var(--my,-600px),transparent 0%,rgba(0,0,0,.55) 52%,#000 100%)}
+/* grano fino: quita el look digital plano */
+.grano{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
 
-/* ================= contenido ================= */
-main{position:relative;z-index:5}
-.cab{position:fixed;top:0;left:0;right:0;z-index:60;padding:20px 32px;
-  display:flex;align-items:center;justify-content:space-between}
-.cab__marca{display:flex;align-items:center;gap:9px;font-weight:700}
-.cab__marca img{width:28px;height:28px}
-.cab__cta{background:var(--verde);color:#04140A;text-decoration:none;font-weight:700;
-  font-size:.88rem;padding:12px 22px;border-radius:999px;min-height:44px;
-  display:inline-flex;align-items:center;transition:transform .25s var(--ease)}
-.cab__cta:hover{transform:translateY(-2px)}
+/* ============================================================
+   NAV — píldora de vidrio centrada
+   ============================================================ */
+.barra{position:fixed;top:0;left:0;right:0;z-index:60;padding:22px 24px}
+.barra__int{max-width:1024px;margin:0 auto;border-radius:999px;padding:11px 12px 11px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.barra__izq{display:flex;align-items:center;gap:32px}
+.marca{display:flex;align-items:center;gap:9px;font-weight:600;font-size:1.05rem}
+.marca img{width:25px;height:25px}
+.enlaces{display:flex;gap:26px}
+.enlaces a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.86rem;font-weight:500;
+  transition:color .25s var(--ease)}
+.enlaces a:hover{color:#fff}
+@media(max-width:900px){.enlaces{display:none}}
+.barra__der{display:flex;align-items:center;gap:14px}
+.enlace-plano{color:#fff;text-decoration:none;font-size:.86rem;font-weight:500;
+  min-height:44px;display:inline-flex;align-items:center;padding:0 6px}
+.pill{border-radius:999px;padding:11px 22px;color:#fff;text-decoration:none;
+  font-size:.86rem;font-weight:600;min-height:44px;display:inline-flex;align-items:center;
+  transition:background .25s var(--ease),transform .25s var(--ease)}
+.pill:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
+@media(max-width:560px){.enlace-plano{display:none}}
 
-.hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 60px}
-.marca-viva{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:600;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--verde-vivo);margin-bottom:28px}
-.marca-viva::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--verde-vivo);
-  box-shadow:0 0 0 0 rgba(56,235,107,.6);animation:latir 2.4s infinite}
-@keyframes latir{70%{box-shadow:0 0 0 14px rgba(56,235,107,0)}100%{box-shadow:0 0 0 0 rgba(56,235,107,0)}}
-.hero h1{font-size:clamp(3.2rem,9.6vw,9rem);max-width:15ch;margin-bottom:30px;
-  text-shadow:0 8px 60px rgba(5,11,22,.9)}
-.hero h1 em{font-style:normal;color:var(--verde-vivo)}
-.hero__lead{font-size:clamp(1.04rem,1.6vw,1.3rem);max-width:40ch;color:var(--tenue);
-  margin-bottom:38px;text-shadow:0 2px 24px rgba(5,11,22,1)}
-.hero__pista{margin-top:44px;font-size:.82rem;color:var(--tenue);display:flex;align-items:center;gap:10px}
-.hero__pista svg{width:17px;height:17px;color:var(--verde-vivo)}
+/* ============================================================
+   HERO
+   ============================================================ */
+main{position:relative;z-index:10}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:120px 24px 60px}
+.vivo{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:26px}
+.vivo::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--verde-vivo);
+  box-shadow:0 0 0 0 rgba(56,235,107,.55);animation:latir 2.6s infinite}
+@keyframes latir{70%{box-shadow:0 0 0 13px rgba(56,235,107,0)}100%{box-shadow:0 0 0 0 rgba(56,235,107,0)}}
+.hero h1{font-size:clamp(3rem,7.6vw,6.6rem);line-height:1.02;margin-bottom:30px;
+  text-shadow:0 6px 50px rgba(4,7,13,.75)}
+.hero h1 em{font-style:italic;color:var(--verde-vivo)}
+.hero__sub{max-width:34rem;color:rgba(255,255,255,.82);font-size:1rem;line-height:1.7;
+  margin:0 auto 34px;text-shadow:0 2px 22px rgba(4,7,13,.95)}
 
-.tiendas{display:flex;gap:13px;flex-wrap:wrap}
-.tienda{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;
-  padding:15px 26px;border-radius:12px;min-height:44px;backdrop-filter:blur(12px);
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.tienda--p{background:var(--hueso);color:#050B16}
-.tienda--s{background:rgba(255,255,255,.07);color:var(--hueso);box-shadow:inset 0 0 0 1px rgba(255,255,255,.24)}
-.tienda:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.55)}
-.tienda svg{width:19px;height:19px}
+/* barra de vidrio con botón circular — el CTA principal */
+.caja{max-width:36rem;width:100%;margin:0 auto}
+.buscador{border-radius:999px;padding:8px 8px 8px 24px;display:flex;align-items:center;gap:12px}
+.buscador input{flex:1;background:transparent;border:none;outline:none;color:#fff;
+  font-family:inherit;font-size:1rem;min-height:44px}
+.buscador input::placeholder{color:rgba(255,255,255,.42)}
+.circular{background:#fff;color:#04070D;border:none;border-radius:50%;width:46px;height:46px;
+  display:grid;place-items:center;cursor:pointer;flex:none;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.circular:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(255,255,255,.24)}
+.circular svg{width:20px;height:20px}
+.pie-caja{color:rgba(255,255,255,.78);font-size:.86rem;line-height:1.6;padding:0 16px;margin-top:16px}
+.tiendas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.tienda{border-radius:999px;padding:13px 26px;color:#fff;text-decoration:none;font-size:.9rem;
+  font-weight:600;min-height:44px;display:inline-flex;align-items:center;gap:9px;
+  transition:background .25s var(--ease),transform .25s var(--ease)}
+.tienda:hover{background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.tienda svg{width:18px;height:18px}
+.pista{margin-top:40px;font-size:.8rem;color:rgba(255,255,255,.5);display:inline-flex;
+  align-items:center;gap:9px}
+.pista svg{width:15px;height:15px;color:var(--verde-vivo)}
 
-/* bloques que se apoyan sobre el muro */
-.bloque{background:rgba(5,11,22,.82);backdrop-filter:blur(22px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.09);padding:88px 0;position:relative}
-.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
-@media(max-width:820px){.cifras{grid-template-columns:1fr}}
-.cifra b{display:block;font-family:'Fraunces',serif;font-size:clamp(3rem,6.4vw,5rem);
-  font-weight:900;line-height:.9;color:var(--verde-vivo);margin-bottom:8px}
-.cifra span{color:var(--tenue);font-size:.95rem}
-.bloque h2{font-size:clamp(2.2rem,5vw,3.9rem);max-width:18ch;margin-bottom:44px}
-.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-@media(max-width:820px){.pasos{grid-template-columns:1fr}}
-.paso{padding:28px;border-radius:16px;background:rgba(255,255,255,.04);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);transition:transform .35s var(--ease)}
-.paso:hover{transform:translateY(-6px)}
-.paso i{font-style:normal;color:var(--verde-vivo);font-weight:700;font-size:.86rem;
-  letter-spacing:.1em;display:block;margin-bottom:12px}
-.paso h3{font-size:1.34rem;margin-bottom:8px}
-.paso p{color:var(--tenue);font-size:.96rem}
+/* resultados del buscador sobre el muro */
+.hallazgos{max-width:36rem;margin:18px auto 0;border-radius:22px;padding:8px;
+  display:none;text-align:left}
+.hallazgos.on{display:block}
+.hallazgo{display:flex;align-items:center;gap:13px;padding:9px 12px;border-radius:14px;
+  text-decoration:none;color:inherit;transition:background .25s var(--ease)}
+.hallazgo *{text-decoration:none}
+.hallazgo:hover{background:rgba(255,255,255,.06)}
+.hallazgo img{width:38px;height:56px;object-fit:cover;border-radius:5px;flex:none}
+.hallazgo b{display:block;font-family:'Instrument Serif',serif;font-size:1.06rem;font-weight:400}
+.hallazgo span{font-size:.78rem;color:rgba(255,255,255,.55)}
+.hallazgo em{margin-left:auto;font-style:normal;font-size:.74rem;color:var(--verde-vivo)}
+.vacio{padding:14px 16px;font-size:.88rem;color:rgba(255,255,255,.6)}
 
-.cierre{padding:120px 0;text-align:center;position:relative}
-.cierre h2{font-size:clamp(2.4rem,6.4vw,5.4rem);max-width:16ch;margin:0 auto 20px;
-  text-shadow:0 8px 60px rgba(5,11,22,.95)}
-.cierre p{color:var(--tenue);margin-bottom:36px;text-shadow:0 2px 20px rgba(5,11,22,1)}
-.cierre .tiendas{justify-content:center}
-footer{background:#020509;padding:44px 0;font-size:.86rem;color:var(--tenue);position:relative;z-index:5}
-.pie{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;align-items:center}
-.pie nav{display:flex;gap:6px;flex-wrap:wrap}
-.pie nav a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:0 9px}
-.pie nav a:hover{color:var(--verde-vivo)}
-.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+/* ============================================================
+   BLOQUES
+   ============================================================ */
+.bloque{padding:96px 0;position:relative}
+.bloque__caja{border-radius:28px;padding:56px 44px}
+@media(max-width:640px){.bloque__caja{padding:38px 24px}}
+.bloque h2{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(2.1rem,4.6vw,3.5rem);line-height:1.06;max-width:20ch;margin-bottom:34px}
+.bloque h2 em{font-style:italic;color:var(--verde-vivo)}
+.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+@media(max-width:760px){.cifras{grid-template-columns:1fr;gap:24px}}
+.cifra b{display:block;font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(2.8rem,5.6vw,4.4rem);line-height:1;color:#fff;margin-bottom:6px}
+.cifra span{color:rgba(255,255,255,.62);font-size:.92rem}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.pasos{grid-template-columns:1fr}}
+.paso{border-radius:20px;padding:26px;transition:transform .35s var(--ease)}
+.paso:hover{transform:translateY(-5px)}
+.paso i{font-style:normal;color:var(--verde-vivo);font-size:.76rem;letter-spacing:.14em;
+  font-weight:600;display:block;margin-bottom:13px}
+.paso h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.4rem;margin-bottom:7px}
+.paso p{color:rgba(255,255,255,.66);font-size:.94rem}
+
+.cierre{text-align:center;padding:120px 0 130px}
+.cierre h2{margin:0 auto 18px;font-size:clamp(2.3rem,5.6vw,4.4rem)}
+.cierre p{color:rgba(255,255,255,.72);margin-bottom:32px}
+
+/* ============================================================
+   PIE — botones circulares de vidrio, como el brief
+   ============================================================ */
+footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
+.redondos{display:flex;justify-content:center;gap:14px;margin-bottom:30px}
+.redondo{border-radius:50%;padding:15px;color:rgba(255,255,255,.8);text-decoration:none;
+  display:inline-grid;place-items:center;min-width:52px;min-height:52px;
+  transition:color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
+.redondo:hover{color:#fff;background:rgba(255,255,255,.06);transform:translateY(-3px)}
+.redondo svg{width:20px;height:20px}
+.legal{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.legal a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.85rem;
+  min-height:44px;display:inline-flex;align-items:center;padding:0 11px;
+  transition:color .25s var(--ease)}
+.legal a:hover{color:#fff}
+.copy{color:rgba(255,255,255,.4);font-size:.8rem;max-width:60ch;margin:0 auto}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
-  .col{transform:none!important}.foco{display:none}.rv{opacity:1;transform:none}
-  .marca-viva::before{animation:none}
+  .col{transform:none!important}.foco{display:none}
+  .rv{opacity:1;transform:none}.vivo::before{animation:none}
 }
-@media(pointer:coarse){.foco{display:none}}
+@media(pointer:coarse){.foco{display:none}.pista{display:none}}
 </style>
 </head>
 <body>
@@ -116,74 +204,118 @@ footer{background:#020509;padding:44px 0;font-size:.86rem;color:var(--tenue);pos
 <div class="muro" id="muro" aria-hidden="true"></div>
 <div class="velo" aria-hidden="true"></div>
 <div class="foco" id="foco" aria-hidden="true"></div>
+<div class="grano" aria-hidden="true"></div>
 
-<header class="cab">
-  <span class="cab__marca"><img src="assets/icon.png" alt=""> Zapienz</span>
-  <a class="cab__cta" href="#cierre">Descargar gratis</a>
+<header class="barra">
+  <div class="barra__int vidrio">
+    <div class="barra__izq">
+      <span class="marca"><img src="assets/icon.png" alt=""> Zapienz</span>
+      <nav class="enlaces" aria-label="Secciones">
+        <a href="#catalogo">Catálogo</a><a href="#como">Cómo funciona</a>
+      </nav>
+    </div>
+    <div class="barra__der">
+      <a class="enlace-plano" href="mailto:contactozapienz@gmail.com">Contacto</a>
+      <a class="pill vidrio" href="#descargar">Descargar gratis</a>
+    </div>
+  </div>
 </header>
 
 <main>
 <section class="hero">
+  <span class="vivo">305 Zaps · en español</span>
+  <h1 class="serif">Toda esta biblioteca, <em>escuchada</em>.</h1>
+  <p class="hero__sub">Cada portada del fondo es un libro que ya leímos por ti. Sus ideas, en veinte minutos, para leer o escuchar donde estés.</p>
+
+  <div class="caja">
+    <form class="buscador vidrio" id="buscador" role="search">
+      <input id="q" type="search" placeholder="Busca un libro del catálogo…"
+             aria-label="Buscar un libro del catálogo" autocomplete="off">
+      <button class="circular" type="submit" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </form>
+    <div class="hallazgos vidrio vidrio--fuerte" id="hallazgos" role="region" aria-live="polite"></div>
+    <p class="pie-caja">Escribe un título o un autor y mira si ya está resumido. Prueba con <b>Peterson</b>, <b>Cain</b> o <b>hábitos</b>.</p>
+  </div>
+
+  <div class="tiendas" id="descargar">
+    <a class="tienda vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5z"/></svg>
+      App Store</a>
+    <a class="tienda vidrio" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14z"/></svg>
+      Google Play</a>
+  </div>
+
+  <p class="pista">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.6"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg>
+    Mueve el cursor: la luz enciende el catálogo.
+  </p>
+</section>
+
+<section class="bloque" id="catalogo">
   <div class="wrap">
-    <span class="marca-viva">305 Zaps · en español</span>
-    <h1>Toda esta biblioteca, <em>escuchada</em>.</h1>
-    <p class="hero__lead">Cada portada que ves detrás es un libro que ya leímos por ti. Sus ideas, en veinte minutos, para leer o escuchar.</p>
-    <div class="tiendas">
-      <a class="tienda tienda--p" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5z"/></svg>
-        App Store</a>
-      <a class="tienda tienda--s" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14z"/></svg>
-        Google Play</a>
+    <div class="bloque__caja vidrio vidrio--fuerte">
+      <div class="cifras">
+        <div class="cifra rv"><b>305</b><span>Zaps publicados, todos en español</span></div>
+        <div class="cifra rv"><b>20</b><span>minutos por libro, en promedio</span></div>
+        <div class="cifra rv"><b>5.0</b><span>de calificación · 18 valoraciones</span></div>
+      </div>
     </div>
-    <p class="hero__pista">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
-      Mueve el cursor: la luz enciende el catálogo.
-    </p>
   </div>
 </section>
 
-<section class="bloque">
+<section class="bloque" id="como" style="padding-top:0">
   <div class="wrap">
-    <div class="cifras">
-      <div class="cifra rv"><b>305</b><span>Zaps publicados, todos en español</span></div>
-      <div class="cifra rv"><b>20</b><span>minutos por libro, en promedio</span></div>
-      <div class="cifra rv"><b>5.0</b><span>de calificación · 18 valoraciones</span></div>
+    <div class="bloque__caja vidrio vidrio--fuerte">
+      <h2 class="serif">Léelo o <em>escúchalo</em>. Tú decides.</h2>
+      <div class="pasos">
+        <article class="paso vidrio rv"><i>01</i><h3>Elige un Zap</h3>
+          <p>305 títulos de no ficción en diez categorías: psicología, negocios, filosofía, hábitos y más.</p></article>
+        <article class="paso vidrio rv"><i>02</i><h3>Veinte minutos</h3>
+          <p>Las ideas centrales del libro con sus aprendizajes clave. Lo que de verdad te llevarías.</p></article>
+        <article class="paso vidrio rv"><i>03</i><h3>Texto o audio</h3>
+          <p>Lee con calma o escucha mientras manejas. La app recuerda dónde te quedaste.</p></article>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="bloque" style="padding-top:0">
+<section class="bloque cierre">
   <div class="wrap">
-    <h2>Léelo o escúchalo. Tú decides.</h2>
-    <div class="pasos">
-      <article class="paso rv"><i>01</i><h3>Elige un Zap</h3><p>305 títulos de no ficción en diez categorías: psicología, negocios, filosofía y más.</p></article>
-      <article class="paso rv"><i>02</i><h3>Veinte minutos</h3><p>Las ideas centrales con sus aprendizajes clave. Lo que de verdad te llevarías del libro.</p></article>
-      <article class="paso rv"><i>03</i><h3>Texto o audio</h3><p>Lee con calma o escucha mientras manejas. La app recuerda dónde te quedaste.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="cierre" id="cierre">
-  <div class="wrap">
-    <h2>Empieza por el que llevas años posponiendo.</h2>
+    <h2 class="serif">Empieza por el que llevas <em>años posponiendo</em>.</h2>
     <p>Descárgala gratis y escucha el primero hoy.</p>
     <div class="tiendas">
-      <a class="tienda tienda--p" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">Descargar para iPhone</a>
-      <a class="tienda tienda--s" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">Descargar para Android</a>
+      <a class="tienda vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">Descargar para iPhone</a>
+      <a class="tienda vidrio" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">Descargar para Android</a>
     </div>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="wrap pie">
-    <span>© <span id="anio">2026</span> Zapienz</span>
-    <nav>
-      <a href="privacidad.html">Privacidad</a><a href="terminos.html">Términos</a>
-      <a href="eliminar-cuenta.html">Eliminar cuenta</a><a href="mailto:contactozapienz@gmail.com">Contacto</a>
-    </nav>
+  <div class="redondos">
+    <a class="redondo vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Zapienz en la App Store">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5z"/></svg>
+    </a>
+    <a class="redondo vidrio" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener" aria-label="Zapienz en Google Play">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14z"/></svg>
+    </a>
+    <a class="redondo vidrio" href="mailto:contactozapienz@gmail.com" aria-label="Escríbenos por correo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>
+    </a>
   </div>
+  <nav class="legal" aria-label="Legal">
+    <a href="privacidad.html">Aviso de privacidad</a>
+    <a href="terminos.html">Términos</a>
+    <a href="eliminar-cuenta.html">Eliminar mi cuenta</a>
+  </nav>
+  <p class="copy">
+    Los Zaps son interpretaciones educativas generadas con apoyo de inteligencia artificial
+    a partir de obras publicadas. No sustituyen la obra original. © <span id="anio">2026</span> Zapienz.
+  </p>
 </footer>
 
 <script>
@@ -192,68 +324,131 @@ footer{background:#020509;padding:44px 0;font-size:.86rem;color:var(--tenue);pos
   document.getElementById('anio').textContent=new Date().getFullYear();
   var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var B='https://xxzjuzuouobfzbezuwxs.supabase.co/storage/v1/object/public/covers/';
-  var IDS=['23300c33-8b4e-48db-bd44-3bef205856e8','5d791589-84d9-4aca-83a3-f8635e5a6237',
-    'cfdeefd6-8ca9-45ff-b5fe-52091d7aa301','fe0d183a-f124-4fd9-8bf1-1bd379940687',
-    '829a0a2e-7e7e-4a29-85b0-9459a1f5fe54','d15dc7a5-c1df-4337-a4ed-8f92cfd039bf',
-    'b0469f2f-d7b6-4b06-814c-404f1ab44a68','261a074f-d973-40fd-8c3a-2d677bffbb22',
-    '690f98a5-ed2b-465b-9d6e-32ab34782b11','50f9e235-66aa-46fe-957d-612d4b14810f',
-    '6ca00260-73b0-427a-814b-fcc2cc54c20c','3f13a11b-683c-47b8-a145-7788e9e783e7',
-    'cb9132cd-f5b6-4732-bd79-5f7dd25192ce','aec8f1b0-5aae-4ae3-be7c-a5b8b3d2f2b4',
-    'aa21467a-6110-4ab0-b14c-57c08b8719ae','b9c6ecc1-fb68-4313-80c7-7dab8ad9e44c',
-    '84ca7ced-22cd-4601-b9e6-52047c905b66','7e634917-7934-4a36-b13f-931964c54f68',
-    'a2b3e139-8f87-4c15-b3f6-bd89bb251186','25b60c5b-41e1-4cd4-b017-ca6ebfd09146',
-    'a8f1eea9-d384-490b-bd3a-35a9d78163df','f3d30675-9287-4ff6-b86c-e388bc4c96fb',
-    'cddc0f22-8e7f-4dda-ad82-ce5835dcb71c','bacd543b-57a9-46c3-89db-40fbea6e1e99',
-    'bf26f09c-ea68-482f-a636-fcf062e5f697','0bede6af-d969-4e19-a237-e7b1616bc478',
-    '8a104e96-911c-420d-a048-56467064dfba','b6820d58-0655-407c-8e58-154deea38d2c'];
 
-  /* ---- construir el muro: N columnas, cada una con su ritmo ---- */
+  var LIBROS=[
+    ['23300c33-8b4e-48db-bd44-3bef205856e8','El Arte de Pensar Claramente','Rolf Dobelli','Desarrollo personal'],
+    ['5d791589-84d9-4aca-83a3-f8635e5a6237','Háblame Bonito','Vanessa Van Edwards','Relaciones'],
+    ['cfdeefd6-8ca9-45ff-b5fe-52091d7aa301','Quiet: El Poder de los Introvertidos','Susan Cain','Psicología'],
+    ['fe0d183a-f124-4fd9-8bf1-1bd379940687','La Sociedad del Cansancio','Byung-Chul Han','Filosofía'],
+    ['829a0a2e-7e7e-4a29-85b0-9459a1f5fe54','Factfulness','Hans Rosling','Desarrollo personal'],
+    ['d15dc7a5-c1df-4337-a4ed-8f92cfd039bf','Cómo Mandar a la Mierda de Forma Educada','Alba Cardalda','Desarrollo personal'],
+    ['b0469f2f-d7b6-4b06-814c-404f1ab44a68','Bullshit Jobs','David Graeber','Filosofía'],
+    ['261a074f-d973-40fd-8c3a-2d677bffbb22','Atrévete a No Gustar','Ichiro Kishimi','Desarrollo personal'],
+    ['690f98a5-ed2b-465b-9d6e-32ab34782b11','El Poder de los 5 Segundos','Mel Robbins','Hábitos'],
+    ['50f9e235-66aa-46fe-957d-612d4b14810f','La Buena Suerte','Alex Rovira','Desarrollo personal'],
+    ['6ca00260-73b0-427a-814b-fcc2cc54c20c','Tu Cerebro Manda','John Medina','Psicología'],
+    ['3f13a11b-683c-47b8-a145-7788e9e783e7','Mujeres y Poder','Mary Beard','Filosofía'],
+    ['cb9132cd-f5b6-4732-bd79-5f7dd25192ce','Redefine Imposible','Jonathan Benito','Desarrollo personal'],
+    ['aec8f1b0-5aae-4ae3-be7c-a5b8b3d2f2b4','Aprende más Rápido','Ulrich Boser','Hábitos'],
+    ['aa21467a-6110-4ab0-b14c-57c08b8719ae','La Tercera Ola','Steve Case','Negocios'],
+    ['b9c6ecc1-fb68-4313-80c7-7dab8ad9e44c','Minimalismo','Joshua Fields Millburn','Hábitos'],
+    ['84ca7ced-22cd-4601-b9e6-52047c905b66','Tiende tu Cama','William H. McRaven','Hábitos'],
+    ['7e634917-7934-4a36-b13f-931964c54f68','Pensamiento Lateral','Edward de Bono','Desarrollo personal'],
+    ['a2b3e139-8f87-4c15-b3f6-bd89bb251186','12 Reglas para Vivir','Jordan B. Peterson','Desarrollo personal'],
+    ['25b60c5b-41e1-4cd4-b017-ca6ebfd09146','El Camino del Artista','Julia Cameron','Desarrollo personal'],
+    ['a8f1eea9-d384-490b-bd3a-35a9d78163df','Innovación Abierta','Henry Chesbrough','Negocios'],
+    ['f3d30675-9287-4ff6-b86c-e388bc4c96fb','La Singularidad está Cerca','Ray Kurzweil','Filosofía'],
+    ['cddc0f22-8e7f-4dda-ad82-ce5835dcb71c','Sprint','Jake Knapp','Productividad'],
+    ['bacd543b-57a9-46c3-89db-40fbea6e1e99','El Futuro es más Rápido de lo que Piensas','Peter Diamandis','Negocios'],
+    ['bf26f09c-ea68-482f-a636-fcf062e5f697','Abundancia','Peter Diamandis','Negocios'],
+    ['0bede6af-d969-4e19-a237-e7b1616bc478','Lo Inevitable','Kevin Kelly','Filosofía'],
+    ['8a104e96-911c-420d-a048-56467064dfba','Inner Excellence','Jim Afremow','Desarrollo personal'],
+    ['b6820d58-0655-407c-8e58-154deea38d2c','El Curso Fénix','Brian Tracy','Desarrollo personal']
+  ];
+  function url(id){ return B+id+'/cover.png'; }
+
+  /* ---------- el muro ---------- */
   var muro=document.getElementById('muro');
-  var COLS = innerWidth<700 ? 4 : innerWidth<1100 ? 6 : 8;
-  var POR_COL = 7, k=0, columnas=[];
+  var COLS = innerWidth<640 ? 4 : innerWidth<1024 ? 6 : innerWidth<1500 ? 8 : 9;
+  var POR=7, k=0, columnas=[];
   for (var c=0;c<COLS;c++){
     var col=document.createElement('div'); col.className='col';
-    for (var j=0;j<POR_COL*2;j++){          // x2 para que el bucle sea continuo
+    for (var j=0;j<POR*2;j++){
       var im=new Image();
-      im.src=B+IDS[k++%IDS.length]+'/cover.png'; im.alt=''; im.decoding='async';
-      im.loading = j<POR_COL ? 'eager' : 'lazy';
+      im.src=url(LIBROS[k++%LIBROS.length][0]); im.alt=''; im.decoding='async';
+      im.loading = j<POR ? 'eager' : 'lazy';
       col.appendChild(im);
     }
     muro.appendChild(col);
-    columnas.push({el:col, v:(c%2?-1:1)*(0.16+((c*7)%5)*0.045), y:-(c*90)%700});
+    columnas.push({el:col, v:(c%2?-1:1)*(0.15+((c*7)%5)*0.04), y:-((c*97)%640)});
   }
-
-  /* ---- deriva vertical continua ---- */
   var visible=true;
   document.addEventListener('visibilitychange',function(){ visible=!document.hidden; });
-  function correr(){
-    requestAnimationFrame(correr);
+  function derivar(){
+    requestAnimationFrame(derivar);
     if(!visible) return;
     for (var i=0;i<columnas.length;i++){
-      var C=columnas[i];
-      C.y -= C.v;
+      var C=columnas[i]; C.y-=C.v;
       var h=C.el.scrollHeight/2;
-      if (C.y <= -h) C.y += h;
-      if (C.y > 0) C.y -= h;
+      if (C.y<=-h) C.y+=h;
+      if (C.y>0) C.y-=h;
       C.el.style.transform='translate3d(0,'+C.y.toFixed(1)+'px,0)';
     }
   }
-  if(!quieto) requestAnimationFrame(correr);
+  if(!quieto) requestAnimationFrame(derivar);
 
-  /* ---- la linterna: el cursor enciende el catalogo ---- */
-  var foco=document.getElementById('foco'), mx=innerWidth/2, my=innerHeight/2, sx=mx, sy=my;
-  addEventListener('pointermove',function(e){ mx=e.clientX; my=e.clientY; },{passive:true});
-  (function suave(){
-    requestAnimationFrame(suave);
+  /* ---------- la linterna, suavizada con lerp ---------- */
+  var foco=document.getElementById('foco'), mx=-600, my=-600, sx=mx, sy=my, hayCursor=false;
+  addEventListener('pointermove',function(e){
+    if(e.pointerType==='touch') return;
+    if(!hayCursor){ sx=e.clientX; sy=e.clientY; hayCursor=true; }
+    mx=e.clientX; my=e.clientY;
+  },{passive:true});
+  (function seguir(){
+    requestAnimationFrame(seguir);
+    if(!hayCursor||!visible) return;
     sx+=(mx-sx)*0.12; sy+=(my-sy)*0.12;
     foco.style.setProperty('--mx',sx.toFixed(1)+'px');
     foco.style.setProperty('--my',sy.toFixed(1)+'px');
   })();
 
+  /* ---------- buscador real sobre el catálogo ---------- */
+  var q=document.getElementById('q'), caja=document.getElementById('hallazgos'),
+      form=document.getElementById('buscador');
+  // Sin regex de diacriticos combinantes: son invisibles en el fuente y se
+  // corrompen al pasar por herramientas de texto. Tabla explicita y visible.
+  var CON='aaaaaeeeeiiiiooooouuuunc', ACC='áàäâãéèëêíìïîóòöôõúùüûñç';
+  function norm(s){
+    var r='', b=s.toLowerCase();
+    for(var i=0;i<b.length;i++){ var j=ACC.indexOf(b[i]); r += j>=0 ? CON[j] : b[i]; }
+    return r;
+  }
+  function buscar(){
+    var t=norm(q.value.trim());
+    if(t.length<2){ caja.classList.remove('on'); caja.innerHTML=''; return; }
+    var res=LIBROS.filter(function(L){
+      return norm(L[1]).indexOf(t)>=0 || norm(L[2]).indexOf(t)>=0 || norm(L[3]).indexOf(t)>=0;
+    }).slice(0,5);
+    caja.innerHTML='';
+    if(!res.length){
+      caja.innerHTML='<p class="vacio">Ese no está entre los 28 que enseñamos aquí — el catálogo completo son 305 y crece cada semana.</p>';
+    } else {
+      res.forEach(function(L){
+        var a=document.createElement('a');
+        a.className='hallazgo';
+        a.href='https://apps.apple.com/mx/app/zapienz/id6762142820';
+        a.target='_blank'; a.rel='noopener';
+        a.innerHTML='<img src="'+url(L[0])+'" alt="" loading="lazy">'+
+          '<span><b>'+L[1]+'</b><span>'+L[2]+' · '+L[3]+'</span></span>'+
+          '<em>20 min →</em>';
+        caja.appendChild(a);
+      });
+    }
+    caja.classList.add('on');
+  }
+  q.addEventListener('input',buscar);
+  form.addEventListener('submit',function(e){ e.preventDefault(); buscar(); });
+
+  /* ---------- reveals ---------- */
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
   },{threshold:.15});
   document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  requestAnimationFrame(function(){
+    document.querySelectorAll('.rv').forEach(function(el){
+      if(el.getBoundingClientRect().top<innerHeight*0.94) el.classList.add('on');
+    });
+  });
 })();
 </script>
 </body>

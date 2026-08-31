@@ -31,6 +31,9 @@
   --ease:cubic-bezier(.16,.8,.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+/* proximity, no mandatory: encaja la escena al acercarse pero deja
+   scrollear el resto de la pagina con normalidad */
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
 body{background:var(--noche);color:var(--hueso);font-family:'Inter',sans-serif;
   line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em}
@@ -207,9 +210,23 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
    SAGA — el libro se abre, se compacta, se vuelve voz y entra
    al teléfono. Protagonista del sitio (pinned-saga).
    ============================================================ */
-.saga{height:660vh;padding:0;position:relative}
-.saga__pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center;
+/* Scroll por pasos: la escena ya no ocupa 660vh. Mide una pantalla y cada
+   gesto de rueda dispara la transicion al siguiente capitulo. */
+.saga{height:100svh;padding:0;position:relative;scroll-snap-align:center}
+.saga__pin{position:relative;top:0;height:100svh;overflow:hidden;display:grid;place-items:center;
   perspective:1500px}
+/* puntos: sin esto el visitante no sabe cuantos pasos le quedan */
+.pasos-ind{position:absolute;right:26px;top:50%;transform:translateY(-50%);z-index:30;
+  display:flex;flex-direction:column;gap:11px}
+.pasos-ind button{width:9px;height:9px;border-radius:50%;border:none;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.24);transition:background .35s var(--ease),transform .35s var(--ease)}
+.pasos-ind button[aria-current="true"]{background:var(--verde-vivo);transform:scale(1.5)}
+.pasos-ind button:hover{background:rgba(255,255,255,.5)}
+@media(max-width:700px){.pasos-ind{right:14px}}
+.saltar{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:30;
+  font-size:.78rem;color:rgba(255,255,255,.5);background:none;border:none;cursor:pointer;
+  min-height:44px;padding:0 14px;font-family:inherit;transition:color .25s var(--ease)}
+.saltar:hover{color:#fff}
 .escena{position:relative;width:min(92vw,900px);height:min(72svh,580px);
   transform-style:preserve-3d;display:grid;place-items:center}
 .rotulo{position:absolute;left:50%;top:9svh;transform:translateX(-50%);text-align:center;
@@ -329,7 +346,17 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
   .rotulo{position:static;transform:none;width:auto;background:none;margin-top:34px}
   .rotulo>div{position:relative!important;opacity:1!important;transform:none!important;margin-bottom:20px}
 }
-@media(pointer:coarse){.foco{display:none}.pista{display:none}}
+@media(pointer:coarse){
+  .foco{display:none}.pista{display:none}
+  /* apilada: sin secuestro de scroll y legible con el pulgar */
+  .saga{height:auto;scroll-snap-align:none}
+  .saga__pin{position:static;height:auto;padding:80px 24px}
+  .escena{height:auto;min-height:auto;display:flex;flex-direction:column;gap:32px}
+  .libro,.tarjeta-zap,.ondas,.tel{position:relative;opacity:1!important;transform:none!important}
+  .rotulo{position:static;transform:none;width:auto;background:none;margin-top:30px;padding:0}
+  .rotulo>div{position:relative!important;opacity:1!important;transform:none!important;margin-bottom:22px}
+  .pasos-ind,.saltar{display:none}
+}
 </style>
 </head>
 <body>
@@ -422,6 +449,9 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
       </div>
 
     </div>
+
+    <div class="pasos-ind" id="indicador" role="tablist" aria-label="Capítulos"></div>
+    <button class="saltar" id="saltar" type="button">Saltar al catálogo ↓</button>
 
     <div class="rotulo" id="rotulo">
       <div><h2>Un libro de trescientas páginas.</h2><p>El que compraste con toda la intención del mundo.</p></div>
@@ -781,13 +811,83 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
     cx.globalAlpha=1;
   }
 
+  /* ============================================================
+     SCROLL POR PASOS
+     Cada gesto dispara la transicion completa al siguiente capitulo
+     en vez de arrastrarla con el scroll. El progreso ya no sale del
+     scroll: sale de un estado, y se anima hacia el por tiempo.
+     Regla: en los extremos NO se bloquea nada, para no atrapar a nadie.
+     ============================================================ */
+  var ANCLAS=[0.06,0.34,0.54,0.70,0.90];   // el p que representa cada capitulo
+  var paso=0, pObj=ANCLAS[0], pAct=ANCLAS[0], ultimoGesto=0, ESPERA=780;
+
+  var indicador=document.getElementById('indicador'), puntos=[];
+  ANCLAS.forEach(function(_,i){
+    var b=document.createElement('button');
+    b.type='button'; b.setAttribute('role','tab');
+    b.setAttribute('aria-label','Capítulo '+(i+1)+' de '+ANCLAS.length);
+    b.addEventListener('click',function(){ irA(i); });
+    indicador.appendChild(b); puntos.push(b);
+  });
+  function pintarIndicador(){
+    puntos.forEach(function(b,i){ b.setAttribute('aria-current', i===paso ? 'true':'false'); });
+  }
+  function irA(n){
+    paso=clamp(n,0,ANCLAS.length-1);
+    pObj=ANCLAS[paso];
+    ultimoGesto=Date.now();
+    pintarIndicador();
+  }
+  pintarIndicador();
+
+  // ¿la escena ocupa la pantalla? solo entonces manda ella
+  function mandaLaSaga(){
+    var r=saga.getBoundingClientRect();
+    return r.top<innerHeight*0.28 && r.bottom>innerHeight*0.72;
+  }
+  // en el primer capitulo hacia arriba, o el ultimo hacia abajo, se suelta
+  function puedeAvanzar(dir){
+    return dir>0 ? paso<ANCLAS.length-1 : paso>0;
+  }
+
+  var porPasos = !quieto && matchMedia('(pointer:fine)').matches;
+  function gesto(dir,e){
+    if(!porPasos || !mandaLaSaga()) return;
+    if(!puedeAvanzar(dir)) return;              // extremo: scroll normal
+    if(e && e.cancelable) e.preventDefault();
+    if(Date.now()-ultimoGesto < ESPERA) return; // una transicion a la vez
+    irA(paso+dir);
+  }
+
+  addEventListener('wheel',function(e){
+    gesto(e.deltaY>0?1:-1,e);
+  },{passive:false});
+
+  // En tactil NO se intercepta nada: secuestrar el scroll con el dedo es
+  // fragil (basta un preventDefault mal puesto para dejar al usuario
+  // atrapado) y ademas se lee mejor apilado con el pulgar. En movil la
+  // escena se despliega en vertical por CSS y el scroll es el de siempre.
+
+  addEventListener('keydown',function(e){
+    if(!mandaLaSaga()) return;
+    if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' ') gesto(1,e);
+    else if(e.key==='ArrowUp'||e.key==='PageUp') gesto(-1,e);
+  });
+
+  document.getElementById('saltar').addEventListener('click',function(){
+    irA(ANCLAS.length-1);
+    document.getElementById('catalogo').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
   /* ============ bucle único ============ */
   function bucle(t){
     requestAnimationFrame(bucle);
     if(!visible) return;
+    // el progreso persigue al capitulo destino: la transicion es por tiempo
+    pAct += (pObj-pAct)*0.085;
     var r=saga.getBoundingClientRect();
     var enSaga = r.top<innerHeight && r.bottom>0;
-    if(enSaga) saga_pintar(clamp(-r.top/((r.height-innerHeight)||1),0,1),t);
+    if(enSaga) saga_pintar(pAct,t);
     moverHaz(t);
     // la onda late bajo, y sube al maximo en el capitulo de la voz
     hilo_pintar(t, 0.08 + (enSaga ? 0.2 + energiaVoz*0.72 : 0));

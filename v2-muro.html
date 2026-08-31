@@ -190,11 +190,110 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
 .legal a:hover{color:#fff}
 .copy{color:rgba(255,255,255,.4);font-size:.8rem;max-width:60ch;margin:0 auto}
 
+/* ============================================================
+   SAGA — el libro se abre, se compacta, se vuelve voz y entra
+   al teléfono. Protagonista del sitio (pinned-saga).
+   ============================================================ */
+.saga{height:660vh;padding:0;position:relative}
+.saga__pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center;
+  perspective:1500px}
+.escena{position:relative;width:min(92vw,900px);height:min(72svh,580px);
+  transform-style:preserve-3d;display:grid;place-items:center}
+.rotulo{position:absolute;left:50%;top:9svh;transform:translateX(-50%);text-align:center;
+  z-index:20;width:min(92vw,38rem);pointer-events:none;padding:26px 40px;
+  background:radial-gradient(52% 96% at 50% 44%,rgba(4,7,13,.92) 0%,rgba(4,7,13,.6) 46%,rgba(4,7,13,0) 82%)}
+.rotulo>div{position:absolute;left:0;right:0;opacity:0;transform:translateY(12px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.rotulo>div.on{opacity:1;transform:none;position:relative}
+.rotulo h2{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.06;margin-bottom:7px}
+.rotulo h2 em{font-style:italic;color:var(--verde-vivo)}
+.rotulo p{color:rgba(255,255,255,.7);font-size:.95rem}
+
+.libro{position:absolute;width:clamp(160px,21vw,250px);aspect-ratio:2/3;
+  transform-style:preserve-3d;will-change:transform}
+.libro__cara{position:absolute;inset:0;border-radius:5px 9px 9px 5px;overflow:hidden;
+  backface-visibility:hidden;box-shadow:0 34px 80px rgba(0,0,0,.7)}
+.libro__cara img{width:100%;height:100%;object-fit:cover}
+.libro__tapa{transform-origin:left center;z-index:4;transform-style:preserve-3d}
+.libro__rev{position:absolute;inset:0;border-radius:9px 5px 5px 9px;backface-visibility:hidden;
+  transform:rotateY(180deg);background:linear-gradient(115deg,#f4efe3,#ddd6c5)}
+.libro__hoja{position:absolute;inset:0;border-radius:3px 7px 7px 3px;padding:15px 13px;
+  background:linear-gradient(115deg,#faf6ee,#e7e1d3);transform-origin:left center;overflow:hidden}
+.libro__hoja i{display:block;height:3.5px;border-radius:2px;background:#c8c0ad;margin-bottom:7.5px}
+.libro__hoja i:nth-child(3n){width:74%} .libro__hoja i:nth-child(4n){width:88%}
+
+.tarjeta-zap{position:absolute;width:clamp(165px,19vw,215px);border-radius:18px;padding:18px;
+  opacity:0;will-change:transform,opacity}
+.tarjeta-zap b{display:block;font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:1.5rem;color:var(--verde-vivo);margin-bottom:9px}
+.tarjeta-zap i{display:block;height:3.5px;border-radius:2px;background:rgba(255,255,255,.32);margin-bottom:7px}
+.tarjeta-zap i:nth-child(4){width:68%}
+
+.ondas{position:absolute;z-index:2;display:flex;align-items:center;gap:clamp(3px,.62vw,7px);
+  height:170px;opacity:0;will-change:opacity,transform}
+.ondas span{width:clamp(3px,.5vw,5px);border-radius:99px;
+  background:linear-gradient(180deg,var(--verde-vivo),var(--verde));
+  box-shadow:0 0 14px rgba(56,235,107,.45)}
+
+.tel{position:absolute;z-index:6;width:clamp(198px,21vw,258px);aspect-ratio:9/19.2;
+  border-radius:32px;padding:9px;background:linear-gradient(160deg,#22304a,#080e1a);
+  box-shadow:0 50px 110px rgba(0,0,0,.82),0 0 120px rgba(29,185,84,.2),
+    0 0 0 1px rgba(29,185,84,.38),inset 0 1px 0 rgba(255,255,255,.14);
+  opacity:0;will-change:transform,opacity;transform-style:preserve-3d}
+.tel__pant{width:100%;height:100%;border-radius:25px;overflow:hidden;padding:15px 12px;
+  background:linear-gradient(180deg,#0d1726,#04070D);display:flex;flex-direction:column}
+.tel__top{display:flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600;margin-bottom:11px}
+.tel__top img{width:17px;height:17px}
+.tel__cov{width:100%;border-radius:9px;margin-bottom:10px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.tel__tit{font-family:'Instrument Serif',serif;font-size:.92rem;line-height:1.14;margin-bottom:2px}
+.tel__aut{font-size:.63rem;color:rgba(255,255,255,.5);margin-bottom:10px}
+.tel__bar{height:3px;border-radius:2px;background:rgba(255,255,255,.16);margin-bottom:5px;overflow:hidden}
+.tel__bar b{display:block;height:100%;width:38%;background:var(--verde);border-radius:2px}
+.tel__t{display:flex;justify-content:space-between;font-size:.56rem;color:rgba(255,255,255,.45)}
+.tel__on{display:flex;align-items:flex-end;justify-content:center;gap:2.5px;height:30px;margin-top:auto}
+.tel__on span{width:2.5px;border-radius:99px;background:var(--teal)}
+
+/* ============ PIPELINE BEAM — el proceso, con un haz que viaja ============ */
+.proceso{position:relative;padding:20px 0 8px}
+.proceso__svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.nodos{display:flex;justify-content:space-between;align-items:center;gap:16px;
+  position:relative;z-index:2;max-width:640px;margin:0 auto}
+.nodo{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;flex:none;
+  background:rgba(4,7,13,.86)}
+.nodo svg{width:30px;height:30px;color:var(--verde-vivo)}
+.nodo__et{position:absolute;top:88px;left:50%;transform:translateX(-50%);white-space:nowrap;
+  font-size:.76rem;color:rgba(255,255,255,.6)}
+.nodo-caja{position:relative}
+@media(max-width:620px){.nodo{width:62px;height:62px}.nodo svg{width:24px;height:24px}
+  .nodo__et{font-size:.68rem}}
+
+/* ============ soportes: tilt, magnético, shiny ============ */
+.paso{transform-style:preserve-3d;will-change:transform}
+.brillo{background:linear-gradient(90deg,#fff 0%,#fff 40%,var(--verde-vivo) 50%,#fff 60%,#fff 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:barrido 6s linear infinite}
+@keyframes barrido{0%{background-position:200% center}100%{background-position:-200% center}}
+
 .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .rv.on{opacity:1;transform:none}
+/* blur-in por palabra */
+.bw span{display:inline-block;opacity:0;filter:blur(9px);transform:translateY(22px);
+  transition:opacity .7s var(--ease),filter .7s var(--ease),transform .7s var(--ease)}
+.bw.on span{opacity:1;filter:blur(0);transform:none}
 @media(prefers-reduced-motion:reduce){
   .col{transform:none!important}.foco{display:none}
   .rv{opacity:1;transform:none}.vivo::before{animation:none}
+  .bw span{opacity:1;filter:none;transform:none}
+  .brillo{animation:none;background:none;-webkit-background-clip:border-box;
+    background-clip:border-box;color:var(--verde-vivo)}
+  /* la saga se despliega en vertical, con todo el contenido a la vista */
+  .saga{height:auto}
+  .saga__pin{position:static;height:auto;padding:80px 24px}
+  .escena{height:auto;min-height:auto;display:flex;flex-direction:column;gap:34px}
+  .libro,.tarjeta-zap,.ondas,.tel{position:relative;opacity:1!important;transform:none!important}
+  .rotulo{position:static;transform:none;width:auto;background:none;margin-top:34px}
+  .rotulo>div{position:relative!important;opacity:1!important;transform:none!important;margin-bottom:20px}
 }
 @media(pointer:coarse){.foco{display:none}.pista{display:none}}
 </style>
@@ -211,7 +310,7 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
     <div class="barra__izq">
       <span class="marca"><img src="assets/icon.png" alt=""> Zapienz</span>
       <nav class="enlaces" aria-label="Secciones">
-        <a href="#catalogo">Catálogo</a><a href="#como">Cómo funciona</a>
+        <a href="#saga">Cómo nace un Zap</a><a href="#catalogo">Catálogo</a><a href="#como">Cómo funciona</a>
       </nav>
     </div>
     <div class="barra__der">
@@ -255,11 +354,72 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
   </p>
 </section>
 
+<!-- ================= SAGA: de libro a voz ================= -->
+<section class="saga" id="saga" aria-label="Cómo nace un Zap">
+  <div class="saga__pin">
+    <div class="escena" id="escena" aria-hidden="true">
+
+      <div class="libro" id="libro">
+        <div class="libro__hoja" id="hoja2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="libro__hoja" id="hoja1"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="libro__cara libro__tapa" id="tapa">
+          <img id="tapaImg" src="" alt="">
+          <div class="libro__rev"></div>
+        </div>
+      </div>
+
+      <div class="tarjeta-zap vidrio vidrio--fuerte" id="zapcard">
+        <b>El Zap</b><i></i><i></i><i></i><i></i>
+      </div>
+
+      <div class="ondas" id="ondas"></div>
+
+      <div class="tel" id="tel">
+        <div class="tel__pant">
+          <div class="tel__top"><img src="assets/icon.png" alt=""> Zapienz</div>
+          <img class="tel__cov" id="telCov" src="" alt="">
+          <p class="tel__tit" id="telTit"></p>
+          <p class="tel__aut" id="telAut"></p>
+          <div class="tel__bar"><b></b></div>
+          <div class="tel__t"><span>7:24</span><span>20:00</span></div>
+          <div class="tel__on" id="telOn"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rotulo" id="rotulo">
+      <div><h2>Un libro de trescientas páginas.</h2><p>El que compraste con toda la intención del mundo.</p></div>
+      <div><h2>Lo abrimos <em>entero</em>.</h2><p>Lo leemos completo, hasta la última idea.</p></div>
+      <div><h2>Y lo compactamos.</h2><p>Solo lo que de verdad te llevarías: veinte minutos.</p></div>
+      <div><h2>Después le damos <em>voz</em>.</h2><p>El Zap se vuelve audio, narrado de principio a fin.</p></div>
+      <div><h2>Y cabe en tu bolsillo.</h2><p>305 libros listos para escuchar, donde estés.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="bloque" id="catalogo">
   <div class="wrap">
     <div class="bloque__caja vidrio vidrio--fuerte">
-      <div class="cifras">
-        <div class="cifra rv"><b>305</b><span>Zaps publicados, todos en español</span></div>
+      <div class="proceso">
+        <svg class="proceso__svg" id="haz" aria-hidden="true"></svg>
+        <div class="nodos">
+          <span class="nodo-caja"><span class="nodo vidrio" id="n1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5zM20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5z"/></svg>
+            </span><span class="nodo__et">El libro</span></span>
+          <span class="nodo-caja"><span class="nodo vidrio" id="n2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+              <path d="M4 6h16M4 11h16M4 16h9"/></svg>
+            </span><span class="nodo__et">El Zap</span></span>
+          <span class="nodo-caja"><span class="nodo vidrio" id="n3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+              <path d="M3 12v1M7 8v8M11 4v16M15 8v8M19 11v2"/></svg>
+            </span><span class="nodo__et">Tu audio</span></span>
+        </div>
+      </div>
+      <div class="cifras" style="margin-top:78px">
+        <div class="cifra rv"><b data-scramble="305">305</b><span>Zaps publicados, todos en español</span></div>
         <div class="cifra rv"><b>20</b><span>minutos por libro, en promedio</span></div>
         <div class="cifra rv"><b>5.0</b><span>de calificación · 18 valoraciones</span></div>
       </div>
@@ -270,7 +430,7 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
 <section class="bloque" id="como" style="padding-top:0">
   <div class="wrap">
     <div class="bloque__caja vidrio vidrio--fuerte">
-      <h2 class="serif">Léelo o <em>escúchalo</em>. Tú decides.</h2>
+      <h2 class="serif bw" data-bw>Léelo o <em>escúchalo</em>. Tú decides.</h2>
       <div class="pasos">
         <article class="paso vidrio rv"><i>01</i><h3>Elige un Zap</h3>
           <p>305 títulos de no ficción en diez categorías: psicología, negocios, filosofía, hábitos y más.</p></article>
@@ -285,7 +445,7 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
 
 <section class="bloque cierre">
   <div class="wrap">
-    <h2 class="serif">Empieza por el que llevas <em>años posponiendo</em>.</h2>
+    <h2 class="serif bw" data-bw>Empieza por el que llevas <em>años posponiendo</em>.</h2>
     <p>Descárgala gratis y escucha el primero hoy.</p>
     <div class="tiendas">
       <a class="tienda vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">Descargar para iPhone</a>
@@ -439,13 +599,173 @@ footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
   q.addEventListener('input',buscar);
   form.addEventListener('submit',function(e){ e.preventDefault(); buscar(); });
 
+  /* ============ SAGA: libro -> Zap -> voz -> teléfono ============ */
+  var clamp=function(v,a,b){ return v<a?a:(v>b?b:v); };
+  function tramo(p,a,b){ var t=clamp((p-a)/(b-a),0,1); return t*t*(3-2*t); }
+
+  var saga=document.getElementById('saga'), libro=document.getElementById('libro'),
+      tapa=document.getElementById('tapa'), hoja1=document.getElementById('hoja1'),
+      hoja2=document.getElementById('hoja2'), zapcard=document.getElementById('zapcard'),
+      ondas=document.getElementById('ondas'), tel=document.getElementById('tel'),
+      rotulo=document.getElementById('rotulo');
+
+  var HEROE=LIBROS[0];
+  document.getElementById('tapaImg').src=url(HEROE[0]);
+  document.getElementById('telCov').src=url(HEROE[0]);
+  document.getElementById('telTit').textContent=HEROE[1];
+  document.getElementById('telAut').textContent=HEROE[2];
+
+  var NB=42, barras=[];
+  for(var bi=0;bi<NB;bi++){ var sb=document.createElement('span'); ondas.appendChild(sb); barras.push(sb); }
+  var telB=[], telOn=document.getElementById('telOn');
+  for(var ti=0;ti<20;ti++){ var st=document.createElement('span'); telOn.appendChild(st); telB.push(st); }
+
+  var caps=[].slice.call(rotulo.children), capAct=-1, energiaVoz=0;
+
+  function saga_pintar(p,t){
+    var entra=tramo(p,0,.12), abre=tramo(p,.14,.34),
+        compacta=tramo(p,.36,.54), voz=tramo(p,.54,.70), fono=tramo(p,.68,.85);
+
+    libro.style.opacity=(1-compacta).toFixed(3);
+    libro.style.transform='translate3d(0,'+((1-entra)*66-compacta*28).toFixed(1)+'px,0) '+
+      'rotateY('+(-24+entra*24-abre*4).toFixed(2)+'deg) '+
+      'rotateZ('+((1-entra)*-6).toFixed(2)+'deg) '+
+      'scale('+(.87+entra*.13-compacta*.48).toFixed(3)+')';
+    tapa.style.transform='rotateY('+(-abre*166).toFixed(2)+'deg)';
+    hoja1.style.transform='rotateY('+(-abre*148+Math.sin(t/900)*abre*3).toFixed(2)+'deg)';
+    hoja2.style.transform='rotateY('+(-abre*20).toFixed(2)+'deg)';
+
+    zapcard.style.opacity=(compacta*(1-voz)).toFixed(3);
+    zapcard.style.transform='translate3d(0,'+((1-compacta)*36).toFixed(1)+'px,0) '+
+      'scale('+(.62+compacta*.38-voz*.32).toFixed(3)+') rotateY('+((1-compacta)*30-voz*22).toFixed(2)+'deg)';
+
+    var vivas=voz*(1-fono*.6)*(1-tramo(p,.93,1));
+    ondas.style.opacity=vivas.toFixed(3);
+    ondas.style.transform='translate3d(0,'+(-fono*112).toFixed(1)+'px,0) scaleX('+(.55+voz*.45).toFixed(3)+')';
+    for(var k=0;k<NB;k++){
+      var c=1-Math.abs(k-(NB-1)/2)/((NB-1)/2);
+      barras[k].style.height=(9+Math.abs(Math.sin(t/255+k*.44))*(15+c*98)*(.35+voz*.65)).toFixed(1)+'px';
+      barras[k].style.opacity=(.45+c*.55).toFixed(2);
+    }
+
+    tel.style.opacity=fono.toFixed(3);
+    tel.style.transform='translate3d(0,'+((1-fono)*116+fono*6).toFixed(1)+'%,0) '+
+      'rotateY('+(198-fono*198).toFixed(1)+'deg) rotateZ('+((1-fono)*11).toFixed(2)+'deg) '+
+      'scale('+(.74+fono*.2).toFixed(3)+')';
+    for(var m=0;m<telB.length;m++)
+      telB[m].style.height=(4+Math.abs(Math.sin(t/235+m*.52))*22*fono).toFixed(1)+'px';
+
+    var idx = p<.13?0 : p<.35?1 : p<.55?2 : p<.71?3 : 4;
+    if(idx!==capAct){ caps.forEach(function(c,i){ c.classList.toggle('on',i===idx); }); capAct=idx; }
+    energiaVoz=voz;
+  }
+
+  /* ============ PIPELINE BEAM: el haz recorre el proceso ============ */
+  var svg=document.getElementById('haz'), nodos=['n1','n2','n3'].map(function(i){return document.getElementById(i);});
+  var NS='http://www.w3.org/2000/svg', linea=null, haz=null, gradId='g'+Math.floor(1e6*0.618);
+  function armarHaz(){
+    if(!svg||!nodos[0]) return;
+    var cont=svg.parentElement.getBoundingClientRect();
+    var pts=nodos.map(function(n){ var r=n.getBoundingClientRect();
+      return [r.left-cont.left+r.width/2, r.top-cont.top+r.height/2]; });
+    svg.setAttribute('viewBox','0 0 '+cont.width+' '+cont.height);
+    svg.innerHTML='<defs><linearGradient id="'+gradId+'" x1="0" y1="0" x2="1" y2="0">'+
+      '<stop offset="0%" stop-color="#38EB6B" stop-opacity="0"/>'+
+      '<stop offset="50%" stop-color="#38EB6B" stop-opacity="1"/>'+
+      '<stop offset="100%" stop-color="#38EB6B" stop-opacity="0"/></linearGradient></defs>';
+    var d='M'+pts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' L');
+    linea=document.createElementNS(NS,'path');
+    linea.setAttribute('d',d); linea.setAttribute('stroke','rgba(255,255,255,.14)');
+    linea.setAttribute('stroke-width','1.6'); linea.setAttribute('fill','none');
+    svg.appendChild(linea);
+    haz=document.createElementNS(NS,'circle');
+    haz.setAttribute('r','5'); haz.setAttribute('fill','#38EB6B');
+    haz.setAttribute('filter','drop-shadow(0 0 8px #38EB6B)');
+    svg.appendChild(haz);
+  }
+  function moverHaz(t){
+    if(!linea||!haz) return;
+    var L=linea.getTotalLength(); if(!L) return;
+    var pt=linea.getPointAtLength(((t/2600)%1)*L);
+    haz.setAttribute('cx',pt.x); haz.setAttribute('cy',pt.y);
+  }
+
+  /* ============ bucle único ============ */
+  function bucle(t){
+    requestAnimationFrame(bucle);
+    if(!visible) return;
+    var r=saga.getBoundingClientRect();
+    if(r.top<innerHeight && r.bottom>0)
+      saga_pintar(clamp(-r.top/((r.height-innerHeight)||1),0,1),t);
+    moverHaz(t);
+  }
+  if(!quieto){
+    addEventListener('resize',armarHaz);
+    requestAnimationFrame(function(){ armarHaz(); requestAnimationFrame(bucle); });
+  }
+
+  /* ============ scramble del contador ============ */
+  var glifos='0123456789';
+  document.querySelectorAll('[data-scramble]').forEach(function(el){
+    var fin=el.dataset.scramble, hecho=false;
+    new IntersectionObserver(function(es,ob){
+      es.forEach(function(e){
+        if(!e.isIntersecting||hecho) return;
+        hecho=true; ob.disconnect();
+        if(quieto){ el.textContent=fin; return; }
+        var n=0,tot=24;
+        var iv=setInterval(function(){
+          n++;
+          el.textContent=fin.split('').map(function(c,i){
+            return (n/tot)*fin.length>i ? c : glifos[Math.floor(Math.random()*10)];
+          }).join('');
+          if(n>=tot){ clearInterval(iv); el.textContent=fin; }
+        },42);
+      });
+    },{threshold:.6}).observe(el);
+  });
+
+  /* ============ blur-in por palabra ============ */
+  document.querySelectorAll('[data-bw]').forEach(function(el){
+    var partes=el.innerHTML.split(/(<em>.*?<\/em>|\s+)/).filter(function(s){return s.trim();});
+    // La puntuacion suelta se pega a la palabra anterior: si no, queda
+    // "escuchalo . Tu" con un espacio antes del punto.
+    var juntas=[];
+    partes.forEach(function(w){
+      if(/^[.,;:!?)»”]+$/.test(w) && juntas.length) juntas[juntas.length-1]+=w;
+      else juntas.push(w);
+    });
+    el.innerHTML=juntas.map(function(w){ return '<span>'+w+'</span> '; }).join('');
+    el.querySelectorAll('span').forEach(function(s,i){ s.style.transitionDelay=(i*.08)+'s'; });
+  });
+
+  /* ============ botones magnéticos + tilt 3D en tarjetas ============ */
+  if(!quieto && matchMedia('(pointer:fine)').matches){
+    document.querySelectorAll('.tienda,.circular,.pill').forEach(function(b){
+      b.addEventListener('pointermove',function(e){
+        var r=b.getBoundingClientRect();
+        b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.28).toFixed(1)+'px,'+
+          ((e.clientY-r.top-r.height/2)*.28).toFixed(1)+'px)';
+      });
+      b.addEventListener('pointerleave',function(){ b.style.transform=''; });
+    });
+    document.querySelectorAll('.paso').forEach(function(c){
+      c.addEventListener('pointermove',function(e){
+        var r=c.getBoundingClientRect();
+        c.style.transform='perspective(700px) rotateX('+(-((e.clientY-r.top)/r.height-.5)*7).toFixed(2)+
+          'deg) rotateY('+(((e.clientX-r.left)/r.width-.5)*7).toFixed(2)+'deg) translateY(-5px)';
+      });
+      c.addEventListener('pointerleave',function(){ c.style.transform=''; });
+    });
+  }
+
   /* ---------- reveals ---------- */
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
   },{threshold:.15});
-  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  document.querySelectorAll(".rv,[data-bw]").forEach(function(el){ io.observe(el); });
   requestAnimationFrame(function(){
-    document.querySelectorAll('.rv').forEach(function(el){
+    document.querySelectorAll('.rv,[data-bw]').forEach(function(el){
       if(el.getBoundingClientRect().top<innerHeight*0.94) el.classList.add('on');
     });
   });

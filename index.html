@@ -1,972 +1,399 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zapienz — Toda esta biblioteca, escuchada</title>
-<meta name="description" content="305 libros de no ficción resumidos en texto y audio. 20 minutos cada uno, en español.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Zapienz — Un libro entero en lo que dura el camino</title>
+<meta name="description" content="Zaps en español para leer o escuchar: las ideas de un libro completo en unos veinte minutos. 303 títulos en diez categorías, en tu iPhone.">
+<meta name="theme-color" content="#0E2453">
 <link rel="canonical" href="https://zapienz.gamalabs.mx/">
-<link rel="icon" href="assets/icon.png">
+<meta name="robots" content="index,follow">
+
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Zapienz">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="Zapienz — Un libro entero en lo que dura el camino">
+<meta property="og:description" content="Zaps en español para leer o escuchar: las ideas de un libro completo en unos veinte minutos.">
 <meta property="og:url" content="https://zapienz.gamalabs.mx/">
+<meta property="og:image" content="https://zapienz.gamalabs.mx/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Un libro abierto del que sale una onda de audio, con el reproductor de Zapienz en 20:00.">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:title" content="Zapienz — Toda esta biblioteca, escuchada">
-<meta property="og:description" content="305 libros de no ficción, resumidos en texto y audio.">
-<meta property="og:image" content="https://zapienz.gamalabs.mx/assets/logo_full.png">
+<meta name="twitter:title" content="Zapienz — Un libro entero en lo que dura el camino">
+<meta name="twitter:description" content="Zaps en español para leer o escuchar. 303 títulos, diez categorías, en tu iPhone.">
+<meta name="twitter:image" content="https://zapienz.gamalabs.mx/assets/img/og.jpg">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="preload" as="image" href="assets/img/hero-poster.jpg" media="(min-width:768px)">
+<link rel="preload" as="image" href="assets/img/hero-poster-916.jpg" media="(max-width:767px)">
+<link rel="stylesheet" href="assets/css/site.css">
+
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"MobileApplication","name":"Zapienz",
-"applicationCategory":"EducationApplication","operatingSystem":"iOS, Android","inLanguage":"es",
-"description":"Resúmenes de libros de no ficción en texto y audio. 305 títulos en español.",
-"installUrl":"https://apps.apple.com/mx/app/zapienz/id6762142820",
-"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"18"},
-"offers":{"@type":"Offer","category":"subscription"}}
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Zapienz",
+  "applicationCategory": "EducationApplication",
+  "operatingSystem": "iOS",
+  "inLanguage": "es",
+  "url": "https://zapienz.gamalabs.mx/",
+  "description": "Zaps en español: las ideas de un libro completo para leer o escuchar en unos veinte minutos.",
+  "author": { "@type": "Organization", "name": "GamaLabs" },
+  "email": "contactozapienz@gmail.com",
+  "installUrl": "https://apps.apple.com/mx/app/zapienz/id6762142820",
+  "sameAs": [
+    "https://www.instagram.com/zapienz_latam",
+    "https://apps.apple.com/mx/app/zapienz/id6762142820"
+  ]
+}
 </script>
-<style>
-:root{
-  --noche:#04070D; --verde:#1DB954; --verde-vivo:#38EB6B; --teal:#19D3C5;
-  --hueso:#FFFFFF; --tenue:rgba(255,255,255,.62);
-  --ease:cubic-bezier(.16,.8,.3,1);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-/* proximity, no mandatory: encaja la escena al acercarse pero deja
-   scrollear el resto de la pagina con normalidad */
-html{scroll-behavior:smooth;scroll-snap-type:y proximity}
-body{background:var(--noche);color:var(--hueso);font-family:'Inter',sans-serif;
-  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em}
-img{max-width:100%;display:block}
-a{color:inherit}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-:focus-visible{outline:2px solid var(--verde-vivo);outline-offset:4px;border-radius:99px}
-
-/* ============================================================
-   VIDRIO LÍQUIDO — el borde es un degradado de 1.4px recortado
-   por mask, no un border: por eso lee como filo de luz.
-   ============================================================ */
-.vidrio{
-  background:rgba(255,255,255,.01);
-  background-blend-mode:luminosity;
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  border:none;
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.1);
-  position:relative;overflow:hidden;
-}
-.vidrio::before{
-  content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;
-  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.15) 20%,
-    rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.15) 80%,rgba(255,255,255,.45) 100%);
-  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
-}
-.vidrio--fuerte{backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);
-  box-shadow:4px 4px 4px rgba(0,0,0,.05),inset 0 1px 1px rgba(255,255,255,.15)}
-
-/* ============================================================
-   EL MURO — el catálogo real como fondo vivo
-   ============================================================ */
-.muro{position:fixed;inset:0;z-index:0;display:flex;gap:10px;padding:0 5px;
-  transform:scale(1.14) translateY(3%)}
-.col{flex:1;display:flex;flex-direction:column;gap:10px;will-change:transform}
-.col img{width:100%;border-radius:4px}
-/* atmósfera: viñeta + apagado general para que el texto respire */
-.velo{position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:
-    radial-gradient(120% 78% at 50% 46%,rgba(4,7,13,.52) 0%,rgba(4,7,13,.86) 58%,rgba(4,7,13,.98) 100%),
-    linear-gradient(180deg,rgba(4,7,13,.92) 0%,rgba(4,7,13,.25) 26%,rgba(4,7,13,.4) 62%,rgba(4,7,13,.96) 100%)}
-/* la linterna: el cursor abre un hueco y enciende las portadas */
-.foco{position:fixed;inset:0;z-index:2;pointer-events:none;
-  background:rgba(4,7,13,.56);
-  -webkit-mask-image:radial-gradient(circle 270px at var(--mx,-600px) var(--my,-600px),transparent 0%,rgba(0,0,0,.55) 52%,#000 100%);
-  mask-image:radial-gradient(circle 270px at var(--mx,-600px) var(--my,-600px),transparent 0%,rgba(0,0,0,.55) 52%,#000 100%)}
-/* grano fino: quita el look digital plano */
-.grano{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.11;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
-
-/* ============================================================
-   NAV — píldora de vidrio centrada
-   ============================================================ */
-.barra{position:fixed;top:0;left:0;right:0;z-index:60;padding:22px 24px}
-.barra__int{max-width:1024px;margin:0 auto;border-radius:999px;padding:11px 12px 11px 22px;
-  display:flex;align-items:center;justify-content:space-between;gap:24px}
-.barra__izq{display:flex;align-items:center;gap:32px}
-.marca{display:flex;align-items:center;gap:9px;font-weight:600;font-size:1.05rem}
-.marca img{width:25px;height:25px}
-.enlaces{display:flex;gap:26px}
-.enlaces a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.86rem;font-weight:500;min-height:44px;display:inline-flex;align-items:center;
-  transition:color .25s var(--ease)}
-.enlaces a:hover{color:#fff}
-@media(max-width:900px){.enlaces{display:none}}
-.barra__der{display:flex;align-items:center;gap:14px}
-.enlace-plano{color:#fff;text-decoration:none;font-size:.86rem;font-weight:500;
-  min-height:44px;display:inline-flex;align-items:center;padding:0 6px}
-.pill{border-radius:999px;padding:11px 22px;color:#fff;text-decoration:none;
-  font-size:.86rem;font-weight:600;min-height:44px;display:inline-flex;align-items:center;
-  transition:background .25s var(--ease),transform .25s var(--ease)}
-.pill:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
-@media(max-width:560px){.enlace-plano{display:none}}
-
-/* ============================================================
-   HERO
-   ============================================================ */
-main{position:relative;z-index:10}
-.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;text-align:center;padding:120px 24px 60px}
-.vivo{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:500;
-  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:26px}
-.vivo::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--verde-vivo);
-  box-shadow:0 0 0 0 rgba(56,235,107,.55);animation:latir 2.6s infinite}
-@keyframes latir{70%{box-shadow:0 0 0 13px rgba(56,235,107,0)}100%{box-shadow:0 0 0 0 rgba(56,235,107,0)}}
-.hero h1{font-size:clamp(3rem,7.6vw,6.6rem);line-height:1.02;margin-bottom:30px;
-  text-shadow:0 6px 50px rgba(4,7,13,.75)}
-.hero h1 em{font-style:italic;color:var(--verde-vivo)}
-.hero__sub{max-width:34rem;color:rgba(255,255,255,.82);font-size:1rem;line-height:1.7;
-  margin:0 auto 34px;text-shadow:0 2px 22px rgba(4,7,13,.95)}
-
-/* barra de vidrio con botón circular — el CTA principal */
-.caja{max-width:36rem;width:100%;margin:0 auto}
-.buscador{border-radius:999px;padding:8px 8px 8px 24px;display:flex;align-items:center;gap:12px}
-.buscador input{flex:1;background:transparent;border:none;outline:none;color:#fff;
-  font-family:inherit;font-size:1rem;min-height:44px}
-.buscador input::placeholder{color:rgba(255,255,255,.42)}
-.circular{background:#fff;color:#04070D;border:none;border-radius:50%;width:46px;height:46px;
-  display:grid;place-items:center;cursor:pointer;flex:none;
-  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
-.circular:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(255,255,255,.24)}
-.circular svg{width:20px;height:20px}
-.pie-caja{color:rgba(255,255,255,.78);font-size:.86rem;line-height:1.6;padding:0 16px;margin-top:16px}
-.tiendas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-.tienda{border-radius:999px;padding:13px 26px;color:#fff;text-decoration:none;font-size:.9rem;
-  font-weight:600;min-height:44px;display:inline-flex;align-items:center;gap:9px;
-  transition:background .25s var(--ease),transform .25s var(--ease)}
-.tienda:hover{background:rgba(255,255,255,.06);transform:translateY(-2px)}
-.tienda svg{width:18px;height:18px}
-.pista{margin-top:40px;font-size:.8rem;color:rgba(255,255,255,.5);display:inline-flex;
-  align-items:center;gap:9px}
-.pista svg{width:15px;height:15px;color:var(--verde-vivo)}
-
-/* resultados del buscador sobre el muro */
-.hallazgos{max-width:36rem;margin:18px auto 0;border-radius:22px;padding:8px;
-  display:none;text-align:left}
-.hallazgos.on{display:block}
-.hallazgo{display:flex;align-items:center;gap:13px;padding:9px 12px;border-radius:14px;
-  text-decoration:none;color:inherit;transition:background .25s var(--ease)}
-.hallazgo *{text-decoration:none}
-.hallazgo:hover{background:rgba(255,255,255,.06)}
-.hallazgo img{width:38px;height:56px;object-fit:cover;border-radius:5px;flex:none}
-.hallazgo b{display:block;font-family:'Instrument Serif',serif;font-size:1.06rem;font-weight:400}
-.hallazgo span{font-size:.78rem;color:rgba(255,255,255,.55)}
-.hallazgo em{margin-left:auto;font-style:normal;font-size:.74rem;color:var(--verde-vivo)}
-.vacio{padding:14px 16px;font-size:.88rem;color:rgba(255,255,255,.6)}
-
-/* ============================================================
-   BLOQUES
-   ============================================================ */
-.bloque{padding:96px 0;position:relative;scroll-margin-top:104px}
-.saga{scroll-margin-top:0}
-.bloque__caja{border-radius:28px;padding:56px 44px}
-@media(max-width:640px){.bloque__caja{padding:38px 24px}}
-.bloque h2{font-family:'Instrument Serif',serif;font-weight:400;
-  font-size:clamp(2.1rem,4.6vw,3.5rem);line-height:1.06;max-width:20ch;margin-bottom:34px}
-.bloque h2 em{font-style:italic;color:var(--verde-vivo)}
-.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-@media(max-width:760px){.cifras{grid-template-columns:1fr;gap:24px}}
-.cifra b{display:block;font-family:'Instrument Serif',serif;font-weight:400;
-  font-size:clamp(2.8rem,5.6vw,4.4rem);line-height:1;color:#fff;margin-bottom:6px}
-.cifra span{color:rgba(255,255,255,.62);font-size:.92rem}
-.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:760px){.pasos{grid-template-columns:1fr}}
-.paso{border-radius:20px;padding:26px;transition:transform .35s var(--ease)}
-.paso:hover{transform:translateY(-5px)}
-.paso i{font-style:normal;color:var(--verde-vivo);font-size:.76rem;letter-spacing:.14em;
-  font-weight:600;display:block;margin-bottom:13px}
-.paso h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.4rem;margin-bottom:7px}
-.paso p{color:rgba(255,255,255,.66);font-size:.94rem}
-
-.cierre{text-align:center;padding:120px 0 130px}
-.cierre h2{margin:0 auto 18px;font-size:clamp(2.3rem,5.6vw,4.4rem)}
-.cierre p{color:rgba(255,255,255,.72);margin-bottom:32px}
-
-/* ============================================================
-   PIE — botones circulares de vidrio, como el brief
-   ============================================================ */
-footer{position:relative;z-index:10;padding:0 24px 54px;text-align:center}
-.redondos{display:flex;justify-content:center;gap:14px;margin-bottom:30px}
-.redondo{border-radius:50%;padding:15px;color:rgba(255,255,255,.8);text-decoration:none;
-  display:inline-grid;place-items:center;min-width:52px;min-height:52px;
-  transition:color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
-.redondo:hover{color:#fff;background:rgba(255,255,255,.06);transform:translateY(-3px)}
-.redondo svg{width:20px;height:20px}
-.legal{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:16px}
-.legal a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.85rem;
-  min-height:44px;display:inline-flex;align-items:center;padding:0 11px;
-  transition:color .25s var(--ease)}
-.legal a:hover{color:#fff}
-.copy{color:rgba(255,255,255,.4);font-size:.8rem;max-width:60ch;margin:0 auto}
-
-/* ============================================================
-   SAGA — el libro se abre, se compacta, se vuelve voz y entra
-   al teléfono. Protagonista del sitio (pinned-saga).
-   ============================================================ */
-/* Scroll por pasos: la escena ya no ocupa 660vh. Mide una pantalla y cada
-   gesto de rueda dispara la transicion al siguiente capitulo. */
-.saga{height:100svh;padding:0;position:relative;scroll-snap-align:center}
-.saga__pin{position:relative;top:0;height:100svh;overflow:hidden;display:grid;place-items:center;
-  perspective:1500px}
-/* puntos: sin esto el visitante no sabe cuantos pasos le quedan */
-.pasos-ind{position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:30;
-  display:flex;flex-direction:column;gap:2px}
-/* El punto se ve de 9px pero el area clicable es de 44: el objetivo tactil
-   no tiene por que medir lo mismo que la marca visual. */
-.pasos-ind button{width:44px;height:44px;border:none;padding:0;cursor:pointer;
-  background:none;display:grid;place-items:center}
-.pasos-ind button::before{content:'';width:9px;height:9px;border-radius:50%;
-  background:rgba(255,255,255,.24);transition:background .35s var(--ease),transform .35s var(--ease)}
-.pasos-ind button[aria-current="true"]::before{background:var(--verde-vivo);transform:scale(1.5)}
-.pasos-ind button:hover::before{background:rgba(255,255,255,.5)}
-@media(max-width:700px){.pasos-ind{right:14px}}
-.saltar{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:30;
-  font-size:.78rem;color:rgba(255,255,255,.5);background:none;border:none;cursor:pointer;
-  min-height:44px;padding:0 14px;font-family:inherit;transition:color .25s var(--ease)}
-.saltar:hover{color:#fff}
-.escena{position:relative;width:min(92vw,900px);height:min(72svh,580px);
-  transform-style:preserve-3d;display:grid;place-items:center}
-.rotulo{position:absolute;left:50%;top:9svh;transform:translateX(-50%);text-align:center;
-  z-index:20;width:min(92vw,38rem);pointer-events:none;padding:26px 40px;
-  background:radial-gradient(52% 96% at 50% 44%,rgba(4,7,13,.92) 0%,rgba(4,7,13,.6) 46%,rgba(4,7,13,0) 82%)}
-.rotulo>div{position:absolute;left:0;right:0;opacity:0;transform:translateY(12px);
-  transition:opacity .5s var(--ease),transform .5s var(--ease)}
-.rotulo>div.on{opacity:1;transform:none;position:relative}
-.rotulo h2{font-family:'Instrument Serif',serif;font-weight:400;
-  font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.06;margin-bottom:7px}
-.rotulo h2 em{font-style:italic;color:var(--verde-vivo)}
-.rotulo p{color:rgba(255,255,255,.7);font-size:.95rem}
-
-.libro{position:absolute;width:clamp(160px,21vw,250px);aspect-ratio:2/3;
-  transform-style:preserve-3d;will-change:transform}
-.libro__cara{position:absolute;inset:0;border-radius:5px 9px 9px 5px;overflow:hidden;
-  backface-visibility:hidden;box-shadow:0 34px 80px rgba(0,0,0,.7)}
-.libro__cara img{width:100%;height:100%;object-fit:cover}
-.libro__tapa{transform-origin:left center;z-index:4;transform-style:preserve-3d}
-.libro__rev{position:absolute;inset:0;border-radius:9px 5px 5px 9px;backface-visibility:hidden;
-  transform:rotateY(180deg);background:linear-gradient(115deg,#f4efe3,#ddd6c5)}
-.libro__hoja{position:absolute;inset:0;border-radius:3px 7px 7px 3px;padding:15px 13px;
-  background:linear-gradient(115deg,#faf6ee,#e7e1d3);transform-origin:left center;overflow:hidden}
-.libro__hoja i{display:block;height:3.5px;border-radius:2px;background:#c8c0ad;margin-bottom:7.5px}
-.libro__hoja i:nth-child(3n){width:74%} .libro__hoja i:nth-child(4n){width:88%}
-
-.tarjeta-zap{position:absolute;width:clamp(165px,19vw,215px);border-radius:18px;padding:18px;
-  opacity:0;will-change:transform,opacity}
-.tarjeta-zap b{display:block;font-family:'Instrument Serif',serif;font-weight:400;
-  font-size:1.5rem;color:var(--verde-vivo);margin-bottom:9px}
-.tarjeta-zap i{display:block;height:3.5px;border-radius:2px;background:rgba(255,255,255,.32);margin-bottom:7px}
-.tarjeta-zap i:nth-child(4){width:68%}
-
-.ondas{position:absolute;z-index:2;display:flex;align-items:center;gap:clamp(3px,.62vw,7px);
-  height:170px;opacity:0;will-change:opacity,transform}
-.ondas span{width:clamp(3px,.5vw,5px);border-radius:99px;
-  background:linear-gradient(180deg,var(--verde-vivo),var(--verde));
-  box-shadow:0 0 14px rgba(56,235,107,.45)}
-
-.tel{position:absolute;z-index:6;width:clamp(198px,21vw,258px);aspect-ratio:9/19.2;
-  border-radius:32px;padding:9px;background:linear-gradient(160deg,#22304a,#080e1a);
-  box-shadow:0 50px 110px rgba(0,0,0,.82),0 0 120px rgba(29,185,84,.2),
-    0 0 0 1px rgba(29,185,84,.38),inset 0 1px 0 rgba(255,255,255,.14);
-  opacity:0;will-change:transform,opacity;transform-style:preserve-3d}
-.tel__pant{width:100%;height:100%;border-radius:25px;overflow:hidden;padding:15px 12px;
-  background:linear-gradient(180deg,#0d1726,#04070D);display:flex;flex-direction:column}
-.tel__top{display:flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600;margin-bottom:11px}
-.tel__top img{width:17px;height:17px}
-.tel__cov{width:100%;border-radius:9px;margin-bottom:10px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
-.tel__tit{font-family:'Instrument Serif',serif;font-size:.92rem;line-height:1.14;margin-bottom:2px}
-.tel__aut{font-size:.63rem;color:rgba(255,255,255,.5);margin-bottom:10px}
-.tel__bar{height:3px;border-radius:2px;background:rgba(255,255,255,.16);margin-bottom:5px;overflow:hidden}
-.tel__bar b{display:block;height:100%;width:38%;background:var(--verde);border-radius:2px}
-.tel__t{display:flex;justify-content:space-between;font-size:.56rem;color:rgba(255,255,255,.45)}
-.tel__on{display:flex;align-items:flex-end;justify-content:center;gap:2.5px;height:30px;margin-top:auto}
-.tel__on span{width:2.5px;border-radius:99px;background:var(--teal)}
-
-/* ============ PIPELINE BEAM — el proceso, con un haz que viaja ============ */
-.proceso{position:relative;padding:20px 0 8px}
-.proceso__svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.nodos{display:flex;justify-content:space-between;align-items:center;gap:16px;
-  position:relative;z-index:2;max-width:640px;margin:0 auto}
-.nodo{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;flex:none;
-  background:rgba(4,7,13,.86)}
-.nodo svg{width:30px;height:30px;color:var(--verde-vivo)}
-.nodo__et{position:absolute;top:88px;left:50%;transform:translateX(-50%);white-space:nowrap;
-  font-size:.76rem;color:rgba(255,255,255,.6)}
-.nodo-caja{position:relative}
-@media(max-width:620px){.nodo{width:62px;height:62px}.nodo svg{width:24px;height:24px}
-  .nodo__et{font-size:.68rem}}
-
-/* ============ HILO DE AUDIO: cose la pagina entera ============ */
-#hilo{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4;opacity:.9}
-
-/* ============ PRECIOS ============ */
-.planes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:38px}
-@media(max-width:780px){.planes{grid-template-columns:1fr}}
-.plan{border-radius:22px;padding:32px 28px;display:flex;flex-direction:column;
-  transition:transform .35s var(--ease)}
-.plan:hover{transform:translateY(-5px)}
-.plan--top{box-shadow:4px 4px 4px rgba(0,0,0,.05),inset 0 1px 1px rgba(255,255,255,.15),
-  0 0 0 1px rgba(29,185,84,.42),0 0 60px rgba(29,185,84,.1)}
-.plan__eti{display:inline-flex;align-self:flex-start;font-size:.7rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:#04140A;background:var(--verde-vivo);
-  padding:5px 12px;border-radius:999px;margin-bottom:16px}
-.plan h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.85rem;margin-bottom:6px}
-.plan__d{color:rgba(255,255,255,.6);font-size:.92rem;margin-bottom:22px}
-.plan ul{list-style:none;display:grid;gap:11px}
-.plan li{display:flex;gap:11px;align-items:flex-start;font-size:.94rem;
-  color:rgba(255,255,255,.88)}
-.plan li svg{width:16px;height:16px;flex:none;margin-top:5px;color:var(--verde-vivo)}
-
-/* ============ soportes: tilt, magnético, shiny ============ */
-.paso{transform-style:preserve-3d;will-change:transform}
-.brillo{background:linear-gradient(90deg,#fff 0%,#fff 40%,var(--verde-vivo) 50%,#fff 60%,#fff 100%);
-  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:barrido 6s linear infinite}
-@keyframes barrido{0%{background-position:200% center}100%{background-position:-200% center}}
-
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.rv.on{opacity:1;transform:none}
-/* blur-in por palabra */
-.bw span{display:inline-block;opacity:0;filter:blur(9px);transform:translateY(22px);
-  transition:opacity .7s var(--ease),filter .7s var(--ease),transform .7s var(--ease)}
-.bw.on span{opacity:1;filter:blur(0);transform:none}
-@media(prefers-reduced-motion:reduce){
-  .col{transform:none!important}.foco{display:none}
-  .rv{opacity:1;transform:none}.vivo::before{animation:none}#hilo{display:none}
-  .bw span{opacity:1;filter:none;transform:none}
-  .brillo{animation:none;background:none;-webkit-background-clip:border-box;
-    background-clip:border-box;color:var(--verde-vivo)}
-  /* la saga se despliega en vertical, con todo el contenido a la vista */
-  .saga{height:auto}
-  .saga__pin{position:static;height:auto;padding:80px 24px}
-  .escena{height:auto;min-height:auto;display:flex;flex-direction:column;gap:34px}
-  .libro,.tarjeta-zap,.ondas,.tel{position:relative;opacity:1!important;transform:none!important}
-  .rotulo{position:static;transform:none;width:auto;background:none;margin-top:34px}
-  .rotulo>div{position:relative!important;opacity:1!important;transform:none!important;margin-bottom:20px}
-}
-@media(pointer:coarse){
-  .foco{display:none}.pista{display:none}
-  /* apilada: sin secuestro de scroll y legible con el pulgar */
-  .saga{height:auto;scroll-snap-align:none}
-  .saga__pin{position:static;height:auto;padding:80px 24px}
-  .escena{height:auto;min-height:auto;display:flex;flex-direction:column;gap:32px}
-  .libro,.tarjeta-zap,.ondas,.tel{position:relative;opacity:1!important;transform:none!important}
-  .rotulo{position:static;transform:none;width:auto;background:none;margin-top:30px;padding:0}
-  .rotulo>div{position:relative!important;opacity:1!important;transform:none!important;margin-bottom:22px}
-  .pasos-ind,.saltar{display:none}
-}
-</style>
 </head>
 <body>
 
-<div class="muro" id="muro" aria-hidden="true"></div>
-<div class="velo" aria-hidden="true"></div>
-<div class="foco" id="foco" aria-hidden="true"></div>
-<canvas id="hilo" aria-hidden="true"></canvas>
-<div class="grano" aria-hidden="true"></div>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
-<header class="barra">
-  <div class="barra__int vidrio">
-    <div class="barra__izq">
-      <span class="marca"><img src="assets/icon.png" alt=""> Zapienz</span>
-      <nav class="enlaces" aria-label="Secciones">
-        <a href="#saga">Cómo nace un Zap</a><a href="#como">Cómo funciona</a><a href="#precios">Precios</a>
-      </nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="marca-z" viewBox="0 0 120 120">
+    <g fill="currentColor">
+      <rect class="zbar" data-col="0" x="7" y="10" width="10" height="18" rx="5"/><rect class="zbar" data-col="0" x="7" y="92" width="10" height="18" rx="5"/>
+      <rect class="zbar" data-col="1" x="23" y="10" width="10" height="18" rx="5"/><rect class="zbar" data-col="1" x="23" y="78.33" width="10" height="31.67" rx="5"/>
+      <rect class="zbar" data-col="2" x="39" y="10" width="10" height="18" rx="5"/><rect class="zbar" data-col="2" x="39" y="64.67" width="10" height="18" rx="5"/><rect class="zbar" data-col="2" x="39" y="92" width="10" height="18" rx="5"/>
+      <rect class="zbar" data-col="3" x="55" y="10" width="10" height="18" rx="5"/><rect class="zbar" data-col="3" x="55" y="51" width="10" height="18" rx="5"/><rect class="zbar" data-col="3" x="55" y="92" width="10" height="18" rx="5"/>
+      <rect class="zbar" data-col="4" x="71" y="10" width="10" height="18" rx="5"/><rect class="zbar" data-col="4" x="71" y="37.33" width="10" height="18" rx="5"/><rect class="zbar" data-col="4" x="71" y="92" width="10" height="18" rx="5"/>
+      <rect class="zbar" data-col="5" x="87" y="10" width="10" height="31.67" rx="5"/><rect class="zbar" data-col="5" x="87" y="92" width="10" height="18" rx="5"/>
+      <rect class="zbar" data-col="6" x="103" y="10" width="10" height="18" rx="5"/><rect class="zbar" data-col="6" x="103" y="92" width="10" height="18" rx="5"/>
+    </g>
+  </symbol>
+  <symbol id="ico-apple" viewBox="0 0 24 24"><path d="M16.7 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.4zM14.5 5.3c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></symbol>
+</svg>
+
+<nav class="nav" id="nav" aria-label="Principal">
+  <a class="nav__marca" href="#inicio" aria-label="Zapienz, inicio">
+    <svg class="nav__z" aria-hidden="true"><use href="#marca-z"/></svg>
+    <span class="nav__nombre">Zapienz</span>
+  </a>
+  <div class="nav__links">
+    <a href="#trayecto">El trayecto</a>
+    <a href="#nace">Cómo nace un Zap</a>
+    <a href="#dentro">Por dentro</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#resenas">Reseñas</a>
+  </div>
+  <a class="btn btn--mini" data-iman href="https://apps.apple.com/mx/app/zapienz/id6762142820">Descargar</a>
+</nav>
+
+<main id="contenido">
+
+<!-- ═══════════ 1 · HERO ═══════════ -->
+<section class="hero" id="inicio" aria-labelledby="titular">
+  <div class="hero__pista">
+    <div class="hero__marco" id="heroMarco">
+      <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="metadata"
+             poster="assets/img/hero-poster.jpg"
+             data-ancho-webm="assets/video/hero-169.webm"
+             data-ancho-mp4="assets/video/hero-169.mp4"
+             data-alto-mp4="assets/video/hero-916.mp4"
+             aria-hidden="true" tabindex="-1"></video>
+      <div class="hero__velo" aria-hidden="true"></div>
+      <div class="hero__foco" id="heroFoco" aria-hidden="true"></div>
+      <div class="hero__borde" aria-hidden="true"></div>
     </div>
-    <div class="barra__der">
-      <a class="enlace-plano" href="mailto:contactozapienz@gmail.com">Contacto</a>
-      <a class="pill vidrio" href="#descargar">Descargar gratis</a>
+
+    <div class="hero__cuerpo" id="heroCuerpo">
+      <p class="sobre" data-anim="1"><span class="mono">Zaps en español</span> · para iPhone</p>
+      <h1 class="titular" id="titular" data-anim="2">
+        Un libro entero,<br><em>en lo que dura</em><br>el camino.
+      </h1>
+      <p class="bajada" data-anim="3">
+        Leemos el libro completo y te entregamos sus ideas en un Zap de unos
+        veinte minutos. Para leer o para escuchar, en español.
+      </p>
+      <div class="hero__acciones" data-anim="4">
+        <a class="btn" data-iman href="https://apps.apple.com/mx/app/zapienz/id6762142820">
+          <svg class="ico" aria-hidden="true"><use href="#ico-apple"/></svg>Descargar en App Store
+        </a>
+        <a class="btn btn--ghost" href="#trayecto">Ver cómo funciona</a>
+      </div>
+      <p class="hero__nota" data-anim="5">Se empieza gratis. Sigues si te sirve.</p>
+    </div>
+
+    <button class="hero__pausa" id="heroPausa" type="button" aria-pressed="false" aria-label="Pausar el video de fondo">
+      <span class="hero__pausa-ico" aria-hidden="true"></span>
+    </button>
+    <div class="hero__pie" aria-hidden="true">
+      <span class="hero__scroll"><i></i></span><span class="mono">Desliza</span>
     </div>
   </div>
-</header>
+</section>
 
-<main>
-<section class="hero">
-  <span class="vivo">305 Zaps · en español</span>
-  <h1 class="serif">Toda esta biblioteca, <em>escuchada</em>.</h1>
-  <p class="hero__sub">Cada portada del fondo es un libro que ya leímos por ti. Sus ideas, en veinte minutos, para leer o escuchar donde estés.</p>
+<!-- ═══════════ 2 · EL TRAYECTO ═══════════ -->
+<section class="trayecto" id="trayecto" aria-labelledby="h-trayecto">
+  <div class="trayecto__fondo" aria-hidden="true">
+    <div class="capa capa--fondo" data-prof="0.08">
+      <video class="trayecto__video" id="trenVideo" muted loop playsinline preload="none"
+             poster="assets/img/tren-poster.jpg" aria-hidden="true" tabindex="-1">
+        <source src="assets/video/tren.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="capa capa--luz" data-prof="0.18"></div>
+    <div class="capa capa--polvo" data-prof="0.3"></div>
+  </div>
 
+  <div class="caja trayecto__cuerpo">
+    <p class="rotulo lineas" data-lineas>Capítulo 1 · El trayecto</p>
+    <h2 class="h2 h2--xl" id="h-trayecto" data-lineas>
+      <span>Compraste el libro.</span>
+      <span>Se quedó en la <em>página 40.</em></span>
+    </h2>
+    <p class="parrafo parrafo--luz" data-lineas>
+      <span>No es falta de interés. Es falta de trayectos.</span>
+      <span>Un Zap cabe en uno: el de la mañana, el del gimnasio, el de vuelta.</span>
+    </p>
+
+    <ul class="cifras" aria-label="Cifras de la app hoy">
+      <li class="cifra rev" data-esc="1"><span class="cifra__n mono" data-contar="303">303</span><span class="cifra__t">Zaps publicados hoy en la app</span></li>
+      <li class="cifra rev" data-esc="2"><span class="cifra__n mono"><span data-contar="20">20</span><small>min</small></span><span class="cifra__t">De promedio. Van de 14 a 24 minutos</span></li>
+      <li class="cifra rev" data-esc="3"><span class="cifra__n mono" data-contar="10">10</span><span class="cifra__t">Categorías, de psicología a finanzas</span></li>
+    </ul>
+  </div>
+
+  <div class="portal" id="portal" aria-hidden="true">
+    <div class="portal__disco"><svg viewBox="0 0 24 24" class="portal__play"><path d="M8 5v14l11-7z"/></svg></div>
+  </div>
+</section>
+
+<!-- ═══════════ 3 · NACE UN ZAP (fijada) ═══════════ -->
+<section class="peli" id="nace" aria-labelledby="h-nace">
+  <div class="peli__pista" id="peliPista">
+    <div class="peli__cuadro" id="peliCuadro">
+      <video class="peli__video" id="peliVideo" muted playsinline preload="metadata"
+             poster="assets/img/scroll-poster.jpg" aria-hidden="true" tabindex="-1">
+        <source src="assets/video/scroll-zap.mp4" type="video/mp4">
+      </video>
+      <div class="peli__velo" aria-hidden="true"></div>
+
+      <div class="peli__cabeza">
+        <p class="rotulo">Capítulo 2 · Cómo nace un Zap</p>
+        <h2 class="h2" id="h-nace">Del libro a tus audífonos, en cuatro pasos.</h2>
+      </div>
+
+      <ol class="peli__pasos" aria-live="polite">
+        <li class="peli__paso" data-paso="0"><span class="mono peli__num">01</span><b>Se abre el libro.</b> Completo, sin saltarse capítulos.</li>
+        <li class="peli__paso" data-paso="1"><span class="mono peli__num">02</span><b>Se separa lo que sostiene la idea</b> de lo que solo la adorna.</li>
+        <li class="peli__paso" data-paso="2"><span class="mono peli__num">03</span><b>Se escribe en español</b>, para leerse de corrido.</li>
+        <li class="peli__paso" data-paso="3"><span class="mono peli__num">04</span><b>Se le da voz</b> y cabe en tus audífonos.</li>
+      </ol>
+
+      <div class="peli__barra" aria-hidden="true"><i id="peliBarra"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4 · POR DENTRO (fijada) ═══════════ -->
+<section class="dentro" id="dentro" aria-labelledby="h-dentro">
+  <div class="dentro__pista" id="dentroPista">
+    <div class="dentro__cuadro">
+      <div class="dentro__texto">
+        <p class="rotulo">Capítulo 3 · Un Zap por dentro</p>
+        <h2 class="h2" id="h-dentro">Texto y voz en la misma pantalla.</h2>
+        <ol class="dentro__estados">
+          <li class="dentro__estado" data-estado="0"><b>Abres la app.</b> Eliges por categoría o sigues donde te quedaste.</li>
+          <li class="dentro__estado" data-estado="1"><b>Abres el Zap.</b> Cuántos minutos dura y cuántas ideas te llevas, antes de empezar.</li>
+          <li class="dentro__estado" data-estado="2"><b>Lees o escuchas.</b> El texto corre mientras suena; seis secciones, saltos de diez segundos, velocidad a tu gusto.</li>
+        </ol>
+        <p class="dentro__nota mono">Capturas reales de la app · versión 1.3</p>
+      </div>
+
+      <div class="fono" id="fono" aria-label="Pantallas reales de la app Zapienz">
+        <div class="fono__cuerpo">
+          <div class="fono__pantalla">
+            <img class="fono__img" data-estado="0" src="assets/app/home.webp" width="752" height="1311" alt="Pantalla de inicio de Zapienz: Conocimiento en minutos, filtros por categoría y la sección Continuar con El Código de Curación, 17 min" loading="lazy" decoding="async">
+            <img class="fono__img" data-estado="1" src="assets/app/lectura.webp" width="646" height="1255" alt="Ficha de un Zap: El Código de Curación, Salud y bienestar, 17 min, 7 aprendizajes y el botón Escuchar ahora" loading="lazy" decoding="async">
+            <img class="fono__img fono__img--zoom" data-estado="2" src="assets/app/lectura.webp" width="646" height="1255" alt="Pantalla de lectura con el texto de la sección y el mini reproductor: Sección 1 de 6, velocidad 1x" loading="lazy" decoding="async">
+          </div>
+          <div class="fono__brillo" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4b · REVEAL: 300 páginas → lo que te llevas ═══════════ -->
+<section class="reveal" id="reveal" aria-labelledby="h-reveal">
+  <div class="caja reveal__cuerpo">
+    <p class="rotulo rev">Lo que te llevas</p>
+    <h2 class="h2 rev" id="h-reveal" data-esc="1">Trescientas páginas.<br><em>Siete ideas que sí usas.</em></h2>
+    <p class="parrafo rev" data-esc="2">
+      Pasa el cursor por el texto —o arrastra el dedo— y mira lo que un Zap
+      rescata de un libro entero. Cada aprendizaje es una frase que puedes
+      aplicar mañana.
+    </p>
+    <button class="btn btn--linea rev" data-esc="3" id="revealBoton" type="button" aria-pressed="false">Mostrar todas las ideas</button>
+  </div>
+
+  <div class="lupa rev" id="lupa" data-esc="2" tabindex="0" role="group" aria-label="Página densa de un libro; al pasar el cursor se revelan las ideas clave">
+    <div class="lupa__base" aria-hidden="true">
+      <p>El problema de la mayoría de los libros de no ficción no es que estén mal escritos, sino que fueron escritos para ocupar trescientas páginas. La idea que los sostiene cabe en una tarde; el resto son ejemplos, repeticiones y capítulos que el editor pidió para justificar el lomo. Quien los compra lo intuye a la página cuarenta, y ahí se quedan.</p>
+      <p>Un Zap hace el trabajo contrario. Lee el libro completo, sin saltarse nada, y separa lo que sostiene la idea de lo que solamente la adorna. Lo que queda no es un extracto: es una lectura hecha por alguien que ya terminó el libro y te cuenta, en español y con voz, qué se lleva de él.</p>
+      <p>Por eso cada Zap trae sus aprendizajes contados. Siete frases, a veces cinco, que puedes recordar el lunes. La sección se lee de corrido y suena mientras la lees; se puede saltar diez segundos, subir la velocidad, guardarlo para después. Cabe en un trayecto, que es el tiempo que de verdad tienes.</p>
+    </div>
+    <div class="lupa__ideas" id="lupaIdeas" aria-hidden="true">
+      <ul>
+        <li><span class="mono">01</span> La idea de un libro cabe en una tarde.</li>
+        <li><span class="mono">02</span> La página 40 es donde se rinden los lectores.</li>
+        <li><span class="mono">03</span> Leer completo, sin saltarse nada.</li>
+        <li><span class="mono">04</span> Separar lo que sostiene de lo que adorna.</li>
+        <li><span class="mono">05</span> Escribir en español, con voz.</li>
+        <li><span class="mono">06</span> Aprendizajes contados: siete frases para el lunes.</li>
+        <li><span class="mono">07</span> Cabe en un trayecto, el tiempo que sí tienes.</li>
+      </ul>
+    </div>
+    <p class="lupa__pista mono" aria-hidden="true"><span class="solo-puntero">Pasa el cursor</span><span class="solo-tacto">Arrastra el dedo</span></p>
+  </div>
+  <div class="visualmente-oculto" id="ideasTexto">
+    Siete ideas clave: la idea de un libro cabe en una tarde; la página 40 es donde se rinden los lectores; leer completo sin saltarse nada; separar lo que sostiene de lo que adorna; escribir en español con voz; aprendizajes contados, siete frases para el lunes; cabe en un trayecto, el tiempo que sí tienes.
+  </div>
+</section>
+
+<!-- ═══════════ 5 · CATÁLOGO ═══════════ -->
+<section class="catalogo" id="catalogo" aria-labelledby="h-catalogo">
+  <div class="muro" aria-hidden="true">
+    <div class="muro__capa" data-prof="0.06"><div class="muro__fila" data-fila="a"></div></div>
+    <div class="muro__capa" data-prof="0.15"><div class="muro__fila" data-fila="b"></div></div>
+    <div class="muro__capa" data-prof="0.26"><div class="muro__fila" data-fila="c"></div></div>
+  </div>
+
+  <div class="caja catalogo__cuerpo">
+    <p class="rotulo rev">Capítulo 4 · El catálogo</p>
+    <h2 class="h2 rev" id="h-catalogo" data-esc="1">Diez categorías.<br>Trescientos tres Zaps.</h2>
+    <p class="parrafo rev" data-esc="2">
+      Son los números de la app hoy, contados uno por uno en la base. Cada barra es una
+      categoría; tócala o pasa el cursor para ver cuántos títulos tiene.
+    </p>
+
+    <div class="eq rev" data-esc="2" id="eq" role="list" aria-label="Categorías y número de Zaps">
+      <button class="eq__col" role="listitem" type="button" data-n="109" aria-label="Desarrollo personal, 109 Zaps"><i></i><span class="eq__n mono">109</span><span class="eq__t">Desarrollo personal</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="34" aria-label="Negocios, 34 Zaps"><i></i><span class="eq__n mono">34</span><span class="eq__t">Negocios</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="33" aria-label="Psicología, 33 Zaps"><i></i><span class="eq__n mono">33</span><span class="eq__t">Psicología</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="31" aria-label="Filosofía, 31 Zaps"><i></i><span class="eq__n mono">31</span><span class="eq__t">Filosofía</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="26" aria-label="Finanzas, 26 Zaps"><i></i><span class="eq__n mono">26</span><span class="eq__t">Finanzas</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="17" aria-label="Salud y bienestar, 17 Zaps"><i></i><span class="eq__n mono">17</span><span class="eq__t">Salud y bienestar</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="17" aria-label="Marketing y ventas, 17 Zaps"><i></i><span class="eq__n mono">17</span><span class="eq__t">Marketing y ventas</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="15" aria-label="Relaciones, 15 Zaps"><i></i><span class="eq__n mono">15</span><span class="eq__t">Relaciones</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="11" aria-label="Biografías, 11 Zaps"><i></i><span class="eq__n mono">11</span><span class="eq__t">Biografías</span></button>
+      <button class="eq__col" role="listitem" type="button" data-n="10" aria-label="Productividad, 10 Zaps"><i></i><span class="eq__n mono">10</span><span class="eq__t">Productividad</span></button>
+    </div>
+
+    <p class="rev" data-esc="3" style="margin-top:40px">
+      <a class="btn" data-iman href="https://apps.apple.com/mx/app/zapienz/id6762142820">Ver el catálogo en la app</a>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ 6 · RESEÑAS ═══════════
+     Las dos únicas reseñas con texto en el App Store de México (verificado 12-sep-2026).
+     Se citan literales y recortadas, rotuladas como fragmento. No hay una tercera. -->
+<section class="resenas" id="resenas" aria-labelledby="h-resenas">
   <div class="caja">
-    <form class="buscador vidrio" id="buscador" role="search">
-      <input id="q" type="search" placeholder="Busca un libro del catálogo…"
-             aria-label="Buscar un libro del catálogo" autocomplete="off">
-      <button class="circular" type="submit" aria-label="Buscar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </button>
-    </form>
-    <div class="hallazgos vidrio vidrio--fuerte" id="hallazgos" role="region" aria-live="polite"></div>
-    <p class="pie-caja">Escribe un título o un autor y mira si ya está resumido. Prueba con <b>Peterson</b>, <b>Cain</b> o <b>hábitos</b>.</p>
-  </div>
+    <p class="rotulo rev">Capítulo 5 · Lo que dicen</p>
+    <h2 class="h2 rev" id="h-resenas" data-esc="1">Dos reseñas.<br>Las dos que hay.</h2>
+    <p class="parrafo rev" data-esc="2">
+      Zapienz es una app joven: en el App Store de México tiene dos reseñas con texto.
+      Están aquí las dos, citadas tal cual.
+    </p>
 
-  <div class="tiendas" id="descargar">
-    <a class="tienda vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5z"/></svg>
-      App Store</a>
-    <a class="tienda vidrio" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14z"/></svg>
-      Google Play</a>
-  </div>
-
-  <p class="pista">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.6"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg>
-    Mueve el cursor: la luz enciende el catálogo.
-  </p>
-</section>
-
-<!-- ================= SAGA: de libro a voz ================= -->
-<section class="saga" id="saga" aria-label="Cómo nace un Zap">
-  <div class="saga__pin">
-    <div class="escena" id="escena" aria-hidden="true">
-
-      <div class="libro" id="libro">
-        <div class="libro__hoja" id="hoja2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="libro__hoja" id="hoja1"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="libro__cara libro__tapa" id="tapa">
-          <img id="tapaImg" src="" alt="">
-          <div class="libro__rev"></div>
-        </div>
-      </div>
-
-      <div class="tarjeta-zap vidrio vidrio--fuerte" id="zapcard">
-        <b>El Zap</b><i></i><i></i><i></i><i></i>
-      </div>
-
-      <div class="ondas" id="ondas"></div>
-
-      <div class="tel" id="tel">
-        <div class="tel__pant">
-          <div class="tel__top"><img src="assets/icon.png" alt=""> Zapienz</div>
-          <img class="tel__cov" id="telCov" src="" alt="">
-          <p class="tel__tit" id="telTit"></p>
-          <p class="tel__aut" id="telAut"></p>
-          <div class="tel__bar"><b></b></div>
-          <div class="tel__t"><span>7:24</span><span>20:00</span></div>
-          <div class="tel__on" id="telOn"></div>
-        </div>
-      </div>
-
+    <div class="tarjetas">
+      <figure class="tarjeta rev" data-esc="1" data-halo>
+        <p class="tarjeta__est" aria-label="5 de 5 estrellas">★★★★★</p>
+        <blockquote class="tarjeta__cita">
+          <p class="tarjeta__tit">«Lo recomiendo !»</p>
+          <p>“Hoy en día los podcast me ayudado a aprender de una manera más rápida y diferente y sin duda esta aplicación lo ha hecho aún mejor…”</p>
+        </blockquote>
+        <figcaption class="tarjeta__pie mono">Cborbog · App Store México · fragmento literal</figcaption>
+      </figure>
+      <figure class="tarjeta rev" data-esc="2" data-halo>
+        <p class="tarjeta__est" aria-label="5 de 5 estrellas">★★★★★</p>
+        <blockquote class="tarjeta__cita">
+          <p class="tarjeta__tit">«Me encantó la app»</p>
+          <p>“Es muy práctico escuchar el audio mientras voy manejado y los libros que tienen están muy interesantes ✨”</p>
+        </blockquote>
+        <figcaption class="tarjeta__pie mono">alemndza98 · App Store México · fragmento literal</figcaption>
+      </figure>
     </div>
 
-    <div class="pasos-ind" id="indicador" role="tablist" aria-label="Capítulos"></div>
-    <button class="saltar" id="saltar" type="button">Saltar al catálogo ↓</button>
-
-    <div class="rotulo" id="rotulo">
-      <div><h2>Un libro de trescientas páginas.</h2><p>El que compraste con toda la intención del mundo.</p></div>
-      <div><h2>Lo abrimos <em>entero</em>.</h2><p>Lo leemos completo, hasta la última idea.</p></div>
-      <div><h2>Y lo compactamos.</h2><p>Solo lo que de verdad te llevarías: veinte minutos.</p></div>
-      <div><h2>Después le damos <em>voz</em>.</h2><p>El Zap se vuelve audio, narrado de principio a fin.</p></div>
-      <div><h2>Y cabe en tu bolsillo.</h2><p>305 libros listos para escuchar, donde estés.</p></div>
+    <div class="hero__acciones rev" data-esc="3" style="margin-top:36px">
+      <a class="btn" data-iman href="https://apps.apple.com/mx/app/zapienz/id6762142820"><svg class="ico" aria-hidden="true"><use href="#ico-apple"/></svg>Descargar en App Store</a>
+      <a class="btn btn--linea" href="https://apps.apple.com/mx/app/zapienz/id6762142820?action=write-review">Escribir la tercera</a>
     </div>
   </div>
 </section>
 
-<section class="bloque" id="catalogo">
-  <div class="wrap">
-    <div class="bloque__caja vidrio vidrio--fuerte">
-      <div class="proceso">
-        <svg class="proceso__svg" id="haz" aria-hidden="true"></svg>
-        <div class="nodos">
-          <span class="nodo-caja"><span class="nodo vidrio" id="n1">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5zM20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5z"/></svg>
-            </span><span class="nodo__et">El libro</span></span>
-          <span class="nodo-caja"><span class="nodo vidrio" id="n2">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-              <path d="M4 6h16M4 11h16M4 16h9"/></svg>
-            </span><span class="nodo__et">El Zap</span></span>
-          <span class="nodo-caja"><span class="nodo vidrio" id="n3">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-              <path d="M3 12v1M7 8v8M11 4v16M15 8v8M19 11v2"/></svg>
-            </span><span class="nodo__et">Tu audio</span></span>
-        </div>
-      </div>
-      <div class="cifras" style="margin-top:78px">
-        <div class="cifra rv"><b data-scramble="305">305</b><span>Zaps publicados, todos en español</span></div>
-        <div class="cifra rv"><b>20</b><span>minutos por libro, en promedio</span></div>
-        <div class="cifra rv"><b>5.0</b><span>de calificación · 18 valoraciones</span></div>
-      </div>
+<!-- ═══════════ 7 · CIERRE ═══════════ -->
+<section class="cierre" id="precios" aria-labelledby="h-cierre">
+  <div class="caja">
+    <p class="rotulo rev">Capítulo 6 · Cómo se paga</p>
+    <h2 class="h2 rev" id="h-cierre" data-esc="1">Empieza gratis.<br>Sigue si te sirve.</h2>
+
+    <div class="planes">
+      <article class="plan rev" data-esc="1" data-halo>
+        <h3 class="plan__t">Con créditos</h3>
+        <p class="plan__d">Un crédito desbloquea un Zap y se queda tuyo. Sin suscripción, sin fecha de vencimiento.</p>
+        <ul class="plan__l"><li>Acceso permanente al Zap que desbloqueas</li><li>Texto y audio del mismo título</li><li>Pagas únicamente lo que abres</li></ul>
+      </article>
+      <article class="plan plan--alto rev" data-esc="2" data-halo>
+        <p class="plan__sello mono">Catálogo completo</p>
+        <h3 class="plan__t">Premium</h3>
+        <p class="plan__d">Los 303 Zaps abiertos, y los que entren cada semana entran contigo. Mensual o anual; se cancela cuando quieras.</p>
+        <ul class="plan__l"><li>Todo el catálogo, sin desbloquear uno por uno</li><li>Audio completo de cada título</li><li>Títulos nuevos cada semana</li></ul>
+      </article>
+    </div>
+    <p class="pie-nota rev" data-esc="3">Los precios vigentes están en la ficha de la app, en el App Store.</p>
+
+    <div class="final rev" data-esc="2">
+      <svg class="final__z" aria-hidden="true"><use href="#marca-z"/></svg>
+      <p class="final__t">El Zap terminó. <em>Ahora te toca a ti.</em></p>
+      <a class="btn btn--grande" data-iman href="https://apps.apple.com/mx/app/zapienz/id6762142820"><svg class="ico" aria-hidden="true"><use href="#ico-apple"/></svg>Descargar Zapienz para iPhone</a>
+      <p class="hero__nota">Gratis en el App Store de México · se empieza sin pagar</p>
     </div>
   </div>
 </section>
 
-<section class="bloque" id="como" style="padding-top:0">
-  <div class="wrap">
-    <div class="bloque__caja vidrio vidrio--fuerte">
-      <h2 class="serif bw" data-bw>Léelo o <em>escúchalo</em>. Tú decides.</h2>
-      <div class="pasos">
-        <article class="paso vidrio rv"><i>01</i><h3>Elige un Zap</h3>
-          <p>305 títulos de no ficción en diez categorías: psicología, negocios, filosofía, hábitos y más.</p></article>
-        <article class="paso vidrio rv"><i>02</i><h3>Veinte minutos</h3>
-          <p>Las ideas centrales del libro con sus aprendizajes clave. Lo que de verdad te llevarías.</p></article>
-        <article class="paso vidrio rv"><i>03</i><h3>Texto o audio</h3>
-          <p>Lee con calma o escucha mientras manejas. La app recuerda dónde te quedaste.</p></article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="bloque" id="precios" style="padding-top:0">
-  <div class="wrap">
-    <div class="bloque__caja vidrio vidrio--fuerte">
-      <h2 class="serif bw" data-bw>Empieza <em>gratis</em>. Sigue si te sirve.</h2>
-      <div class="planes">
-        <article class="plan vidrio rv">
-          <h3>Con créditos</h3>
-          <p class="plan__d">Para quien lee de vez en cuando.</p>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Desbloqueas el libro que quieras</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Tuyo para siempre, sin caducidad</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Texto y audio incluidos</li>
-          </ul>
-        </article>
-        <article class="plan vidrio vidrio--fuerte plan--top rv">
-          <span class="plan__eti">Premium</span>
-          <h3>Todo, sin límite</h3>
-          <p class="plan__d">Para quien quiere leer de verdad este año.</p>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Los 305 Zaps, completos</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Audio de todos los títulos</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Títulos nuevos cada semana</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Mensual o anual, cancelas cuando quieras</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="bloque cierre">
-  <div class="wrap">
-    <h2 class="serif bw" data-bw>Empieza por el que llevas <em>años posponiendo</em>.</h2>
-    <p>Descárgala gratis y escucha el primero hoy.</p>
-    <div class="tiendas">
-      <a class="tienda vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener">Descargar para iPhone</a>
-      <a class="tienda vidrio" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener">Descargar para Android</a>
-    </div>
-  </div>
-</section>
 </main>
 
-<footer>
-  <div class="redondos">
-    <a class="redondo vidrio" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Zapienz en la App Store">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.5c0-2.2 1.8-3.3 1.9-3.35-1.05-1.5-2.65-1.7-3.2-1.75-1.35-.15-2.65.8-3.35.8-.7 0-1.75-.8-2.9-.75-1.5.05-2.85.85-3.6 2.2-1.55 2.65-.4 6.6 1.1 8.75.75 1.05 1.6 2.25 2.75 2.2 1.1-.05 1.5-.7 2.85-.7s1.7.7 2.9.7c1.2 0 1.95-1.05 2.65-2.15.85-1.2 1.2-2.4 1.2-2.45-.05 0-2.3-.9-2.3-3.5z"/></svg>
-    </a>
-    <a class="redondo vidrio" href="https://play.google.com/store/apps/details?id=com.zapienz.app" target="_blank" rel="noopener" aria-label="Zapienz en Google Play">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.25.26-.4.66-.4 1.18v17.24c0 .52.15.92.4 1.18l.06.06 9.66-9.66v-.23L3.66 2.14z"/></svg>
-    </a>
-    <a class="redondo vidrio" href="mailto:contactozapienz@gmail.com" aria-label="Escríbenos por correo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>
-    </a>
+<!-- ═══════════ REPRODUCTOR (progreso del recorrido) ═══════════ -->
+<aside class="player" id="player" aria-label="Progreso de la página, como un Zap de veinte minutos">
+  <svg class="player__z" aria-hidden="true"><use href="#marca-z"/></svg>
+  <div class="player__info">
+    <span class="player__cap" id="playerCap">Un libro entero, en lo que dura el camino</span>
+    <span class="player__pista"><i id="playerBarra"></i></span>
   </div>
-  <nav class="legal" aria-label="Legal">
-    <a href="privacidad.html">Aviso de privacidad</a>
-    <a href="terminos.html">Términos</a>
-    <a href="eliminar-cuenta.html">Eliminar mi cuenta</a>
-  </nav>
-  <p class="copy">
-    Los Zaps son interpretaciones educativas generadas con apoyo de inteligencia artificial
-    a partir de obras publicadas. No sustituyen la obra original. © <span id="anio">2026</span> Zapienz.
-  </p>
+  <span class="player__t mono"><span id="playerT">00:00</span><span class="player__sep">/</span>20:00</span>
+</aside>
+
+<footer class="pie" id="contacto">
+  <div class="caja pie__rejilla">
+    <div>
+      <a class="nav__marca" href="#inicio" aria-label="Zapienz, inicio"><svg class="nav__z" aria-hidden="true"><use href="#marca-z"/></svg><span class="nav__nombre">Zapienz</span></a>
+      <p class="pie__lema">Las ideas de un libro completo, en español,<br>para leer o escuchar donde estés.</p>
+      <p class="pie__aviso">Los Zaps son interpretaciones educativas escritas con apoyo de inteligencia artificial a partir de obras publicadas; no sustituyen la obra original.</p>
+    </div>
+    <div class="pie__col"><h3>Contacto</h3><p><a href="mailto:contactozapienz@gmail.com">contactozapienz@gmail.com</a></p><p><a href="https://www.instagram.com/zapienz_latam" rel="me noopener">Instagram @zapienz_latam</a></p></div>
+    <div class="pie__col"><h3>Descargar</h3><p><a href="https://apps.apple.com/mx/app/zapienz/id6762142820">App Store · iPhone</a></p><p><a href="https://apps.apple.com/mx/app/zapienz/id6762142820?action=write-review">Escribir una reseña</a></p></div>
+    <div class="pie__col"><h3>Legal</h3><p><a href="https://zapienz-dot.github.io/legal/privacy-policy.html">Aviso de privacidad</a></p><p><a href="https://zapienz-dot.github.io/legal/terms.html">Términos</a></p><p><a href="https://zapienz-dot.github.io/legal/support.html">Soporte</a></p></div>
+  </div>
+  <div class="caja pie__linea">
+    <p>© <span id="anio">2026</span> Zapienz · un producto de GamaLabs</p>
+    <p class="mono">Hecho en español, para América Latina</p>
+  </div>
 </footer>
 
-<script>
-(function(){
-  'use strict';
-  document.getElementById('anio').textContent=new Date().getFullYear();
-  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var B='https://xxzjuzuouobfzbezuwxs.supabase.co/storage/v1/object/public/covers/';
-
-  var LIBROS=[
-    ['23300c33-8b4e-48db-bd44-3bef205856e8','El Arte de Pensar Claramente','Rolf Dobelli','Desarrollo personal'],
-    ['5d791589-84d9-4aca-83a3-f8635e5a6237','Háblame Bonito','Vanessa Van Edwards','Relaciones'],
-    ['cfdeefd6-8ca9-45ff-b5fe-52091d7aa301','Quiet: El Poder de los Introvertidos','Susan Cain','Psicología'],
-    ['fe0d183a-f124-4fd9-8bf1-1bd379940687','La Sociedad del Cansancio','Byung-Chul Han','Filosofía'],
-    ['829a0a2e-7e7e-4a29-85b0-9459a1f5fe54','Factfulness','Hans Rosling','Desarrollo personal'],
-    ['d15dc7a5-c1df-4337-a4ed-8f92cfd039bf','Cómo Mandar a la Mierda de Forma Educada','Alba Cardalda','Desarrollo personal'],
-    ['b0469f2f-d7b6-4b06-814c-404f1ab44a68','Bullshit Jobs','David Graeber','Filosofía'],
-    ['261a074f-d973-40fd-8c3a-2d677bffbb22','Atrévete a No Gustar','Ichiro Kishimi','Desarrollo personal'],
-    ['690f98a5-ed2b-465b-9d6e-32ab34782b11','El Poder de los 5 Segundos','Mel Robbins','Hábitos'],
-    ['50f9e235-66aa-46fe-957d-612d4b14810f','La Buena Suerte','Alex Rovira','Desarrollo personal'],
-    ['6ca00260-73b0-427a-814b-fcc2cc54c20c','Tu Cerebro Manda','John Medina','Psicología'],
-    ['3f13a11b-683c-47b8-a145-7788e9e783e7','Mujeres y Poder','Mary Beard','Filosofía'],
-    ['cb9132cd-f5b6-4732-bd79-5f7dd25192ce','Redefine Imposible','Jonathan Benito','Desarrollo personal'],
-    ['aec8f1b0-5aae-4ae3-be7c-a5b8b3d2f2b4','Aprende más Rápido','Ulrich Boser','Hábitos'],
-    ['aa21467a-6110-4ab0-b14c-57c08b8719ae','La Tercera Ola','Steve Case','Negocios'],
-    ['b9c6ecc1-fb68-4313-80c7-7dab8ad9e44c','Minimalismo','Joshua Fields Millburn','Hábitos'],
-    ['84ca7ced-22cd-4601-b9e6-52047c905b66','Tiende tu Cama','William H. McRaven','Hábitos'],
-    ['7e634917-7934-4a36-b13f-931964c54f68','Pensamiento Lateral','Edward de Bono','Desarrollo personal'],
-    ['a2b3e139-8f87-4c15-b3f6-bd89bb251186','12 Reglas para Vivir','Jordan B. Peterson','Desarrollo personal'],
-    ['25b60c5b-41e1-4cd4-b017-ca6ebfd09146','El Camino del Artista','Julia Cameron','Desarrollo personal'],
-    ['a8f1eea9-d384-490b-bd3a-35a9d78163df','Innovación Abierta','Henry Chesbrough','Negocios'],
-    ['f3d30675-9287-4ff6-b86c-e388bc4c96fb','La Singularidad está Cerca','Ray Kurzweil','Filosofía'],
-    ['cddc0f22-8e7f-4dda-ad82-ce5835dcb71c','Sprint','Jake Knapp','Productividad'],
-    ['bacd543b-57a9-46c3-89db-40fbea6e1e99','El Futuro es más Rápido de lo que Piensas','Peter Diamandis','Negocios'],
-    ['bf26f09c-ea68-482f-a636-fcf062e5f697','Abundancia','Peter Diamandis','Negocios'],
-    ['0bede6af-d969-4e19-a237-e7b1616bc478','Lo Inevitable','Kevin Kelly','Filosofía'],
-    ['8a104e96-911c-420d-a048-56467064dfba','Inner Excellence','Jim Afremow','Desarrollo personal'],
-    ['b6820d58-0655-407c-8e58-154deea38d2c','El Curso Fénix','Brian Tracy','Desarrollo personal']
-  ];
-  function url(id){ return B+id+'/cover.png'; }
-
-  /* ---------- el muro ---------- */
-  var muro=document.getElementById('muro');
-  var COLS = innerWidth<640 ? 4 : innerWidth<1024 ? 6 : innerWidth<1500 ? 8 : 9;
-  var POR=7, k=0, columnas=[];
-  for (var c=0;c<COLS;c++){
-    var col=document.createElement('div'); col.className='col';
-    for (var j=0;j<POR*2;j++){
-      var im=new Image();
-      im.src=url(LIBROS[k++%LIBROS.length][0]); im.alt=''; im.decoding='async';
-      im.loading = j<POR ? 'eager' : 'lazy';
-      col.appendChild(im);
-    }
-    muro.appendChild(col);
-    columnas.push({el:col, v:(c%2?-1:1)*(0.15+((c*7)%5)*0.04), y:-((c*97)%640)});
-  }
-  var visible=true;
-  document.addEventListener('visibilitychange',function(){ visible=!document.hidden; });
-  function derivar(){
-    requestAnimationFrame(derivar);
-    if(!visible) return;
-    for (var i=0;i<columnas.length;i++){
-      var C=columnas[i]; C.y-=C.v;
-      var h=C.el.scrollHeight/2;
-      if (C.y<=-h) C.y+=h;
-      if (C.y>0) C.y-=h;
-      C.el.style.transform='translate3d(0,'+C.y.toFixed(1)+'px,0)';
-    }
-  }
-  if(!quieto) requestAnimationFrame(derivar);
-
-  /* ---------- la linterna, suavizada con lerp ---------- */
-  var foco=document.getElementById('foco'), mx=-600, my=-600, sx=mx, sy=my, hayCursor=false;
-  addEventListener('pointermove',function(e){
-    if(e.pointerType==='touch') return;
-    if(!hayCursor){ sx=e.clientX; sy=e.clientY; hayCursor=true; }
-    mx=e.clientX; my=e.clientY;
-  },{passive:true});
-  (function seguir(){
-    requestAnimationFrame(seguir);
-    if(!hayCursor||!visible) return;
-    sx+=(mx-sx)*0.12; sy+=(my-sy)*0.12;
-    foco.style.setProperty('--mx',sx.toFixed(1)+'px');
-    foco.style.setProperty('--my',sy.toFixed(1)+'px');
-  })();
-
-  /* ---------- buscador real sobre el catálogo ---------- */
-  var q=document.getElementById('q'), caja=document.getElementById('hallazgos'),
-      form=document.getElementById('buscador');
-  // Sin regex de diacriticos combinantes: son invisibles en el fuente y se
-  // corrompen al pasar por herramientas de texto. Tabla explicita y visible.
-  var CON='aaaaaeeeeiiiiooooouuuunc', ACC='áàäâãéèëêíìïîóòöôõúùüûñç';
-  function norm(s){
-    var r='', b=s.toLowerCase();
-    for(var i=0;i<b.length;i++){ var j=ACC.indexOf(b[i]); r += j>=0 ? CON[j] : b[i]; }
-    return r;
-  }
-  function buscar(){
-    var t=norm(q.value.trim());
-    if(t.length<2){ caja.classList.remove('on'); caja.innerHTML=''; return; }
-    var res=LIBROS.filter(function(L){
-      return norm(L[1]).indexOf(t)>=0 || norm(L[2]).indexOf(t)>=0 || norm(L[3]).indexOf(t)>=0;
-    }).slice(0,5);
-    caja.innerHTML='';
-    if(!res.length){
-      caja.innerHTML='<p class="vacio">Ese no está entre los 28 que enseñamos aquí — el catálogo completo son 305 y crece cada semana.</p>';
-    } else {
-      res.forEach(function(L){
-        var a=document.createElement('a');
-        a.className='hallazgo';
-        a.href='https://apps.apple.com/mx/app/zapienz/id6762142820';
-        a.target='_blank'; a.rel='noopener';
-        a.innerHTML='<img src="'+url(L[0])+'" alt="" loading="lazy">'+
-          '<span><b>'+L[1]+'</b><span>'+L[2]+' · '+L[3]+'</span></span>'+
-          '<em>20 min →</em>';
-        caja.appendChild(a);
-      });
-    }
-    caja.classList.add('on');
-  }
-  q.addEventListener('input',buscar);
-  form.addEventListener('submit',function(e){ e.preventDefault(); buscar(); });
-
-  /* ============ SAGA: libro -> Zap -> voz -> teléfono ============ */
-  var clamp=function(v,a,b){ return v<a?a:(v>b?b:v); };
-  function tramo(p,a,b){ var t=clamp((p-a)/(b-a),0,1); return t*t*(3-2*t); }
-
-  var saga=document.getElementById('saga'), libro=document.getElementById('libro'),
-      tapa=document.getElementById('tapa'), hoja1=document.getElementById('hoja1'),
-      hoja2=document.getElementById('hoja2'), zapcard=document.getElementById('zapcard'),
-      ondas=document.getElementById('ondas'), tel=document.getElementById('tel'),
-      rotulo=document.getElementById('rotulo');
-
-  var HEROE=LIBROS[0];
-  document.getElementById('tapaImg').src=url(HEROE[0]);
-  document.getElementById('telCov').src=url(HEROE[0]);
-  document.getElementById('telTit').textContent=HEROE[1];
-  document.getElementById('telAut').textContent=HEROE[2];
-
-  var NB=42, barras=[];
-  for(var bi=0;bi<NB;bi++){ var sb=document.createElement('span'); ondas.appendChild(sb); barras.push(sb); }
-  var telB=[], telOn=document.getElementById('telOn');
-  for(var ti=0;ti<20;ti++){ var st=document.createElement('span'); telOn.appendChild(st); telB.push(st); }
-
-  var caps=[].slice.call(rotulo.children), capAct=-1, energiaVoz=0;
-
-  function saga_pintar(p,t){
-    var entra=tramo(p,0,.12), abre=tramo(p,.14,.34),
-        compacta=tramo(p,.36,.54), voz=tramo(p,.54,.70), fono=tramo(p,.68,.85);
-
-    libro.style.opacity=(1-compacta).toFixed(3);
-    libro.style.transform='translate3d(0,'+((1-entra)*66-compacta*28).toFixed(1)+'px,0) '+
-      'rotateY('+(-24+entra*24-abre*4).toFixed(2)+'deg) '+
-      'rotateZ('+((1-entra)*-6).toFixed(2)+'deg) '+
-      'scale('+(.87+entra*.13-compacta*.48).toFixed(3)+')';
-    tapa.style.transform='rotateY('+(-abre*166).toFixed(2)+'deg)';
-    hoja1.style.transform='rotateY('+(-abre*148+Math.sin(t/900)*abre*3).toFixed(2)+'deg)';
-    hoja2.style.transform='rotateY('+(-abre*20).toFixed(2)+'deg)';
-
-    zapcard.style.opacity=(compacta*(1-voz)).toFixed(3);
-    zapcard.style.transform='translate3d(0,'+((1-compacta)*36).toFixed(1)+'px,0) '+
-      'scale('+(.62+compacta*.38-voz*.32).toFixed(3)+') rotateY('+((1-compacta)*30-voz*22).toFixed(2)+'deg)';
-
-    var vivas=voz*(1-fono*.6)*(1-tramo(p,.93,1));
-    ondas.style.opacity=vivas.toFixed(3);
-    ondas.style.transform='translate3d(0,'+(-fono*112).toFixed(1)+'px,0) scaleX('+(.55+voz*.45).toFixed(3)+')';
-    for(var k=0;k<NB;k++){
-      var c=1-Math.abs(k-(NB-1)/2)/((NB-1)/2);
-      barras[k].style.height=(9+Math.abs(Math.sin(t/255+k*.44))*(15+c*98)*(.35+voz*.65)).toFixed(1)+'px';
-      barras[k].style.opacity=(.45+c*.55).toFixed(2);
-    }
-
-    tel.style.opacity=fono.toFixed(3);
-    tel.style.transform='translate3d(0,'+((1-fono)*116+fono*6).toFixed(1)+'%,0) '+
-      'rotateY('+(198-fono*198).toFixed(1)+'deg) rotateZ('+((1-fono)*11).toFixed(2)+'deg) '+
-      'scale('+(.74+fono*.2).toFixed(3)+')';
-    for(var m=0;m<telB.length;m++)
-      telB[m].style.height=(4+Math.abs(Math.sin(t/235+m*.52))*22*fono).toFixed(1)+'px';
-
-    var idx = p<.13?0 : p<.35?1 : p<.55?2 : p<.71?3 : 4;
-    if(idx!==capAct){ caps.forEach(function(c,i){ c.classList.toggle('on',i===idx); }); capAct=idx; }
-    energiaVoz=voz;
-  }
-
-  /* ============ PIPELINE BEAM: el haz recorre el proceso ============ */
-  var svg=document.getElementById('haz'), nodos=['n1','n2','n3'].map(function(i){return document.getElementById(i);});
-  var NS='http://www.w3.org/2000/svg', linea=null, haz=null, gradId='g'+Math.floor(1e6*0.618);
-  function armarHaz(){
-    if(!svg||!nodos[0]) return;
-    var cont=svg.parentElement.getBoundingClientRect();
-    var pts=nodos.map(function(n){ var r=n.getBoundingClientRect();
-      return [r.left-cont.left+r.width/2, r.top-cont.top+r.height/2]; });
-    svg.setAttribute('viewBox','0 0 '+cont.width+' '+cont.height);
-    svg.innerHTML='<defs><linearGradient id="'+gradId+'" x1="0" y1="0" x2="1" y2="0">'+
-      '<stop offset="0%" stop-color="#38EB6B" stop-opacity="0"/>'+
-      '<stop offset="50%" stop-color="#38EB6B" stop-opacity="1"/>'+
-      '<stop offset="100%" stop-color="#38EB6B" stop-opacity="0"/></linearGradient></defs>';
-    var d='M'+pts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' L');
-    linea=document.createElementNS(NS,'path');
-    linea.setAttribute('d',d); linea.setAttribute('stroke','rgba(255,255,255,.14)');
-    linea.setAttribute('stroke-width','1.6'); linea.setAttribute('fill','none');
-    svg.appendChild(linea);
-    haz=document.createElementNS(NS,'circle');
-    haz.setAttribute('r','5'); haz.setAttribute('fill','#38EB6B');
-    haz.setAttribute('filter','drop-shadow(0 0 8px #38EB6B)');
-    svg.appendChild(haz);
-  }
-  function moverHaz(t){
-    if(!linea||!haz) return;
-    var L=linea.getTotalLength(); if(!L) return;
-    var pt=linea.getPointAtLength(((t/2600)%1)*L);
-    haz.setAttribute('cx',pt.x); haz.setAttribute('cy',pt.y);
-  }
-
-  /* ============ HILO DE AUDIO: la onda cose la pagina ============ */
-  var cv=document.getElementById('hilo'), cx=cv.getContext('2d'), W=0,H=0,DPR=1;
-  function medir(){ DPR=Math.min(devicePixelRatio||1,1.6);
-    W=cv.width=innerWidth*DPR; H=cv.height=innerHeight*DPR; }
-  function hilo_pintar(t,energia){
-    cx.clearRect(0,0,W,H);
-    var base=H*0.5, amp=(11+energia*104)*DPR;
-    for(var capa=0;capa<3;capa++){
-      cx.beginPath();
-      for(var x=0;x<=W;x+=9*DPR){
-        var n=x/W;
-        var y=base+Math.sin(n*7.2+t/1150+capa*1.7)*amp*(0.5+0.5*Math.sin(n*3.1+t/2700))
-              +Math.sin(n*18+t/640-capa)*amp*0.2;
-        x===0?cx.moveTo(x,y):cx.lineTo(x,y);
-      }
-      var g=cx.createLinearGradient(0,0,W,0);
-      g.addColorStop(0,'rgba(25,211,197,0)');
-      g.addColorStop(.3,'rgba(25,211,197,'+(0.1+energia*0.3)+')');
-      g.addColorStop(.62,'rgba(56,235,107,'+(0.1+energia*0.45)+')');
-      g.addColorStop(1,'rgba(29,185,84,0)');
-      cx.strokeStyle=g; cx.lineWidth=(1+capa*0.45+energia*1.5)*DPR;
-      cx.globalAlpha=1-capa*0.3; cx.stroke();
-    }
-    cx.globalAlpha=1;
-  }
-
-  /* ============================================================
-     SCROLL POR PASOS
-     Cada gesto dispara la transicion completa al siguiente capitulo
-     en vez de arrastrarla con el scroll. El progreso ya no sale del
-     scroll: sale de un estado, y se anima hacia el por tiempo.
-     Regla: en los extremos NO se bloquea nada, para no atrapar a nadie.
-     ============================================================ */
-  var ANCLAS=[0.06,0.34,0.54,0.70,0.90];   // el p que representa cada capitulo
-  var paso=0, pObj=ANCLAS[0], pAct=ANCLAS[0], ultimoGesto=0, ESPERA=780;
-
-  var indicador=document.getElementById('indicador'), puntos=[];
-  ANCLAS.forEach(function(_,i){
-    var b=document.createElement('button');
-    b.type='button'; b.setAttribute('role','tab');
-    b.setAttribute('aria-label','Capítulo '+(i+1)+' de '+ANCLAS.length);
-    b.addEventListener('click',function(){ irA(i); });
-    indicador.appendChild(b); puntos.push(b);
-  });
-  function pintarIndicador(){
-    puntos.forEach(function(b,i){ b.setAttribute('aria-current', i===paso ? 'true':'false'); });
-  }
-  function irA(n){
-    paso=clamp(n,0,ANCLAS.length-1);
-    pObj=ANCLAS[paso];
-    ultimoGesto=Date.now();
-    pintarIndicador();
-  }
-  pintarIndicador();
-
-  // ¿la escena ocupa la pantalla? solo entonces manda ella
-  function mandaLaSaga(){
-    var r=saga.getBoundingClientRect();
-    return r.top<innerHeight*0.28 && r.bottom>innerHeight*0.72;
-  }
-  // en el primer capitulo hacia arriba, o el ultimo hacia abajo, se suelta
-  function puedeAvanzar(dir){
-    return dir>0 ? paso<ANCLAS.length-1 : paso>0;
-  }
-
-  var porPasos = !quieto && matchMedia('(pointer:fine)').matches;
-  function gesto(dir,e){
-    if(!porPasos || !mandaLaSaga()) return;
-    if(!puedeAvanzar(dir)) return;              // extremo: scroll normal
-    if(e && e.cancelable) e.preventDefault();
-    if(Date.now()-ultimoGesto < ESPERA) return; // una transicion a la vez
-    irA(paso+dir);
-  }
-
-  addEventListener('wheel',function(e){
-    gesto(e.deltaY>0?1:-1,e);
-  },{passive:false});
-
-  // En tactil NO se intercepta nada: secuestrar el scroll con el dedo es
-  // fragil (basta un preventDefault mal puesto para dejar al usuario
-  // atrapado) y ademas se lee mejor apilado con el pulgar. En movil la
-  // escena se despliega en vertical por CSS y el scroll es el de siempre.
-
-  addEventListener('keydown',function(e){
-    if(!mandaLaSaga()) return;
-    if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' ') gesto(1,e);
-    else if(e.key==='ArrowUp'||e.key==='PageUp') gesto(-1,e);
-  });
-
-  document.getElementById('saltar').addEventListener('click',function(){
-    irA(ANCLAS.length-1);
-    document.getElementById('catalogo').scrollIntoView({behavior:'smooth',block:'start'});
-  });
-
-  /* ============ bucle único ============ */
-  function bucle(t){
-    requestAnimationFrame(bucle);
-    if(!visible) return;
-    // el progreso persigue al capitulo destino: la transicion es por tiempo
-    pAct += (pObj-pAct)*0.085;
-    var r=saga.getBoundingClientRect();
-    var enSaga = r.top<innerHeight && r.bottom>0;
-    if(enSaga) saga_pintar(pAct,t);
-    moverHaz(t);
-    // la onda late bajo, y sube al maximo en el capitulo de la voz
-    hilo_pintar(t, 0.08 + (enSaga ? 0.2 + energiaVoz*0.72 : 0));
-  }
-  if(!quieto){
-    medir(); addEventListener("resize",function(){ medir(); armarHaz(); });
-    requestAnimationFrame(function(){ armarHaz(); requestAnimationFrame(bucle); });
-  }
-
-  /* ============ scramble del contador ============ */
-  var glifos='0123456789';
-  document.querySelectorAll('[data-scramble]').forEach(function(el){
-    var fin=el.dataset.scramble, hecho=false;
-    new IntersectionObserver(function(es,ob){
-      es.forEach(function(e){
-        if(!e.isIntersecting||hecho) return;
-        hecho=true; ob.disconnect();
-        if(quieto){ el.textContent=fin; return; }
-        var n=0,tot=24;
-        var iv=setInterval(function(){
-          n++;
-          el.textContent=fin.split('').map(function(c,i){
-            return (n/tot)*fin.length>i ? c : glifos[Math.floor(Math.random()*10)];
-          }).join('');
-          if(n>=tot){ clearInterval(iv); el.textContent=fin; }
-        },42);
-      });
-    },{threshold:.6}).observe(el);
-  });
-
-  /* ============ blur-in por palabra ============ */
-  document.querySelectorAll('[data-bw]').forEach(function(el){
-    var partes=el.innerHTML.split(/(<em>.*?<\/em>|\s+)/).filter(function(s){return s.trim();});
-    // La puntuacion suelta se pega a la palabra anterior: si no, queda
-    // "escuchalo . Tu" con un espacio antes del punto.
-    var juntas=[];
-    partes.forEach(function(w){
-      if(/^[.,;:!?)»”]+$/.test(w) && juntas.length) juntas[juntas.length-1]+=w;
-      else juntas.push(w);
-    });
-    el.innerHTML=juntas.map(function(w){ return '<span>'+w+'</span> '; }).join('');
-    el.querySelectorAll('span').forEach(function(s,i){ s.style.transitionDelay=(i*.08)+'s'; });
-  });
-
-  /* ============ botones magnéticos + tilt 3D en tarjetas ============ */
-  if(!quieto && matchMedia('(pointer:fine)').matches){
-    document.querySelectorAll('.tienda,.circular,.pill').forEach(function(b){
-      b.addEventListener('pointermove',function(e){
-        var r=b.getBoundingClientRect();
-        b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.28).toFixed(1)+'px,'+
-          ((e.clientY-r.top-r.height/2)*.28).toFixed(1)+'px)';
-      });
-      b.addEventListener('pointerleave',function(){ b.style.transform=''; });
-    });
-    document.querySelectorAll('.paso').forEach(function(c){
-      c.addEventListener('pointermove',function(e){
-        var r=c.getBoundingClientRect();
-        c.style.transform='perspective(700px) rotateX('+(-((e.clientY-r.top)/r.height-.5)*7).toFixed(2)+
-          'deg) rotateY('+(((e.clientX-r.left)/r.width-.5)*7).toFixed(2)+'deg) translateY(-5px)';
-      });
-      c.addEventListener('pointerleave',function(){ c.style.transform=''; });
-    });
-  }
-
-  /* ---------- reveals ---------- */
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-  },{threshold:.15});
-  document.querySelectorAll(".rv,[data-bw]").forEach(function(el){ io.observe(el); });
-  requestAnimationFrame(function(){
-    document.querySelectorAll('.rv,[data-bw]').forEach(function(el){
-      if(el.getBoundingClientRect().top<innerHeight*0.94) el.classList.add('on');
-    });
-  });
-})();
-</script>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

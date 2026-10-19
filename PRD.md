@@ -106,10 +106,9 @@ su historia.
 ## 7. Técnico
 
 - HTML/CSS/JS vanilla, cero dependencias salvo Google Fonts.
-- Hosting: GitHub Pages con `CNAME` a `zapienz.gamalabs.mx`.
+- Hosting: Vercel en `https://zapienz.gamalabs.ai/` (`cleanUrls`, sin barra final). El `CNAME` de GitHub Pages (`zapienz.gamalabs.mx`) se conserva mientras ese dominio siga ahí.
 - Presupuesto: LCP < 2.5s, página < 5MB.
-- Incluye `/privacidad`, `/terminos` y `/eliminar-cuenta` — cierra el hueco legal
-  detectado en la auditoría del 27-ago-2026.
+- Incluye `/privacidad`, `/terminos`, `/soporte` y `/eliminar-cuenta`.
 
 ## 8. Criterios de aceptación
 

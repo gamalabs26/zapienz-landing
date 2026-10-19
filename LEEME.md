@@ -1,7 +1,9 @@
 # Zapienz · sitio scrollytelling — procedencia (14-sep-2026)
 
-Sitio de una página, vanilla HTML/CSS/JS, sin librerías. Construido como preview en
-GitHub Pages (`https://zapienz.gamalabs.mx/`); NO toca `zapienz.gamalabs.mx`.
+Sitio de una página, vanilla HTML/CSS/JS, sin librerías. Se publica en Vercel en
+`https://zapienz.gamalabs.ai/` (`vercel.json`: `cleanUrls` y sin barra final).
+El `CNAME` de GitHub Pages sigue en `zapienz.gamalabs.mx` mientras ese dominio
+siga servido ahí; el 301 de `.mx` a `.ai` es un paso aparte, fuera de este repo.
 Concepto, referencias y coreografía: `_brief/CONCEPTO.md`.
 
 ## De dónde salió cada cifra
@@ -46,5 +48,6 @@ no llega a 20:00 en esa emulación; en navegador real sí (ver verificación en 
 
 ## Enlaces publicados (todos abiertos antes de publicar)
 App Store `apps.apple.com/mx/app/zapienz/id6762142820` (y `?action=write-review`), Instagram
-`@zapienz_latam`, legales en `zapienz-dot.github.io/legal/` (privacy-policy, terms, support),
-correo `contactozapienz@gmail.com`.
+`@zapienz_latam`, páginas propias `/privacidad`, `/terminos`, `/soporte` y `/eliminar-cuenta`.
+Soporte: `hola@gamalabs.ai`. Las páginas legales que ya existían siguen con
+`contactozapienz@gmail.com`.

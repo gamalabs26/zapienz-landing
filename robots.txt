@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /elige
+Disallow: /elige.html
+Disallow: /v1-papel
+Disallow: /v1-papel.html
+Disallow: /v2-muro
+Disallow: /v2-muro.html
+Disallow: /v3-reproductor
+Disallow: /v3-reproductor.html
 
-Sitemap: https://zapienz.gamalabs.mx/sitemap.xml
+Sitemap: https://zapienz.gamalabs.ai/sitemap.xml

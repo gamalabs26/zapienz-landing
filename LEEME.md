@@ -48,3 +48,6 @@ no llega a 20:00 en esa emulación; en navegador real sí (ver verificación en 
 App Store `apps.apple.com/mx/app/zapienz/id6762142820` (y `?action=write-review`), Instagram
 `@zapienz_latam`, legales en `zapienz-dot.github.io/legal/` (privacy-policy, terms, support),
 correo `contactozapienz@gmail.com`.
+
+## 10-nov-2026: mudanza a gamalabs.ai
+Este repo ya solo redirige: cada pagina manda a gamalabs.ai/zapienz (las legales a /zapienz/privacidad, /terminos y /eliminar-cuenta). El sitio anterior esta en el commit 71b5d52. Se hizo asi porque el DNS de gamalabs.mx vive en GoDaddy y no se cambio.
